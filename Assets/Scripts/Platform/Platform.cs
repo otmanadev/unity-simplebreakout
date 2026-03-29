@@ -15,10 +15,10 @@ public class Platform : MonoBehaviour
 
     private void FixedUpdate()
     {
-        UpdateMovement();
+        MovePlatform();
     }
 
-    private void UpdateMovement()
+    private void MovePlatform()
     {
         Vector2 initialPosition = transform.position;
         
