@@ -32,18 +32,26 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         GameObject collidedObject = other.gameObject;
+        ContactPoint2D contact = other.GetContact(0);
+        Vector2 normal = contact.normal;
+        
+        Debug.Log($"{name} collided with {collidedObject.name} on position {normal}");
+        
+        if (collidedObject.TryGetComponent(out Brick brick))
+        {
+            _direction = Vector2.Reflect(_direction, normal).normalized;
+            brick.TryHitBrick();
+            return;
+        }
+        
         if (collidedObject.TryGetComponent(out Platform platform))
         {
             _direction = platform.GetNormalizedDirection(transform.position);
             return;
         }
         
-        Debug.Log("Contact with something else...");
-        ContactPoint2D contact = other.GetContact(0);
-        
-        Vector2 normal = contact.normal;
-        
         _direction = Vector2.Reflect(_direction, normal).normalized;
+        
     }
 
     /// <summary>

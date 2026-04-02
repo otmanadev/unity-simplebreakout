@@ -17,5 +17,13 @@ public class Brick : MonoBehaviour
         _boxCollider2D = GetComponent<BoxCollider2D>();
         Assert.IsNotNull(_boxCollider2D);
     }
+
+    /// <summary>
+    /// Hit brick, so he could die... Or not...
+    /// </summary>
+    public void TryHitBrick()
+    {
+        Destroy(gameObject);
+    }
     
 }
