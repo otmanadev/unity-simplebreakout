@@ -19,7 +19,7 @@ public class InGameControls : MonoBehaviour
         
         var directionValue = context.ReadValue<Vector2>().x;
         
-        platform.inputDirection = directionValue;
+        platform.InputHorizontalDirection = directionValue;
     }
     
 }

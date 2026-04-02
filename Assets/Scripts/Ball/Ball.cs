@@ -1,52 +1,59 @@
 using System;
+using NUnit.Framework;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private Vector2 direction;
-    [SerializeField] private float speed;
-    [SerializeField] private float smoothTime;
     
-    Vector2 zeroVelocity = Vector2.zero;
+    private Rigidbody2D _rigidBody;
+    
+    [Header("Movement")]
+    [SerializeField] private float speed = 1.0f;
+    [SerializeField] private float smoothTimeSpeed = .05f;
+    private Vector2 _direction;
+    private Vector2 _refZeroVelocity = Vector2.zero;
+
+    private void Awake()
+    {
+        _rigidBody = GetComponent<Rigidbody2D>();
+        Assert.IsNotNull(_rigidBody);
+    }
 
     private void Start()
     {
-        direction = Vector2.down;
+        _direction = Vector2.down;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         MoveBall();
     }
     
     private void OnCollisionEnter2D(Collision2D other)
     {
-        GameObject colliderGameObject = other.gameObject;
-        if (colliderGameObject.GetComponent<Platform>() != null)
+        GameObject collidedObject = other.gameObject;
+        if (collidedObject.TryGetComponent(out Platform platform))
         {
-            Debug.Log("Contact with platform");
-            direction = (colliderGameObject.transform.position - transform.position).normalized;
+            _direction = platform.GetNormalizedDirection(transform.position);
+            return;
         }
-        else
-        {
-            Debug.Log("Contact with something else...");
-            ContactPoint2D contact = other.GetContact(0);
-            
-            Vector2 normal = contact.normal;
-            
-            direction = Vector2.Reflect(direction, normal).normalized;
-        }
+        
+        Debug.Log("Contact with something else...");
+        ContactPoint2D contact = other.GetContact(0);
+        
+        Vector2 normal = contact.normal;
+        
+        _direction = Vector2.Reflect(_direction, normal).normalized;
     }
 
+    /// <summary>
+    /// Update ball's velocity, based on its direction.
+    /// </summary>
     private void MoveBall()
     {
-        Vector2 initialPosition = transform.position;
-        
-        Vector2 targetPosition = initialPosition + direction * speed;
-        
-        Vector2 calculatedPosition = Vector2.SmoothDamp(initialPosition, targetPosition, ref zeroVelocity, smoothTime);
-        
-        transform.position = calculatedPosition;
+        Vector2 currentVelocity = _rigidBody.linearVelocity;
+        Vector2 targetVelocity = _direction * speed;
+        _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, smoothTimeSpeed);
     }
     
 }

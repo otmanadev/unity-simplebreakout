@@ -12,14 +12,10 @@ public class Brick : MonoBehaviour
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _boxCollider2D = GetComponent<BoxCollider2D>();
+        Assert.IsNotNull(_spriteRenderer);
         
-        Assert.IsNotNull(_spriteRenderer, $"[Brick / {name}] SpriteRenderer is null");
-        Assert.IsNotNull(_boxCollider2D, $"[Brick / {name}] BoxCollider2D is null");
+        _boxCollider2D = GetComponent<BoxCollider2D>();
+        Assert.IsNotNull(_boxCollider2D);
     }
-
-    private void Start()
-    {
-        Debug.Log($"[Brick / {name}] Start");
-    }
+    
 }
