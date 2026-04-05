@@ -21,6 +21,8 @@ public class Ball : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log($"[Ball / {name}] Send notification to {BallsManager.Instance.name} : Ball created.");
+        BallsManager.Instance.OnBallCreatedNotification(this);
         _direction = Vector2.down;
     }
 
@@ -52,6 +54,17 @@ public class Ball : MonoBehaviour
         
         _direction = Vector2.Reflect(_direction, normal).normalized;
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        GameObject collidedObject = other.gameObject;
+
+        if (collidedObject.TryGetComponent(out DeadZoneTrigger _))
+        {
+            Debug.Log($"[Ball / {name}] Send notification from {BallsManager.Instance.name} : Ball reached dead zone.");
+            BallsManager.Instance.OnBallReachDeadZoneNotification(this);
+        }
     }
 
     /// <summary>

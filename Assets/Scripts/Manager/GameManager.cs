@@ -24,5 +24,11 @@ public class GameManager : MonoBehaviour
         Debug.Log($"[GameManager / {name}] Receive notification from {BricksManager.Instance.name} : No more bricks to destroy.");
         Debug.Break();
     }
+
+    public void OnBallReachedDeadZoneNotification()
+    {
+        Debug.Log($"[GameManager / {name}] Receive notification from {BallsManager.Instance.name} : Ball reached dead zone.");
+        Debug.Break();
+    }
     
 }
