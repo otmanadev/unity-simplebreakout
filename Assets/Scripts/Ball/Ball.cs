@@ -51,8 +51,11 @@ public class Ball : MonoBehaviour
             _direction = platform.GetNormalizedDirection(transform.position);
             return;
         }
-        
-        _direction = Vector2.Reflect(_direction, normal).normalized;
+
+        if (collidedObject.TryGetComponent(out StaticCollider _))
+        {
+            _direction = Vector2.Reflect(_direction, normal).normalized;
+        }
         
     }
 
