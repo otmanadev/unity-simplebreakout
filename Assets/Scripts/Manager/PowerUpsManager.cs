@@ -39,17 +39,39 @@ public class PowerUpsManager : MonoBehaviour
             .ToList();
         
         // Put randomly power ups to bricks
-        foreach (PowerUpSO powerUpSO in powerUps)
+        foreach (PowerUpSO powerUpSo in powerUps)
         {
-            PowerUp powerUp = powerUpSO.PowerUpPrefab.gameObject.GetComponent<PowerUp>();
+            PowerUp powerUp = powerUpSo.PowerUpPrefab.gameObject.GetComponent<PowerUp>();
             Assert.IsNotNull(powerUp);
             
             Brick randomBrick = bricks[Random.Range(0, bricks.Count)];
             
             Debug.Log($"[PowerUpsManager / {name}] Put power up {powerUp.PowerUpType} to brick {randomBrick.name}.");
-            randomBrick.SetUpPowerUp(powerUpSO);
+            randomBrick.SetUpPowerUp(powerUpSo);
             
             bricks.Remove(randomBrick);
+        }
+    }
+
+    /// <summary>
+    /// Enable given power up.
+    /// </summary>
+    /// <param name="powerUpType"></param>
+    public void ActivatePowerUp(EPowerUp powerUpType)
+    {
+        Debug.Log($"[PowerUp / {name}] Received notification : Activate power up {powerUpType}.");
+
+        switch (powerUpType)
+        {
+            case EPowerUp.BALL_BIGGER:
+            case EPowerUp.BALL_SMALLER:
+                BallsManager.Instance.ActivateBallPowerUp(powerUpType);
+                break;
+            
+            case EPowerUp.PLATFORM_BIGGER:
+            case EPowerUp.PLATFORM_SMALLER:
+                // TODO
+                break;
         }
     }
 }

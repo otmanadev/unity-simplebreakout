@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2870857734954478953}
   - component: {fileID: 4252231004838117511}
   m_Layer: 17
-  m_Name: Ball
+  m_Name: Ball - SMALL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,7 +124,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0031621754, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_Radius: 0.40829465
 --- !u!50 &2870857734954478953
 Rigidbody2D:
@@ -165,5 +165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b501c92faac7c60498aaa7e8b280ecef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballSizeSo: {fileID: 11400000, guid: 62aea9264b5a2fc499cc70cfe730d440, type: 2}
   speed: 6
   smoothTimeSpeed: 0

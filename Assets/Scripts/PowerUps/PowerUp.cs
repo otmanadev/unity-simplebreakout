@@ -35,7 +35,8 @@ public class PowerUp : MonoBehaviour
             return;
         }
         
-        Debug.Log($"[PowerUp / {name}] Activating power up {PowerUpType}...");
+        Debug.Log($"[PowerUp / {name}] Send notification to {PowerUpsManager.Instance.name} : Activate power up {PowerUpType}.");
+        PowerUpsManager.Instance.ActivatePowerUp(PowerUpType);
         Destroy(gameObject);
     }
 

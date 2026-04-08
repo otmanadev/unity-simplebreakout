@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 888582ec15aaa4149b2526d2abe30a98, type: 3}
-  m_Name: PowerUp - BALL SMALLER
+  m_Script: {fileID: 11500000, guid: a020e9573fa54bc4a04c351411bc4acb, type: 3}
+  m_Name: BallSize - LARGE
   m_EditorClassIdentifier: 
-  powerUpPrefab: {fileID: 5459947136880005606, guid: 052cab6bc1b7b844ba4a4eae9d6aa2d8, type: 3}
-  material: {fileID: 2100000, guid: 017cab79853b1d947802ca969dc39998, type: 2}
+  ballSizeType: 3
+  speed: 5.5
+  smoothTime: 0.05
+  colliderRadius: 0.49
+  sprite: {fileID: 21300000, guid: 97f5fd77695d6e84aaa1c0d87ca1b5a4, type: 3}
