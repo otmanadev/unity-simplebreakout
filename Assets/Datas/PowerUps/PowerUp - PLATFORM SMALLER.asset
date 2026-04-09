@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 888582ec15aaa4149b2526d2abe30a98, type: 3}
   m_Name: PowerUp - PLATFORM SMALLER
   m_EditorClassIdentifier: 
-  powerUpType: 3
+  powerUpPrefab: {fileID: 5459947136880005606, guid: d9b81bea84d6af4448012eaf5b24be95, type: 3}
   material: {fileID: 2100000, guid: 017cab79853b1d947802ca969dc39998, type: 2}

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cd1d08f97378ec14e86ade0882699f6f
+guid: ba624db2eb0cfc546b763d7b07c404aa
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,9 +123,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: medium-platform-v1.0
+  - name: xlarge-platform-v0.1
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.50000006, y: -0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,9 +133,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 64
-      height: 32
-    spriteID: 00450a641b444c7418a7b5cc125710e5
+      width: 68
+      height: 16
+    spriteID: a6116e95881241545a78ad1f8c4aef11
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -148,25 +148,25 @@ ScriptedImporter:
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 950214679
+      value0: 1561002919
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: medium-platform-v1.0
+    name: xlarge-platform-v0.1
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: medium-platform-v0.1
+    - name: xlarge-platform-v0.1
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 0
-        width: 64
-        height: 32
-      spriteId: 00450a641b444c7418a7b5cc125710e5
+        x: 6
+        y: 8
+        width: 68
+        height: 16
+      spriteId: a6116e95881241545a78ad1f8c4aef11
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -185,5 +185,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 64, y: 32}
-  previousTextureSize: {x: 128, y: 64}
+  canvasSize: {x: 80, y: 32}
+  previousTextureSize: {x: 128, y: 32}

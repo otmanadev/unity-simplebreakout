@@ -70,7 +70,7 @@ public class PowerUpsManager : MonoBehaviour
             
             case EPowerUp.PLATFORM_BIGGER:
             case EPowerUp.PLATFORM_SMALLER:
-                // TODO
+                PlatformsManager.Instance.ActivatePlatformPowerUp(powerUpType);
                 break;
         }
     }

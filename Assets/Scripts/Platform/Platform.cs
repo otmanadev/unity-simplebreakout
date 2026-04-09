@@ -1,13 +1,21 @@
-using System;
 using NUnit.Framework;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Platform : MonoBehaviour
 {
     
     private Rigidbody2D _rigidBody;
+    private BoxCollider2D _boxCollider;
+    private SpriteRenderer _spriteRenderer;
+    
+    [Header("Platform Properties")]
+    [SerializeField] private PlatformSizeSO platformSizeSo;
+    public PlatformSizeSO PlatformSizeSo => platformSizeSo;
 
-    [Header("Movement")] 
+    [Header("Movement")]
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float smoothTimeSpeed = .05f;
     private float _inputHorizontalDirection = .0f;
@@ -20,7 +28,16 @@ public class Platform : MonoBehaviour
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
-        Assert.IsNotNull(_rigidBody);
+        _boxCollider = GetComponent<BoxCollider2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        Assert.IsNotNull(PlatformSizeSo);
+    }
+    
+    private void Start()
+    {
+        UpdatePlatformSize();
+        Debug.Log($"[Platform / {name}] Send notification to {PlatformsManager.Instance.name} : Platform created.");
+        PlatformsManager.Instance.OnPlatformCreatedNotification(this);
     }
 
     private void FixedUpdate()
@@ -63,6 +80,17 @@ public class Platform : MonoBehaviour
             }
         }
     }
+    
+    /// <summary>
+    /// Update platform size.
+    /// </summary>
+    private void UpdatePlatformSize()
+    {
+        _spriteRenderer.sprite = PlatformSizeSo.Sprite;
+        _boxCollider.size = new Vector2(PlatformSizeSo.ColliderHorizontalSize, _boxCollider.size.y);
+        speed = PlatformSizeSo.Speed;
+        smoothTimeSpeed = PlatformSizeSo.SmoothTime;
+    }
 
     /// <summary>
     /// Returns normalized direction from given position.
@@ -91,6 +119,21 @@ public class Platform : MonoBehaviour
         float currentHorizontalVelocity = _rigidBody.linearVelocityX;
         float targetHorizontalVelocity = currentInputHorizontalDirection * speed;
         _rigidBody.linearVelocityX = Mathf.SmoothDamp(currentHorizontalVelocity, targetHorizontalVelocity, ref _refZeroVelocity, smoothTimeSpeed);
+    }
+    
+    /// <summary>
+    /// Update new platform size.
+    /// </summary>
+    /// <param name="newPlatformSizeSo"></param>
+    public void SetUpNewPlatformSize(PlatformSizeSO newPlatformSizeSo)
+    {
+        if (newPlatformSizeSo == null || newPlatformSizeSo.PlatformSizeType.Equals(PlatformSizeSo.PlatformSizeType))
+        {
+            return;
+        }
+        
+        platformSizeSo = newPlatformSizeSo;
+        UpdatePlatformSize();
     }
     
 }
