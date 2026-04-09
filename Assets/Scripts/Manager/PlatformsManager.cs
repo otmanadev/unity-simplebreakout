@@ -69,46 +69,52 @@ public class PlatformsManager : MonoBehaviour
     /// <returns></returns>
     private PlatformSizeSO PickUpNewPlatformSizeSoForCurrentPlatform(EPowerUp powerUpType, PlatformSizeSO currentPlatformSize)
     {
+        if (!powerUpType.Equals(EPowerUp.PLATFORM_SMALLER) && !powerUpType.Equals(EPowerUp.PLATFORM_BIGGER))
+        {
+            Debug.LogError($"[PlatformsManager / {name}] Cannot find PlatformSizeSO from power up type {powerUpType}");
+            return null;
+        }
+        
         EPlatformSize currentPlatformSizeType = currentPlatformSize.PlatformSizeType;
         EPlatformSize newPlatformSizeType = currentPlatformSizeType;
+        
         switch (currentPlatformSizeType)
         {
             case EPlatformSize.XLARGE:
-                if (powerUpType.Equals(EPowerUp.PLATFORM_SMALLER))
-                    newPlatformSizeType = EPlatformSize.LARGE;
+                newPlatformSizeType = powerUpType.Equals(EPowerUp.PLATFORM_SMALLER)
+                    ? EPlatformSize.LARGE
+                    : newPlatformSizeType;
                 break;
             case EPlatformSize.LARGE:
-                if (powerUpType.Equals(EPowerUp.PLATFORM_BIGGER))
-                    newPlatformSizeType = EPlatformSize.XLARGE;
-                if (powerUpType.Equals(EPowerUp.PLATFORM_SMALLER))
-                    newPlatformSizeType = EPlatformSize.MEDIUM;
+                newPlatformSizeType = powerUpType.Equals(EPowerUp.PLATFORM_BIGGER)
+                    ? EPlatformSize.XLARGE
+                    : EPlatformSize.MEDIUM;
                 break;
             case EPlatformSize.MEDIUM:
-                if (powerUpType.Equals(EPowerUp.PLATFORM_BIGGER))
-                    newPlatformSizeType = EPlatformSize.LARGE;
-                if (powerUpType.Equals(EPowerUp.PLATFORM_SMALLER))
-                    newPlatformSizeType = EPlatformSize.SMALL;
+                newPlatformSizeType = powerUpType.Equals(EPowerUp.PLATFORM_BIGGER)
+                    ? EPlatformSize.LARGE
+                    : EPlatformSize.SMALL;
                 break;
             case EPlatformSize.SMALL:
-                if (powerUpType.Equals(EPowerUp.PLATFORM_BIGGER))
-                    newPlatformSizeType = EPlatformSize.MEDIUM;
-                if (powerUpType.Equals(EPowerUp.PLATFORM_SMALLER))
-                    newPlatformSizeType = EPlatformSize.XSMALL;
+                newPlatformSizeType = powerUpType.Equals(EPowerUp.PLATFORM_BIGGER)
+                    ? EPlatformSize.MEDIUM
+                    : EPlatformSize.XSMALL;
                 break;
             case EPlatformSize.XSMALL:
-                if (powerUpType.Equals(EPowerUp.PLATFORM_BIGGER))
-                    newPlatformSizeType = EPlatformSize.SMALL;
+                newPlatformSizeType = powerUpType.Equals(EPowerUp.PLATFORM_BIGGER)
+                    ? EPlatformSize.SMALL
+                    : newPlatformSizeType;
                 break;
         }
 
-        PlatformSizeSO newPlatformSizeSO = platformSizes.Find(e => e.PlatformSizeType.Equals(newPlatformSizeType));
-        if (newPlatformSizeSO == null)
+        PlatformSizeSO newPlatformSizeSo = platformSizes.Find(e => e.PlatformSizeType.Equals(newPlatformSizeType));
+        if (newPlatformSizeSo == null)
         {
-            Debug.LogError($"[PlatformsManager / {name}] Cannot find PlatformSizeSO from its type {newPlatformSizeType}");
+            Debug.LogError($"[PlatformsManager / {name}] Cannot find PlatformSizeSO from size type {newPlatformSizeType}");
             return null;
         }
 
-        return newPlatformSizeSO;
+        return newPlatformSizeSo;
     }
     
 }
