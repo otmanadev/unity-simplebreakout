@@ -23,6 +23,8 @@ public class Platform : MonoBehaviour
     private bool _canMoveToRight = true;
     private bool _canMoveToLeft = true;
     
+    private float yPosition;
+    
     public float InputHorizontalDirection { set => _inputHorizontalDirection = value; }
 
     private void Awake()
@@ -31,6 +33,8 @@ public class Platform : MonoBehaviour
         _boxCollider = GetComponent<BoxCollider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         Assert.IsNotNull(PlatformSizeSo);
+        
+        yPosition = transform.position.y;
     }
     
     private void Start()
@@ -43,42 +47,7 @@ public class Platform : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlatform();
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        GameObject collidedObject = other.gameObject;
-
-        if (collidedObject.TryGetComponent(out StaticCollider _))
-        {
-            if (_rigidBody.linearVelocityX > .0f)
-            {
-                _canMoveToRight = false;
-            }
-            
-            if (_rigidBody.linearVelocityX < .0f)
-            {
-                _canMoveToLeft = false;
-            }
-        }
-    }
-    
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        GameObject collidedObject = other.gameObject;
-
-        if (collidedObject.TryGetComponent(out StaticCollider _))
-        {
-            if (_rigidBody.linearVelocityX > .0f)
-            {
-                _canMoveToLeft = true;
-            }
-            
-            if (_rigidBody.linearVelocityX < .0f)
-            {
-                _canMoveToRight = true;
-            }
-        }
+        FixVerticalVelocity();
     }
     
     /// <summary>
@@ -119,6 +88,12 @@ public class Platform : MonoBehaviour
         float currentHorizontalVelocity = _rigidBody.linearVelocityX;
         float targetHorizontalVelocity = currentInputHorizontalDirection * speed;
         _rigidBody.linearVelocityX = Mathf.SmoothDamp(currentHorizontalVelocity, targetHorizontalVelocity, ref _refZeroVelocity, smoothTimeSpeed);
+    }
+
+    private void FixVerticalVelocity()
+    {
+        _rigidBody.linearVelocityY = .0f;
+        transform.position = new Vector2(transform.position.x, yPosition);
     }
     
     /// <summary>

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
@@ -8,6 +9,9 @@ public class PlatformsManager : MonoBehaviour
     public static PlatformsManager Instance;
     
     private List<Platform> _platforms;
+
+    [Header("Controls")] 
+    [SerializeField, UnityEngine.Range(.5f, 2f)] private float sensitivityHorizontalPlatformVelocity = 1.5f;
     
     [Header("Platforms Datas")]
     [SerializeField] private List<PlatformSizeSO> platformSizes;
@@ -24,6 +28,26 @@ public class PlatformsManager : MonoBehaviour
         
         Assert.IsNotNull(platformSizes);
         _platforms = new List<Platform>();
+    }
+
+    private void Start()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Update()
+    {
+        UpdateMousePositions();
+    }
+
+    private void UpdateMousePositions()
+    {
+        float delta = sensitivityHorizontalPlatformVelocity * Input.GetAxis("Mouse X");
+        foreach (Platform platform in _platforms)
+        {
+            platform.InputHorizontalDirection = delta;
+        }
     }
 
     /// <summary>
