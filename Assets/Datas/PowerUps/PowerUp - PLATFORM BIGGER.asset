@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: PowerUp - PLATFORM BIGGER
   m_EditorClassIdentifier: 
   powerUpPrefab: {fileID: 5459947136880005606, guid: a9768e07ad68fc049979e88b4b215c1c, type: 3}
-  material: {fileID: 2100000, guid: 017cab79853b1d947802ca969dc39998, type: 2}
+  glowColor: {r: 0, g: 0.7355242, b: 1, a: 0}
+  glowStrength: 0.54

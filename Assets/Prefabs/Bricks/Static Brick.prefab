@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 8a9e294d9b9d6f1489bebe21ec9dbc9d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 8062238870127439780}
   - component: {fileID: 4634948644182470811}
   m_Layer: 0
-  m_Name: Brick
+  m_Name: Static Brick
   m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,8 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineRenderer: {fileID: 5384828004423620602}
-  gradientRenderer: {fileID: 4232779151032773000}
-  gradientMaterial: {fileID: 2100000, guid: 6dd333263e3e4b84e9da706554bf0487, type: 2}
+  fillRenderer: {fileID: 4232779151032773000}
   powerUpGO: {fileID: 0}
 --- !u!1 &8783084095861525868
 GameObject:
@@ -239,7 +238,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

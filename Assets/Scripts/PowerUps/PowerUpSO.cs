@@ -7,7 +7,10 @@ public class PowerUpSO : ScriptableObject
     [SerializeField] private GameObject powerUpPrefab;
     public GameObject PowerUpPrefab => powerUpPrefab;
     
-    [SerializeField] private Material material;
-    public Material Material => material;
+    [SerializeField] private Color glowColor;
+    public Color GlowColor => glowColor;
+    
+    [SerializeField] private float glowStrength;
+    public float GlowStrength => glowStrength;
 
 }

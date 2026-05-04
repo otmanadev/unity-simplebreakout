@@ -4,32 +4,32 @@ using UnityEngine;
 public class Brick : MonoBehaviour
 {
     
-    private readonly string _materialPropertyColor = "_Color";
     private readonly string _materialPropertyMainTex = "_MainTex";
-    
+    private readonly string _materialPropertyColor = "_Color";
+    private readonly string _materialGlowEnabled = "_GlowEnabled";
+    private readonly string _materialGlowColor = "_GlowColor";
+    private readonly string _materialGlowStrength = "_GlowStrength";
+
     private BoxCollider2D _boxCollider2D;
     
     [Header("Sprites and materials properties")]
     [SerializeField] private SpriteRenderer outlineRenderer;
-    [SerializeField] private SpriteRenderer gradientRenderer;
-    [SerializeField] private Material gradientMaterial;
+    [SerializeField] private SpriteRenderer fillRenderer;
     
     [Header("Power Up properties")]
     [SerializeField] private GameObject powerUpGO;
     
-    private void Awake()
+    protected virtual void Awake()
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         Assert.IsNotNull(_boxCollider2D);
         
         Assert.IsNotNull(outlineRenderer);
-        Assert.IsNotNull(gradientRenderer);
-        Assert.IsNotNull(gradientMaterial);
-        Assert.IsTrue(gradientMaterial.HasProperty(_materialPropertyColor));
+        Assert.IsNotNull(fillRenderer);
         PickRandomGradientColor();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         Debug.Log($"[Brick / {name}] Send notification to {BricksManager.Instance.name} : Brick created.");
         BricksManager.Instance.OnBrickCreatedNotification(this);
@@ -40,9 +40,8 @@ public class Brick : MonoBehaviour
     /// </summary>
     private void PickRandomGradientColor()
     {
-        gradientRenderer.material = gradientMaterial;
-        gradientRenderer.material.SetTexture(_materialPropertyMainTex, gradientRenderer.sprite.texture);
-        gradientRenderer.material.SetColor(_materialPropertyColor, BrickColor.PickRandomColor());
+        fillRenderer.material.SetTexture(_materialPropertyMainTex, fillRenderer.sprite.texture);
+        fillRenderer.material.SetColor(_materialPropertyColor, BrickColor.PickRandomColor());
     }
     
     /// <summary>
@@ -54,7 +53,10 @@ public class Brick : MonoBehaviour
         PowerUp powerUp = powerUpSO.PowerUpPrefab.gameObject.GetComponent<PowerUp>();
         Debug.Log($"[Brick / {name}] Received power up {powerUp.PowerUpType}.");
         powerUpGO = powerUpSO.PowerUpPrefab;
-        //_spriteRenderer.material = powerUpSO.Material;
+        
+        fillRenderer.material.SetColor(_materialGlowColor, powerUpSO.GlowColor);
+        fillRenderer.material.SetFloat(_materialGlowStrength, powerUpSO.GlowStrength);
+        fillRenderer.material.SetInt(_materialGlowEnabled, 1);
     }
 
     /// <summary>

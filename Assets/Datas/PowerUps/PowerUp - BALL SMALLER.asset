@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: PowerUp - BALL SMALLER
   m_EditorClassIdentifier: 
   powerUpPrefab: {fileID: 5459947136880005606, guid: 052cab6bc1b7b844ba4a4eae9d6aa2d8, type: 3}
-  material: {fileID: 2100000, guid: 017cab79853b1d947802ca969dc39998, type: 2}
+  glowColor: {r: 0.24347973, g: 1, b: 0, a: 0}
+  glowStrength: 0.33
