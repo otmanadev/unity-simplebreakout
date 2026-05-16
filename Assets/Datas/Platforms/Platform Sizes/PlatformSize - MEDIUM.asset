@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aceaca885394ff2a197d361277e8212, type: 3}
   m_Name: PlatformSize - MEDIUM
   m_EditorClassIdentifier: 
-  platformSizeType: 2
+  platformSize: 2
   speed: 6.5
   smoothTime: 0.05
-  colliderHorizontalSize: 3.3
   sprite: {fileID: 21300000, guid: a80c0a9a411650c4390e93d3b5b495ac, type: 3}
+  colliderHorizontalSize: 3.3

@@ -1,10 +1,10 @@
 ﻿public enum EPlatformSize
 {
     
-    XSMALL,
-    SMALL,
-    MEDIUM,
-    LARGE,
-    XLARGE
+    ExtraSmall,
+    Small,
+    Medium,
+    Large,
+    ExtraLarge
     
 }

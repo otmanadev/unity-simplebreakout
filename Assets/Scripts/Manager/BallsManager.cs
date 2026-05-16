@@ -8,11 +8,10 @@ public class BallsManager : MonoBehaviour
 {
 
     public static BallsManager Instance;
-    
     private List<Ball> _balls;
     
     [Header("Ball Datas")]
-    [SerializeField] private List<BallSizeSO> ballSizes;
+    [SerializeField] private List<SOBallSize> ballSizes;
     
     private void Awake()
     {
@@ -69,11 +68,11 @@ public class BallsManager : MonoBehaviour
         {
             switch (powerUpType)
             {
-                case EPowerUp.BALL_BIGGER:
-                case EPowerUp.BALL_SMALLER:
-                    BallSizeSO currentBallSize = ball.BallSizeSo;
-                    BallSizeSO newBallSize = PickUpNewBallSizeSoForCurrentBall(powerUpType, currentBallSize);
-                    ball.SetUpNewBallSize(newBallSize);
+                case EPowerUp.BallBigger:
+                case EPowerUp.BallSmaller:
+                    SOBallSize currentSoBallSize = ball.SoBallSize;
+                    SOBallSize newSoBallSize = PickUpNewBallSizeSoForCurrentBall(powerUpType, currentSoBallSize);
+                    ball.SetUpNewBallSize(newSoBallSize);
                     break;
             }
         }
@@ -83,55 +82,55 @@ public class BallsManager : MonoBehaviour
     /// Select ball size SO from current ball size and depending on selected power up.
     /// </summary>
     /// <param name="powerUpType"></param>
-    /// <param name="currentBallSize"></param>
+    /// <param name="currentSoBallSize"></param>
     /// <returns></returns>
-    private BallSizeSO PickUpNewBallSizeSoForCurrentBall(EPowerUp powerUpType, BallSizeSO currentBallSize)
+    private SOBallSize PickUpNewBallSizeSoForCurrentBall(EPowerUp powerUpType, SOBallSize currentSoBallSize)
     {
-        if (!powerUpType.Equals(EPowerUp.BALL_SMALLER) && !powerUpType.Equals(EPowerUp.BALL_BIGGER))
+        if (!powerUpType.Equals(EPowerUp.BallSmaller) && !powerUpType.Equals(EPowerUp.BallBigger))
         {
             Debug.LogError($"[BallsManager / {name}] Cannot find BallSizeSO from power up type {powerUpType}");
             return null;
         }
         
-        EBallSize currentBallSizeType = currentBallSize.BallSizeType;
+        EBallSize currentBallSizeType = currentSoBallSize.BallSize;
         EBallSize newBallSizeType = currentBallSizeType;
         switch (currentBallSizeType)
         {
-            case EBallSize.XLARGE:
-                newBallSizeType = powerUpType.Equals(EPowerUp.BALL_SMALLER) 
-                    ? EBallSize.LARGE 
+            case EBallSize.ExtraLarge:
+                newBallSizeType = powerUpType.Equals(EPowerUp.BallSmaller) 
+                    ? EBallSize.Large 
                     : newBallSizeType;
                 break;
-            case EBallSize.LARGE:
-                newBallSizeType = powerUpType.Equals(EPowerUp.BALL_BIGGER) 
-                    ? EBallSize.XLARGE 
-                    : EBallSize.MEDIUM;
+            case EBallSize.Large:
+                newBallSizeType = powerUpType.Equals(EPowerUp.BallBigger) 
+                    ? EBallSize.ExtraLarge 
+                    : EBallSize.Medium;
                 break;
-            case EBallSize.MEDIUM:
-                newBallSizeType = powerUpType.Equals(EPowerUp.BALL_BIGGER) 
-                    ? EBallSize.LARGE 
-                    : EBallSize.SMALL;
+            case EBallSize.Medium:
+                newBallSizeType = powerUpType.Equals(EPowerUp.BallBigger) 
+                    ? EBallSize.Large 
+                    : EBallSize.Small;
                 break;
-            case EBallSize.SMALL:
-                newBallSizeType = powerUpType.Equals(EPowerUp.BALL_BIGGER) 
-                    ? EBallSize.MEDIUM 
-                    : EBallSize.XSMALL;
+            case EBallSize.Small:
+                newBallSizeType = powerUpType.Equals(EPowerUp.BallBigger) 
+                    ? EBallSize.Medium 
+                    : EBallSize.ExtraSmall;
                 break;
-            case EBallSize.XSMALL:
-                newBallSizeType = powerUpType.Equals(EPowerUp.BALL_BIGGER) 
-                    ? EBallSize.SMALL 
+            case EBallSize.ExtraSmall:
+                newBallSizeType = powerUpType.Equals(EPowerUp.BallBigger) 
+                    ? EBallSize.Small 
                     : newBallSizeType;
                 break;
         }
 
-        BallSizeSO newBallSizeSo = ballSizes.Find(e => e.BallSizeType.Equals(newBallSizeType));
-        if (newBallSizeSo == null)
+        SOBallSize newSoBallSize = ballSizes.Find(e => e.BallSize.Equals(newBallSizeType));
+        if (newSoBallSize == null)
         {
             Debug.LogError($"[BallsManager / {name}] Cannot find BallSizeSO from size type {newBallSizeType}");
             return null;
         }
 
-        return newBallSizeSo;
+        return newSoBallSize;
     }
     
 }

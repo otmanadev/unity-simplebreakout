@@ -8,7 +8,7 @@ public class PowerUpsManager : MonoBehaviour
 
     public static PowerUpsManager Instance;
 
-    [SerializeField] private List<PowerUpSO> powerUps;
+    [SerializeField] private List<SOPowerUp> powerUps;
 
     private void Awake()
     {
@@ -39,7 +39,7 @@ public class PowerUpsManager : MonoBehaviour
             .ToList();
         
         // Put randomly power ups to bricks
-        foreach (PowerUpSO powerUpSo in powerUps)
+        foreach (SOPowerUp powerUpSo in powerUps)
         {
             PowerUp powerUp = powerUpSo.PowerUpPrefab.gameObject.GetComponent<PowerUp>();
             Assert.IsNotNull(powerUp);
@@ -63,13 +63,13 @@ public class PowerUpsManager : MonoBehaviour
 
         switch (powerUpType)
         {
-            case EPowerUp.BALL_BIGGER:
-            case EPowerUp.BALL_SMALLER:
+            case EPowerUp.BallBigger:
+            case EPowerUp.BallSmaller:
                 BallsManager.Instance.ActivateBallPowerUp(powerUpType);
                 break;
             
-            case EPowerUp.PLATFORM_BIGGER:
-            case EPowerUp.PLATFORM_SMALLER:
+            case EPowerUp.PlatformBigger:
+            case EPowerUp.PlatformSmaller:
                 PlatformsManager.Instance.ActivatePlatformPowerUp(powerUpType);
                 break;
         }

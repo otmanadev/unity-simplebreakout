@@ -12,13 +12,15 @@ public class Ball : MonoBehaviour
     private CircleCollider2D _circleCollider;
     private SpriteRenderer _spriteRenderer;
     
-    [Header("Ball Properties")]
-    [SerializeField] private BallSizeSO ballSizeSo;
-    public BallSizeSO BallSizeSo => ballSizeSo;
+    [SerializeField] private SOBallSize soBallSize;
+    public SOBallSize SoBallSize => soBallSize;
+
+    [Header("Damage")] 
+    [SerializeField, Min(1)] private int damage;
     
     [Header("Movement")]
     [SerializeField] private float speed = 1.0f;
-    [SerializeField] private float smoothTimeSpeed = .05f;
+    
     private Vector2 _direction;
     private Vector2 _refZeroVelocity = Vector2.zero;
 
@@ -28,7 +30,7 @@ public class Ball : MonoBehaviour
         _circleCollider = GetComponent<CircleCollider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         
-        Assert.IsNotNull(BallSizeSo);
+        Assert.IsNotNull(SoBallSize);
     }
 
     private void Start()
@@ -56,7 +58,7 @@ public class Ball : MonoBehaviour
         if (collidedObject.TryGetComponent(out Brick brick))
         {
             _direction = Vector2.Reflect(_direction, normal).normalized;
-            brick.TryHitBrick();
+            brick.TryHitBrick(damage);
             return;
         }
         
@@ -89,10 +91,10 @@ public class Ball : MonoBehaviour
     /// </summary>
     private void UpdateBallSize()
     {
-        _spriteRenderer.sprite = BallSizeSo.Sprite;
-        _circleCollider.radius = BallSizeSo.ColliderRadius;
-        speed = BallSizeSo.Speed;
-        smoothTimeSpeed = BallSizeSo.SmoothTime;
+        _spriteRenderer.sprite = SoBallSize.Sprite;
+        _circleCollider.radius = SoBallSize.ColliderRadius;
+        speed = SoBallSize.Speed;
+        damage = SoBallSize.Damage;
     }
 
     /// <summary>
@@ -102,21 +104,21 @@ public class Ball : MonoBehaviour
     {
         Vector2 currentVelocity = _rigidBody.linearVelocity;
         Vector2 targetVelocity = _direction * speed;
-        _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, smoothTimeSpeed);
+        _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, .0f);
     }
 
     /// <summary>
     /// Update new ball size.
     /// </summary>
-    /// <param name="newBallSizeSo"></param>
-    public void SetUpNewBallSize(BallSizeSO newBallSizeSo)
+    /// <param name="newSoBallSize"></param>
+    public void SetUpNewBallSize(SOBallSize newSoBallSize)
     {
-        if (newBallSizeSo == null || newBallSizeSo.BallSizeType.Equals(BallSizeSo.BallSizeType))
+        if (newSoBallSize == null || newSoBallSize.BallSize.Equals(SoBallSize.BallSize))
         {
             return;
         }
         
-        ballSizeSo = newBallSizeSo;
+        soBallSize = newSoBallSize;
         UpdateBallSize();
     }
     

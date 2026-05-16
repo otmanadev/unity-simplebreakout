@@ -12,7 +12,6 @@ public class PowerUp : MonoBehaviour
     
     [Header("Movement")]
     [SerializeField] private float speed = 1.0f;
-    [SerializeField] private float smoothTimeSpeed = .05f;
 
     private float _refZeroVelocity = .0f;
 
@@ -28,7 +27,7 @@ public class PowerUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        GameObject collidedObject = other.gameObject;
+        var collidedObject = other.gameObject;
 
         if (collidedObject.GetComponent<Platform>() == null)
         {
@@ -42,9 +41,9 @@ public class PowerUp : MonoBehaviour
 
     private void ThrowPowerUp()
     {
-        float currentVelocityY = _rigidBody.linearVelocityY;
-        float targetVelocityY = -speed;
-        _rigidBody.linearVelocityY = Mathf.SmoothDamp(currentVelocityY, targetVelocityY, ref _refZeroVelocity, smoothTimeSpeed);
+        var currentVelocityY = _rigidBody.linearVelocityY;
+        var targetVelocityY = -speed;
+        _rigidBody.linearVelocityY = Mathf.SmoothDamp(currentVelocityY, targetVelocityY, ref _refZeroVelocity, .0f);
     }
     
 }

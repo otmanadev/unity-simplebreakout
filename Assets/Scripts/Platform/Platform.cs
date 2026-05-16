@@ -12,8 +12,8 @@ public class Platform : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     
     [Header("Platform Properties")]
-    [SerializeField] private PlatformSizeSO platformSizeSo;
-    public PlatformSizeSO PlatformSizeSo => platformSizeSo;
+    [SerializeField] private SOPlatformSize soPlatformSize;
+    public SOPlatformSize SoPlatformSize => soPlatformSize;
 
     [Header("Movement")]
     [SerializeField] private float speed = 1.0f;
@@ -23,7 +23,7 @@ public class Platform : MonoBehaviour
     private bool _canMoveToRight = true;
     private bool _canMoveToLeft = true;
     
-    private float yPosition;
+    private float _yPosition;
     
     public float InputHorizontalDirection { set => _inputHorizontalDirection = value; }
 
@@ -32,9 +32,9 @@ public class Platform : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        Assert.IsNotNull(PlatformSizeSo);
+        Assert.IsNotNull(SoPlatformSize);
         
-        yPosition = transform.position.y;
+        _yPosition = transform.position.y;
     }
     
     private void Start()
@@ -55,10 +55,10 @@ public class Platform : MonoBehaviour
     /// </summary>
     private void UpdatePlatformSize()
     {
-        _spriteRenderer.sprite = PlatformSizeSo.Sprite;
-        _boxCollider.size = new Vector2(PlatformSizeSo.ColliderHorizontalSize, _boxCollider.size.y);
-        speed = PlatformSizeSo.Speed;
-        smoothTimeSpeed = PlatformSizeSo.SmoothTime;
+        _spriteRenderer.sprite = SoPlatformSize.Sprite;
+        _boxCollider.size = new Vector2(SoPlatformSize.ColliderHorizontalSize, _boxCollider.size.y);
+        speed = SoPlatformSize.Speed;
+        smoothTimeSpeed = SoPlatformSize.SmoothTime;
     }
 
     /// <summary>
@@ -93,21 +93,21 @@ public class Platform : MonoBehaviour
     private void FixVerticalVelocity()
     {
         _rigidBody.linearVelocityY = .0f;
-        transform.position = new Vector2(transform.position.x, yPosition);
+        transform.position = new Vector2(transform.position.x, _yPosition);
     }
     
     /// <summary>
     /// Update new platform size.
     /// </summary>
-    /// <param name="newPlatformSizeSo"></param>
-    public void SetUpNewPlatformSize(PlatformSizeSO newPlatformSizeSo)
+    /// <param name="newSoPlatformSize"></param>
+    public void SetUpNewPlatformSize(SOPlatformSize newSoPlatformSize)
     {
-        if (newPlatformSizeSo == null || newPlatformSizeSo.PlatformSizeType.Equals(PlatformSizeSo.PlatformSizeType))
+        if (newSoPlatformSize == null || newSoPlatformSize.PlatformSize.Equals(SoPlatformSize.PlatformSize))
         {
             return;
         }
         
-        platformSizeSo = newPlatformSizeSo;
+        soPlatformSize = newSoPlatformSize;
         UpdatePlatformSize();
     }
     
