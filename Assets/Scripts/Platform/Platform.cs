@@ -40,8 +40,9 @@ public class Platform : MonoBehaviour
     private void Start()
     {
         UpdatePlatformSize();
-        Debug.Log($"[Platform / {name}] Send notification to {PlatformsManager.Instance.name} : Platform created.");
-        PlatformsManager.Instance.OnPlatformCreatedNotification(this);
+        
+        Debug.Log($"[Platform / {name}] Send notification to Platforms Manager : <color=orange>Platform initialized</color>");
+        PlatformsManager.Instance.OnPlatformInitializedNotification(this);
     }
 
     private void FixedUpdate()

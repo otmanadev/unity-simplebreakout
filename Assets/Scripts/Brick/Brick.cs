@@ -18,8 +18,8 @@ public class Brick : MonoBehaviour
 
     protected virtual void Start()
     {
-        Debug.Log($"[Brick / {name}] Send notification to {BricksManager.Instance.name} : Brick created.");
-        BricksManager.Instance.OnBrickCreatedNotification(this);
+        Debug.Log($"[Brick / {name}] Send notification to Bricks Manager : <color=orange>Brick initialized</color>");
+        BricksManager.Instance.OnBrickInitializedNotification(this);
     }
     
     /// <summary>

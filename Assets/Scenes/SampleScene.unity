@@ -1612,6 +1612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 2750505831257865749, guid: 8897377576658b6449fddc3697931cd5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3576973009973384567, guid: 8897377576658b6449fddc3697931cd5, type: 3}
       propertyPath: m_Sprite
       value: 

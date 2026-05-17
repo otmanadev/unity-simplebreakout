@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -6,8 +7,10 @@ public class PlatformsManager : MonoBehaviour
 {
     
     public static PlatformsManager Instance;
-    
+
+    private int _platformsCount;
     private List<Platform> _platforms;
+    public List<Platform> Platforms => _platforms;
 
     [Header("Controls")] 
     [SerializeField, UnityEngine.Range(.5f, 2f)] private float sensitivityHorizontalPlatformVelocity = 1.5f;
@@ -19,25 +22,23 @@ public class PlatformsManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.LogWarning($"[PlatformsManager / {name}] Instance is not unique : this instance will not be created");
+            Debug.LogWarning($"[<color=orange>PlatformsManager / {name}</color>] Instance is not unique : this instance will not be created");
             Destroy(gameObject);
             return;
         }
         Instance = this;
         
         Assert.IsNotNull(platformSizes);
+        
+        _platformsCount = GameObject.FindGameObjectsWithTag("Player")
+            .Where(o => o.GetComponent<Platform>() != null)
+            .Count();
         _platforms = new List<Platform>();
-    }
-
-    private void Start()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
-        UpdateMousePositions();
+        //UpdateMousePositions();
     }
 
     private void UpdateMousePositions()
@@ -50,18 +51,31 @@ public class PlatformsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Receive notification from platform when he is created.
+    /// Receive notification from platform when instanciated.
     /// </summary>
     /// <param name="platform"></param>
-    public void OnPlatformCreatedNotification(Platform platform)
+    public void OnPlatformInitializedNotification(Platform platform)
     {
         if (_platforms.Contains(platform))
         {
+            Debug.LogWarning($"[<color=orange>PlatformsManager / {name}</color>] Received notification from Platform {platform.name} but was already initialized");
             return;
         }
         
         _platforms.Add(platform);
-        Debug.Log($"[PlatformsManager / {name}] Received notification from {platform.name} : Platform created.");
+        VerifyIfAllPlatformsAreInstanciatedBeforeNotifyLevelManager();
+    }
+    
+    /// <summary>
+    /// Verify if all platforms are instanciated before notify Level Manager so that the level can start.
+    /// </summary>
+    private void VerifyIfAllPlatformsAreInstanciatedBeforeNotifyLevelManager()
+    {
+        if (_platforms.Count != _platformsCount)
+            return;
+        
+        Debug.Log($"[<color=orange>PlatformsManager / {name}</color>] Notify Level Manager");
+        LevelManager.Instance.OnPlatformsManagerSuccesfullyNotified();
     }
     
     /// <summary>
@@ -94,7 +108,7 @@ public class PlatformsManager : MonoBehaviour
     {
         if (!powerUpType.Equals(EPowerUp.PlatformSmaller) && !powerUpType.Equals(EPowerUp.PlatformBigger))
         {
-            Debug.LogError($"[PlatformsManager / {name}] Cannot find PlatformSizeSO from power up type {powerUpType}");
+            Debug.LogError($"[<color=orange>PlatformsManager / {name}</color>] Cannot find PlatformSizeSO from power up type {powerUpType}");
             return null;
         }
         
@@ -133,7 +147,7 @@ public class PlatformsManager : MonoBehaviour
         SOPlatformSize newSoPlatformSize = platformSizes.Find(e => e.PlatformSize.Equals(newPlatformSizeType));
         if (newSoPlatformSize == null)
         {
-            Debug.LogError($"[PlatformsManager / {name}] Cannot find PlatformSizeSO from size type {newPlatformSizeType}");
+            Debug.LogError($"[<color=orange>PlatformsManager / {name}</color>] Cannot find PlatformSizeSO from size type {newPlatformSizeType}");
             return null;
         }
 

@@ -36,10 +36,10 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         UpdateBallSize();
-        _direction = Vector2.down;
+        //_direction = Vector2.down;
         
         Debug.Log($"[Ball / {name}] Send notification to {BallsManager.Instance.name} : Ball created.");
-        BallsManager.Instance.OnBallCreatedNotification(this);
+        BallsManager.Instance.OnBallInitializedNotification(this);
     }
 
     private void FixedUpdate()

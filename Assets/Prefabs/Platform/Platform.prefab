@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7717173952702929010}
   m_Layer: 0
   m_Name: Platform
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,6 +175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d3dab70bd91df4a9b75e9dd971189d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformSizeSo: {fileID: 11400000, guid: 68d50c922414588468de1345ad54f22f, type: 2}
+  soPlatformSize: {fileID: 0}
   speed: 6.5
   smoothTimeSpeed: 0.05

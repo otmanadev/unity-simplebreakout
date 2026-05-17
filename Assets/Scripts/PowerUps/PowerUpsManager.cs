@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -14,7 +13,7 @@ public class PowerUpsManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.LogWarning($"[PowerUpsManager / {name}] Instance is not unique : this instance will not be created");
+            Debug.LogWarning($"[<color=orange>PowerUpsManager / {name}</color>] Instance is not unique : this instance will not be created");
             Destroy(gameObject);
             return;
         }
@@ -22,21 +21,12 @@ public class PowerUpsManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
-    {
-        SetUpPowerUpsToBricks();
-    }
-
     /// <summary>
     /// Put power ups to bricks placed on the scene.
     /// </summary>
-    private void SetUpPowerUpsToBricks()
+    public void LinkPowerUpsToBricks()
     {
-        // Get Bricks
-        List<Brick> bricks = GameObject.FindGameObjectsWithTag("Brick")
-            .Select(o => o.GetComponent<Brick>())
-            .Where(o => o != null)
-            .ToList();
+        List<Brick> bricks = BricksManager.Instance.Bricks;
         
         // Put randomly power ups to bricks
         foreach (SOPowerUp powerUpSo in powerUps)
@@ -46,11 +36,14 @@ public class PowerUpsManager : MonoBehaviour
             
             Brick randomBrick = bricks[Random.Range(0, bricks.Count)];
             
-            Debug.Log($"[PowerUpsManager / {name}] Put power up {powerUp.PowerUpType} to brick {randomBrick.name}.");
+            Debug.Log($"[<color=orange>PowerUpsManager / {name}</color>] Put power up {powerUp.PowerUpType} to brick {randomBrick.name}.");
             randomBrick.SetUpPowerUp(powerUpSo);
             
             bricks.Remove(randomBrick);
         }
+        
+        Debug.Log($"[<color=orange>PowerUpsManager / {name}</color>] Notify Level Manager");
+        LevelManager.Instance.OnPowerUpsManagerSuccesfullyNotified();
     }
 
     /// <summary>
@@ -59,7 +52,7 @@ public class PowerUpsManager : MonoBehaviour
     /// <param name="powerUpType"></param>
     public void ActivatePowerUp(EPowerUp powerUpType)
     {
-        Debug.Log($"[PowerUp / {name}] Received notification : Activate power up {powerUpType}.");
+        Debug.Log($"[<color=orange>PowerUpsManager / {name}</color>] Received notification : Activate power up {powerUpType}.");
 
         switch (powerUpType)
         {

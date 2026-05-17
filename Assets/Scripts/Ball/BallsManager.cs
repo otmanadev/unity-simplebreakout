@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Serialization;
@@ -8,7 +9,10 @@ public class BallsManager : MonoBehaviour
 {
 
     public static BallsManager Instance;
+
+    private int _ballsCount;
     private List<Ball> _balls;
+    public List<Ball> Balls => _balls;
     
     [Header("Ball Datas")]
     [SerializeField] private List<SOBallSize> ballSizes;
@@ -17,29 +21,46 @@ public class BallsManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.LogWarning($"[BallsManager / {name}] Instance is not unique : this instance will not be created");
+            Debug.LogWarning($"[<color=orange>BallsManager / {name}</color>] Instance is not unique : this instance will not be created");
             Destroy(gameObject);
             return;
         }
         Instance = this;
         
         Assert.IsNotNull(ballSizes);
+        
+        _ballsCount = GameObject.FindGameObjectsWithTag("Ball")
+            .Where(o => o.GetComponent<Ball>() != null)
+            .Count();
         _balls = new List<Ball>();
     }
 
     /// <summary>
-    /// Receive notification from ball when he is created.
+    /// Receive notification from ball when initialized.
     /// </summary>
     /// <param name="ball"></param>
-    public void OnBallCreatedNotification(Ball ball)
+    public void OnBallInitializedNotification(Ball ball)
     {
         if (_balls.Contains(ball))
         {
+            Debug.LogWarning($"[<color=orange>BallsManager / {name}</color>] Received notification from Ball {ball.name} but was already initialized");
             return;
         }
         
         _balls.Add(ball);
-        Debug.Log($"[BallsManager / {name}] Received notification from {ball.name} : Ball created.");
+        VerifyIfAllBallsAreInstanciatedBeforeNotifyLevelManager();
+    }
+    
+    /// <summary>
+    /// Verify if all balls are instanciated before notify Level Manager so that the level can start.
+    /// </summary>
+    private void VerifyIfAllBallsAreInstanciatedBeforeNotifyLevelManager()
+    {
+        if (_balls.Count != _ballsCount)
+            return;
+        
+        Debug.Log($"[<color=orange>BallsManager / {name}</color>] Notify Level Manager");
+        LevelManager.Instance.OnBallsManagerSuccesfullyNotified();
     }
     
     /// <summary>
@@ -53,9 +74,9 @@ public class BallsManager : MonoBehaviour
             return;
         }
         
-        Debug.Log($"[BallsManager / {name}] Received notification from {ball.name} : Ball reached dead zone.");
-        Debug.Log($"[BallsManager / {name}] Send notification from {GameManager.Instance.name} : Ball reached dead zone.");
-        GameManager.Instance.OnBallReachedDeadZoneNotification();
+        Debug.Log($"[<color=orange>BallsManager / {name}</color>] Received notification from {ball.name} : Ball reached dead zone.");
+        Debug.Log($"[<color=orange>BallsManager / {name}</color>] Send notification from {LevelManager.Instance.name} : Ball reached dead zone.");
+        LevelManager.Instance.OnBallReachedDeadZoneNotification();
     }
 
     /// <summary>
@@ -88,7 +109,7 @@ public class BallsManager : MonoBehaviour
     {
         if (!powerUpType.Equals(EPowerUp.BallSmaller) && !powerUpType.Equals(EPowerUp.BallBigger))
         {
-            Debug.LogError($"[BallsManager / {name}] Cannot find BallSizeSO from power up type {powerUpType}");
+            Debug.LogError($"[<color=orange>BallsManager / {name}</color>] Cannot find BallSizeSO from power up type {powerUpType}");
             return null;
         }
         
@@ -126,7 +147,7 @@ public class BallsManager : MonoBehaviour
         SOBallSize newSoBallSize = ballSizes.Find(e => e.BallSize.Equals(newBallSizeType));
         if (newSoBallSize == null)
         {
-            Debug.LogError($"[BallsManager / {name}] Cannot find BallSizeSO from size type {newBallSizeType}");
+            Debug.LogError($"[<color=orange>BallsManager / {name}</color>] Cannot find BallSizeSO from size type {newBallSizeType}");
             return null;
         }
 
