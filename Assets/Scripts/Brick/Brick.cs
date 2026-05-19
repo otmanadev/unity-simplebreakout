@@ -1,10 +1,13 @@
 using NUnit.Framework;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Animator))]
 public class Brick : MonoBehaviour
 {
 
     private BoxCollider2D _boxCollider2D;
+    private Animator _animator;
     [SerializeField] private GameObject powerUpGo;
 
     [Header("Health")]
@@ -14,12 +17,33 @@ public class Brick : MonoBehaviour
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         Assert.IsNotNull(_boxCollider2D);
+        
+        _animator = GetComponent<Animator>();
+        Assert.IsNotNull(_animator);
     }
 
     protected virtual void Start()
     {
         Debug.Log($"[Brick / {name}] Send notification to Bricks Manager : <color=orange>Brick initialized</color>");
         BricksManager.Instance.OnBrickInitializedNotification(this);
+    }
+
+    /// <summary>
+    /// Play brick spawn animation.
+    /// </summary>
+    public void StartBrickSpawn()
+    {
+        Debug.Log($"[Brick / {name}] Start animation");
+        _animator.SetTrigger("SpawnTrigger");
+    }
+
+    /// <summary>
+    /// Notify Bricks Manager the brick finished his spawn animation.
+    /// </summary>
+    public void OnReceiveNotificationFromAnimatorBrickSpawned()
+    {
+        Debug.Log($"[Brick / {name}] Send notification to Bricks Manager : <color=orange>Brick spawned</color>");
+        BricksManager.Instance.OnBrickSpawnedNotification(this);
     }
     
     /// <summary>

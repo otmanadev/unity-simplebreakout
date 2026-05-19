@@ -34,6 +34,9 @@ public class LevelManager : MonoBehaviour
         _bricksManagerNotificationReceived = false;
         _ballsManagerNotificationReceived = false;
         _platformsManagerNotificationReceived = false;
+        
+        Debug.Log($"[<color=orange>LevelManager / {name}</color>] Level State changed from <color=red>{_levelState}</color> to <color=green>{newLevelState}</color>");
+        _levelState = newLevelState;
 
         switch (newLevelState)
         {
@@ -41,12 +44,15 @@ public class LevelManager : MonoBehaviour
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 break;
+            case ELevelState.AppearingObjects:
+                BricksManager.Instance.SpawnAllBricks();
+                // TODO retirer ça plus tard
+                _ballsManagerNotificationReceived = true;
+                _platformsManagerNotificationReceived = true;
+                break;
             default:
                 break;
         }
-        
-        Debug.Log($"[<color=orange>LevelManager / {name}</color>] Level State changed from <color=red>{_levelState}</color> to <color=green>{newLevelState}</color>");
-        _levelState = newLevelState;
     }
     
     /// <summary>

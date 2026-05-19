@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -26,7 +27,7 @@ public class PowerUpsManager : MonoBehaviour
     /// </summary>
     public void LinkPowerUpsToBricks()
     {
-        List<Brick> bricks = BricksManager.Instance.Bricks;
+        List<Brick> bricks = BricksManager.Instance.AllBricks.ToList();
         
         // Put randomly power ups to bricks
         foreach (SOPowerUp powerUpSo in powerUps)
