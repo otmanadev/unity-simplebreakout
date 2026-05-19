@@ -9,8 +9,8 @@ public class PlatformsManager : MonoBehaviour
     public static PlatformsManager Instance;
 
     private int _platformsCount;
-    private List<Platform> _platforms;
-    public List<Platform> Platforms => _platforms;
+    private readonly List<Platform> _allPlatforms = new();
+    private readonly List<Platform> _spawnedPlatforms = new();
 
     [Header("Controls")] 
     [SerializeField, UnityEngine.Range(.5f, 2f)] private float sensitivityHorizontalPlatformVelocity = 1.5f;
@@ -33,7 +33,6 @@ public class PlatformsManager : MonoBehaviour
         _platformsCount = GameObject.FindGameObjectsWithTag("Player")
             .Where(o => o.GetComponent<Platform>() != null)
             .Count();
-        _platforms = new List<Platform>();
     }
 
     private void Update()
@@ -44,7 +43,7 @@ public class PlatformsManager : MonoBehaviour
     private void UpdateMousePositions()
     {
         float delta = sensitivityHorizontalPlatformVelocity * Input.GetAxis("Mouse X");
-        foreach (Platform platform in _platforms)
+        foreach (Platform platform in _allPlatforms)
         {
             platform.InputHorizontalDirection = delta;
         }
@@ -56,13 +55,13 @@ public class PlatformsManager : MonoBehaviour
     /// <param name="platform"></param>
     public void OnPlatformInitializedNotification(Platform platform)
     {
-        if (_platforms.Contains(platform))
+        if (_allPlatforms.Contains(platform))
         {
             Debug.LogWarning($"[<color=orange>PlatformsManager / {name}</color>] Received notification from Platform {platform.name} but was already initialized");
             return;
         }
         
-        _platforms.Add(platform);
+        _allPlatforms.Add(platform);
         VerifyIfAllPlatformsAreInstanciatedBeforeNotifyLevelManager();
     }
     
@@ -71,7 +70,46 @@ public class PlatformsManager : MonoBehaviour
     /// </summary>
     private void VerifyIfAllPlatformsAreInstanciatedBeforeNotifyLevelManager()
     {
-        if (_platforms.Count != _platformsCount)
+        if (_allPlatforms.Count != _platformsCount)
+            return;
+        
+        Debug.Log($"[<color=orange>PlatformsManager / {name}</color>] Notify Level Manager");
+        LevelManager.Instance.OnPlatformsManagerSuccesfullyNotified();
+    }
+
+    /// <summary>
+    /// Spawn all platforms.
+    /// </summary>
+    public void SpawnAllPlatforms()
+    {
+        foreach (Platform platform in _allPlatforms)
+        {
+            platform.SpawnPlatform();
+        }
+    }
+    
+    /// <summary>
+    /// Receive notification from single platform when spawned.
+    /// </summary>
+    /// <param name="platform"></param>
+    public void OnPlatformSpawnedNotification(Platform platform)
+    {
+        if (_spawnedPlatforms.Contains(platform))
+        {
+            Debug.LogWarning($"[<color=orange>PlatformsManager / {name}</color>] Received notification from Platform {platform.name} but was already spawned");
+            return;
+        }
+        
+        _spawnedPlatforms.Add(platform);
+        VerifyIfAllPlatformsAreSpawnedBeforeNotifyLevelManager();
+    }
+
+    /// <summary>
+    /// Verify if all platforms are spawned before notify Level Manager so that the level can start.
+    /// </summary>
+    private void VerifyIfAllPlatformsAreSpawnedBeforeNotifyLevelManager()
+    {
+        if (_spawnedPlatforms.Count != _platformsCount)
             return;
         
         Debug.Log($"[<color=orange>PlatformsManager / {name}</color>] Notify Level Manager");
@@ -84,7 +122,7 @@ public class PlatformsManager : MonoBehaviour
     /// <param name="powerUpType"></param>
     public void ActivatePlatformPowerUp(EPowerUp powerUpType)
     {
-        foreach (Platform platform in _platforms)
+        foreach (Platform platform in _allPlatforms)
         {
             switch (powerUpType)
             {

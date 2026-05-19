@@ -11,8 +11,8 @@ public class BallsManager : MonoBehaviour
     public static BallsManager Instance;
 
     private int _ballsCount;
-    private List<Ball> _balls;
-    public List<Ball> Balls => _balls;
+    private readonly List<Ball> _allBalls = new();
+    private readonly List<Ball> _spawnedBalls = new();
     
     [Header("Ball Datas")]
     [SerializeField] private List<SOBallSize> ballSizes;
@@ -32,7 +32,6 @@ public class BallsManager : MonoBehaviour
         _ballsCount = GameObject.FindGameObjectsWithTag("Ball")
             .Where(o => o.GetComponent<Ball>() != null)
             .Count();
-        _balls = new List<Ball>();
     }
 
     /// <summary>
@@ -41,13 +40,13 @@ public class BallsManager : MonoBehaviour
     /// <param name="ball"></param>
     public void OnBallInitializedNotification(Ball ball)
     {
-        if (_balls.Contains(ball))
+        if (_allBalls.Contains(ball))
         {
             Debug.LogWarning($"[<color=orange>BallsManager / {name}</color>] Received notification from Ball {ball.name} but was already initialized");
             return;
         }
         
-        _balls.Add(ball);
+        _allBalls.Add(ball);
         VerifyIfAllBallsAreInstanciatedBeforeNotifyLevelManager();
     }
     
@@ -56,7 +55,46 @@ public class BallsManager : MonoBehaviour
     /// </summary>
     private void VerifyIfAllBallsAreInstanciatedBeforeNotifyLevelManager()
     {
-        if (_balls.Count != _ballsCount)
+        if (_allBalls.Count != _ballsCount)
+            return;
+        
+        Debug.Log($"[<color=orange>BallsManager / {name}</color>] Notify Level Manager");
+        LevelManager.Instance.OnBallsManagerSuccesfullyNotified();
+    }
+
+    /// <summary>
+    /// Spawn all balls.
+    /// </summary>
+    public void SpawnAllBalls()
+    {
+        foreach (Ball ball in _allBalls)
+        {
+            ball.StartBallSpawn();
+        }
+    }
+
+    /// <summary>
+    /// Receive notification from single ball when spawned.
+    /// </summary>
+    /// <param name="ball"></param>
+    public void OnBallSpawnedNotification(Ball ball)
+    {
+        if (_spawnedBalls.Contains(ball))
+        {
+            Debug.LogWarning($"[<color=orange>BallsManager / {name}</color>] Received notification from Ball {ball.name} but was already spawned");
+            return;
+        }
+        
+        _spawnedBalls.Add(ball);
+        VerifyIfAllBallsAreSpawnedBeforeNotifyLevelManager();
+    }
+    
+    /// <summary>
+    /// Verify if all balls are spawned before notify Level Manager so that the level can start.
+    /// </summary>
+    private void VerifyIfAllBallsAreSpawnedBeforeNotifyLevelManager()
+    {
+        if (_spawnedBalls.Count != _ballsCount)
             return;
         
         Debug.Log($"[<color=orange>BallsManager / {name}</color>] Notify Level Manager");
@@ -69,7 +107,7 @@ public class BallsManager : MonoBehaviour
     /// <param name="ball"></param>
     public void OnBallReachDeadZoneNotification(Ball ball)
     {
-        if (!_balls.Contains(ball))
+        if (!_allBalls.Contains(ball))
         {
             return;
         }
@@ -85,7 +123,7 @@ public class BallsManager : MonoBehaviour
     /// <param name="powerUpType"></param>
     public void ActivateBallPowerUp(EPowerUp powerUpType)
     {
-        foreach (Ball ball in _balls)
+        foreach (Ball ball in _allBalls)
         {
             switch (powerUpType)
             {

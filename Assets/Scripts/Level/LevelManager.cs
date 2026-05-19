@@ -46,9 +46,8 @@ public class LevelManager : MonoBehaviour
                 break;
             case ELevelState.AppearingObjects:
                 BricksManager.Instance.SpawnAllBricks();
-                // TODO retirer ça plus tard
-                _ballsManagerNotificationReceived = true;
-                _platformsManagerNotificationReceived = true;
+                BallsManager.Instance.SpawnAllBalls();
+                PlatformsManager.Instance.SpawnAllPlatforms();
                 break;
             default:
                 break;

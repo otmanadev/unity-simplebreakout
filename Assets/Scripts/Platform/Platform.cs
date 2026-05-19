@@ -4,12 +4,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Animator))]
 public class Platform : MonoBehaviour
 {
     
     private Rigidbody2D _rigidBody;
     private BoxCollider2D _boxCollider;
     private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
     
     [Header("Platform Properties")]
     [SerializeField] private SOPlatformSize soPlatformSize;
@@ -32,6 +34,8 @@ public class Platform : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
+        
         Assert.IsNotNull(SoPlatformSize);
         
         _yPosition = transform.position.y;
@@ -49,6 +53,24 @@ public class Platform : MonoBehaviour
     {
         MovePlatform();
         FixVerticalVelocity();
+    }
+    
+    /// <summary>
+    /// Play platform spawn animation.
+    /// </summary>
+    public void SpawnPlatform()
+    {
+        Debug.Log($"[Platform / {name}] Start animation");
+        _animator.SetTrigger("SpawnTrigger");
+    }
+
+    /// <summary>
+    /// Notify Platforms Manager the platform finished his spawn animation.
+    /// </summary>
+    public void OnReceiveNotificationFromAnimatorPlatformSpawned()
+    {
+        Debug.Log($"[Platform / {name}] Send notification to Platforms Manager : <color=orange>Platform spawned</color>");
+        PlatformsManager.Instance.OnPlatformSpawnedNotification(this);
     }
     
     /// <summary>

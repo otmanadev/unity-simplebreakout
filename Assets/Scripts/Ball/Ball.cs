@@ -5,12 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Animator))]
 public class Ball : MonoBehaviour
 {
     
     private Rigidbody2D _rigidBody;
     private CircleCollider2D _circleCollider;
     private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
     
     [SerializeField] private SOBallSize soBallSize;
     public SOBallSize SoBallSize => soBallSize;
@@ -29,6 +31,7 @@ public class Ball : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _circleCollider = GetComponent<CircleCollider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
         
         Assert.IsNotNull(SoBallSize);
     }
@@ -84,6 +87,24 @@ public class Ball : MonoBehaviour
             Debug.Log($"[Ball / {name}] Send notification from {BallsManager.Instance.name} : Ball reached dead zone.");
             BallsManager.Instance.OnBallReachDeadZoneNotification(this);
         }
+    }
+    
+    /// <summary>
+    /// Play ball spawn animation.
+    /// </summary>
+    public void StartBallSpawn()
+    {
+        Debug.Log($"[Ball / {name}] Start animation");
+        _animator.SetTrigger("SpawnTrigger");
+    }
+    
+    /// <summary>
+    /// Notify Balls Manager the ball finished his spawn animation.
+    /// </summary>
+    public void OnReceiveNotificationFromAnimatorBallSpawned()
+    {
+        Debug.Log($"[Ball / {name}] Send notification to Balls Manager : <color=orange>Ball spawned</color>");
+        BallsManager.Instance.OnBallSpawnedNotification(this);
     }
 
     /// <summary>
