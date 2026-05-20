@@ -603,6 +603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97975af64f15ee94b8cd44e5f0fbaf95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementFadeDuration: 1
   ballSizes:
   - {fileID: 11400000, guid: 544df5db916403f458cd155ba7fa94f4, type: 2}
   - {fileID: 11400000, guid: 62aea9264b5a2fc499cc70cfe730d440, type: 2}
@@ -660,6 +661,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 68d50c922414588468de1345ad54f22f, type: 2}
   - {fileID: 11400000, guid: ecfba1879faf4644f94e883e40e9b42b, type: 2}
   - {fileID: 11400000, guid: c6031dd67dff2bf47aea022e7da42e00, type: 2}
+  movementFadeDuration: 1.5
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0

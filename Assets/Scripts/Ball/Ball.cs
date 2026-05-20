@@ -39,7 +39,6 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         UpdateBallSize();
-        //_direction = Vector2.down;
         
         Debug.Log($"[Ball / {name}] Send notification to {BallsManager.Instance.name} : Ball created.");
         BallsManager.Instance.OnBallInitializedNotification(this);
@@ -88,6 +87,14 @@ public class Ball : MonoBehaviour
             BallsManager.Instance.OnBallReachDeadZoneNotification(this);
         }
     }
+
+    /// <summary>
+    /// Start move ball.
+    /// </summary>
+    public void StartMoveBall()
+    {
+        _direction = Vector2.down;
+    }
     
     /// <summary>
     /// Play ball spawn animation.
@@ -124,7 +131,7 @@ public class Ball : MonoBehaviour
     private void MoveBall()
     {
         Vector2 currentVelocity = _rigidBody.linearVelocity;
-        Vector2 targetVelocity = _direction * speed;
+        Vector2 targetVelocity = _direction * BallsManager.Instance.MovementMultiplier * speed;
         _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, .0f);
     }
 

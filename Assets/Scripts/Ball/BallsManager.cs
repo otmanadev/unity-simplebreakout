@@ -14,6 +14,13 @@ public class BallsManager : MonoBehaviour
     private readonly List<Ball> _allBalls = new();
     private readonly List<Ball> _spawnedBalls = new();
     
+    [Header("Ball movement fade properties")] 
+    [SerializeField, Min(.0f)] private float movementFadeDuration;
+    [Range(0f, 1f)] private float _movementMultiplier = .0f;
+    public float MovementMultiplier => _movementMultiplier;
+    private float _currentMovementFadeDuration = .0f;
+    private bool _fadeInProgress = false;
+    
     [Header("Ball Datas")]
     [SerializeField] private List<SOBallSize> ballSizes;
     
@@ -32,6 +39,11 @@ public class BallsManager : MonoBehaviour
         _ballsCount = GameObject.FindGameObjectsWithTag("Ball")
             .Where(o => o.GetComponent<Ball>() != null)
             .Count();
+    }
+
+    private void Update()
+    {
+        UpdateMovementMultiplier();
     }
 
     /// <summary>
@@ -99,6 +111,35 @@ public class BallsManager : MonoBehaviour
         
         Debug.Log($"[<color=orange>BallsManager / {name}</color>] Notify Level Manager");
         LevelManager.Instance.OnBallsManagerSuccesfullyNotified();
+    }
+    
+    private void UpdateMovementMultiplier()
+    {
+        if (!_fadeInProgress) return;
+
+        _currentMovementFadeDuration += Time.deltaTime;
+        
+        if (_currentMovementFadeDuration >= movementFadeDuration)
+        {
+            _currentMovementFadeDuration = .0f;
+            _movementMultiplier = 1.0f;
+            _fadeInProgress = false;
+            return;
+        }
+
+        _movementMultiplier = _currentMovementFadeDuration / movementFadeDuration;
+    }
+    
+    /// <summary>
+    /// Start move balls.
+    /// </summary>
+    public void StartMoveBalls()
+    {
+        foreach (Ball ball in _allBalls)
+        {
+            ball.StartMoveBall();
+        }
+        _fadeInProgress = true;
     }
     
     /// <summary>

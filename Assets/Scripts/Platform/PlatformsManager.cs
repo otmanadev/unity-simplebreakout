@@ -18,6 +18,12 @@ public class PlatformsManager : MonoBehaviour
     [Header("Platforms Datas")]
     [SerializeField] private List<SOPlatformSize> platformSizes;
 
+    [Header("Platform movement fade properties")] 
+    [SerializeField, Min(.0f)] private float movementFadeDuration;
+    [UnityEngine.Range(0f, 1f)] private float _movementMultiplier = .0f;
+    private float _currentMovementFadeDuration = .0f;
+    private bool _fadeInProgress = false;
+
     private void Awake()
     {
         if (Instance != null)
@@ -37,16 +43,34 @@ public class PlatformsManager : MonoBehaviour
 
     private void Update()
     {
-        //UpdateMousePositions();
+        UpdateMovementMultiplier();
+        UpdateMousePositions();
     }
 
     private void UpdateMousePositions()
     {
-        float delta = sensitivityHorizontalPlatformVelocity * Input.GetAxis("Mouse X");
+        float delta = _movementMultiplier * sensitivityHorizontalPlatformVelocity * Input.GetAxis("Mouse X");
         foreach (Platform platform in _allPlatforms)
         {
             platform.InputHorizontalDirection = delta;
         }
+    }
+
+    private void UpdateMovementMultiplier()
+    {
+        if (!_fadeInProgress) return;
+
+        _currentMovementFadeDuration += Time.deltaTime;
+        
+        if (_currentMovementFadeDuration >= movementFadeDuration)
+        {
+            _currentMovementFadeDuration = .0f;
+            _movementMultiplier = 1.0f;
+            _fadeInProgress = false;
+            return;
+        }
+
+        _movementMultiplier = _currentMovementFadeDuration / movementFadeDuration;
     }
 
     /// <summary>
@@ -114,6 +138,14 @@ public class PlatformsManager : MonoBehaviour
         
         Debug.Log($"[<color=orange>PlatformsManager / {name}</color>] Notify Level Manager");
         LevelManager.Instance.OnPlatformsManagerSuccesfullyNotified();
+    }
+
+    /// <summary>
+    /// Start move platform.
+    /// </summary>
+    public void StartMovePlatforms()
+    {
+        _fadeInProgress = true;
     }
     
     /// <summary>

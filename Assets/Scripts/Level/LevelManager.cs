@@ -49,6 +49,10 @@ public class LevelManager : MonoBehaviour
                 BallsManager.Instance.SpawnAllBalls();
                 PlatformsManager.Instance.SpawnAllPlatforms();
                 break;
+            case ELevelState.ActivePhase:
+                BallsManager.Instance.StartMoveBalls();
+                PlatformsManager.Instance.StartMovePlatforms();
+                break;
             default:
                 break;
         }
@@ -68,9 +72,6 @@ public class LevelManager : MonoBehaviour
                 UpdateLevelState(ELevelState.AppearingObjects);
                 break;
             case ELevelState.AppearingObjects:
-                UpdateLevelState(ELevelState.PassivePhase);
-                break;
-            case ELevelState.PassivePhase:
                 UpdateLevelState(ELevelState.ActivePhase);
                 break;
             case ELevelState.ActivePhase:
