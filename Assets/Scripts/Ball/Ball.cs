@@ -131,7 +131,8 @@ public class Ball : MonoBehaviour
     private void MoveBall()
     {
         Vector2 currentVelocity = _rigidBody.linearVelocity;
-        Vector2 targetVelocity = _direction * BallsManager.Instance.MovementMultiplier * speed;
+        float currentSpeed = BallsManager.Instance.MovementMultiplier * speed;
+        Vector2 targetVelocity = _direction * currentSpeed;
         _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, .0f);
     }
 
