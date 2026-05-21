@@ -20,9 +20,13 @@ public class BallsManager : MonoBehaviour
     public float MovementMultiplier => _movementMultiplier;
     private float _currentMovementFadeDuration = .0f;
     private bool _fadeInProgress = false;
-    
-    [Header("Ball Datas")]
-    [SerializeField] private List<SOBallSize> ballSizes;
+
+    [Header("Metadatas : Ball Sizes")] 
+    [SerializeField] private SOBallSize extraLargeBall;
+    [SerializeField] private SOBallSize largeBall;
+    [SerializeField] private SOBallSize mediumBall;
+    [SerializeField] private SOBallSize smallBall;
+    [SerializeField] private SOBallSize extraSmallBall;
     
     private void Awake()
     {
@@ -34,8 +38,23 @@ public class BallsManager : MonoBehaviour
         }
         Instance = this;
         
-        Assert.IsNotNull(ballSizes);
+        // Ball sizes
+        Assert.IsNotNull(extraLargeBall);
+        Assert.IsTrue(extraLargeBall.BallSize.Equals(EBallSize.ExtraLarge));
         
+        Assert.IsNotNull(largeBall);
+        Assert.IsTrue(largeBall.BallSize.Equals(EBallSize.Large));
+        
+        Assert.IsNotNull(mediumBall);
+        Assert.IsTrue(mediumBall.BallSize.Equals(EBallSize.Medium));
+        
+        Assert.IsNotNull(smallBall);
+        Assert.IsTrue(smallBall.BallSize.Equals(EBallSize.Small));
+        
+        Assert.IsNotNull(extraSmallBall);
+        Assert.IsTrue(extraSmallBall.BallSize.Equals(EBallSize.ExtraSmall));
+        
+        // Balls
         _ballsCount = GameObject.FindGameObjectsWithTag("Ball")
             .Where(o => o.GetComponent<Ball>() != null)
             .Count();
@@ -162,7 +181,7 @@ public class BallsManager : MonoBehaviour
     /// Enable given power up for every balls.
     /// </summary>
     /// <param name="powerUpType"></param>
-    public void ActivateBallPowerUp(EPowerUp powerUpType)
+    public void EnablePickedPowerUp(EPowerUp powerUpType)
     {
         foreach (Ball ball in _allBalls)
         {
@@ -170,67 +189,71 @@ public class BallsManager : MonoBehaviour
             {
                 case EPowerUp.BallBigger:
                 case EPowerUp.BallSmaller:
-                    SOBallSize currentSoBallSize = ball.SoBallSize;
-                    SOBallSize newSoBallSize = PickUpNewBallSizeSoForCurrentBall(powerUpType, currentSoBallSize);
-                    ball.SetUpNewBallSize(newSoBallSize);
+                    EBallSize currentBallSizeType = ball.BallSize;
+                    EBallSize newBallSizeType = GetNewBallSizePropertiesFromPowerUp(powerUpType, currentBallSizeType);
+                    ball.SetUpNewBallSize(powerUpType, newBallSizeType);
                     break;
             }
         }
     }
 
-    /// <summary>
-    /// Select ball size SO from current ball size and depending on selected power up.
-    /// </summary>
-    /// <param name="powerUpType"></param>
-    /// <param name="currentSoBallSize"></param>
-    /// <returns></returns>
-    private SOBallSize PickUpNewBallSizeSoForCurrentBall(EPowerUp powerUpType, SOBallSize currentSoBallSize)
+    private EBallSize GetNewBallSizePropertiesFromPowerUp(EPowerUp powerUpType, EBallSize currentBallSizeType)
     {
-        if (!powerUpType.Equals(EPowerUp.BallSmaller) && !powerUpType.Equals(EPowerUp.BallBigger))
-        {
-            Debug.LogError($"[<color=orange>BallsManager / {name}</color>] Cannot find BallSizeSO from power up type {powerUpType}");
-            return null;
-        }
-        
-        EBallSize currentBallSizeType = currentSoBallSize.BallSize;
-        EBallSize newBallSizeType = currentBallSizeType;
         switch (currentBallSizeType)
         {
             case EBallSize.ExtraLarge:
-                newBallSizeType = powerUpType.Equals(EPowerUp.BallSmaller) 
-                    ? EBallSize.Large 
-                    : newBallSizeType;
+                if (powerUpType.Equals(EPowerUp.BallSmaller))
+                    return EBallSize.Large;
                 break;
             case EBallSize.Large:
-                newBallSizeType = powerUpType.Equals(EPowerUp.BallBigger) 
-                    ? EBallSize.ExtraLarge 
-                    : EBallSize.Medium;
+                if (powerUpType.Equals(EPowerUp.BallBigger))
+                    return EBallSize.ExtraLarge;
+                if (powerUpType.Equals(EPowerUp.BallSmaller))
+                    return EBallSize.Medium;
                 break;
             case EBallSize.Medium:
-                newBallSizeType = powerUpType.Equals(EPowerUp.BallBigger) 
-                    ? EBallSize.Large 
-                    : EBallSize.Small;
+                if (powerUpType.Equals(EPowerUp.BallBigger))
+                    return EBallSize.Large;
+                if (powerUpType.Equals(EPowerUp.BallSmaller))
+                    return EBallSize.Small;
                 break;
             case EBallSize.Small:
-                newBallSizeType = powerUpType.Equals(EPowerUp.BallBigger) 
-                    ? EBallSize.Medium 
-                    : EBallSize.ExtraSmall;
+                if (powerUpType.Equals(EPowerUp.BallBigger))
+                    return EBallSize.Medium;
+                if (powerUpType.Equals(EPowerUp.BallSmaller))
+                    return EBallSize.ExtraSmall;
                 break;
             case EBallSize.ExtraSmall:
-                newBallSizeType = powerUpType.Equals(EPowerUp.BallBigger) 
-                    ? EBallSize.Small 
-                    : newBallSizeType;
+                if (powerUpType.Equals(EPowerUp.BallBigger))
+                    return EBallSize.Large;
                 break;
         }
 
-        SOBallSize newSoBallSize = ballSizes.Find(e => e.BallSize.Equals(newBallSizeType));
-        if (newSoBallSize == null)
-        {
-            Debug.LogError($"[<color=orange>BallsManager / {name}</color>] Cannot find BallSizeSO from size type {newBallSizeType}");
-            return null;
-        }
+        return currentBallSizeType;
+    }
 
-        return newSoBallSize;
+    /// <summary>
+    /// Return right ball size properties depending on its type.
+    /// </summary>
+    /// <param name="ballSizeType"></param>
+    /// <returns></returns>
+    public SOBallSize GetBallSizeByItsType(EBallSize ballSizeType)
+    {
+        switch (ballSizeType)
+        {
+            case EBallSize.ExtraLarge:
+                return extraLargeBall;
+            case EBallSize.Large:
+                return largeBall;
+            case EBallSize.Medium:
+                return mediumBall;;
+            case EBallSize.Small:
+                return smallBall;
+            case EBallSize.ExtraSmall:
+                return extraSmallBall;
+            default:
+                return mediumBall;
+        }
     }
     
 }

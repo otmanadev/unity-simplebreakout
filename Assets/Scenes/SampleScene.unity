@@ -604,12 +604,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementFadeDuration: 1
-  ballSizes:
-  - {fileID: 11400000, guid: 544df5db916403f458cd155ba7fa94f4, type: 2}
-  - {fileID: 11400000, guid: 62aea9264b5a2fc499cc70cfe730d440, type: 2}
-  - {fileID: 11400000, guid: f21a4edc2bc8ea341acad86dc3ecb1d4, type: 2}
-  - {fileID: 11400000, guid: 0b6d5e680466ac34386b39e19a44745d, type: 2}
-  - {fileID: 11400000, guid: 223b0efce6834fc46a0248f0703335df, type: 2}
+  extraLargeBall: {fileID: 11400000, guid: 223b0efce6834fc46a0248f0703335df, type: 2}
+  largeBall: {fileID: 11400000, guid: 0b6d5e680466ac34386b39e19a44745d, type: 2}
+  mediumBall: {fileID: 11400000, guid: f21a4edc2bc8ea341acad86dc3ecb1d4, type: 2}
+  smallBall: {fileID: 11400000, guid: 62aea9264b5a2fc499cc70cfe730d440, type: 2}
+  extraSmallBall: {fileID: 11400000, guid: 544df5db916403f458cd155ba7fa94f4, type: 2}
 --- !u!114 &605778858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,10 +637,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 064bae28fd438ca4c8041b180a893d53, type: 2}
   - {fileID: 11400000, guid: ddebb82e53944444384998264e76cf52, type: 2}
   - {fileID: 11400000, guid: 71f7d2849117c7444928723a55e2c9c5, type: 2}
-  - {fileID: 11400000, guid: 71f7d2849117c7444928723a55e2c9c5, type: 2}
   - {fileID: 11400000, guid: ddebb82e53944444384998264e76cf52, type: 2}
   - {fileID: 11400000, guid: 53288424ed8102d4881b8a42c7f49f41, type: 2}
   - {fileID: 11400000, guid: ddebb82e53944444384998264e76cf52, type: 2}
+  - {fileID: 11400000, guid: 064bae28fd438ca4c8041b180a893d53, type: 2}
+  - {fileID: 11400000, guid: 71f7d2849117c7444928723a55e2c9c5, type: 2}
+  - {fileID: 11400000, guid: 064bae28fd438ca4c8041b180a893d53, type: 2}
+  - {fileID: 11400000, guid: 71f7d2849117c7444928723a55e2c9c5, type: 2}
+  - {fileID: 11400000, guid: 53288424ed8102d4881b8a42c7f49f41, type: 2}
+  - {fileID: 11400000, guid: 53288424ed8102d4881b8a42c7f49f41, type: 2}
 --- !u!114 &605778860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,13 +659,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivityHorizontalPlatformVelocity: 1.5
-  platformSizes:
-  - {fileID: 11400000, guid: f2268271802f23a488512fe3e8c2b541, type: 2}
-  - {fileID: 11400000, guid: fa29c87776c57a34eb9aef68ce0e2a3c, type: 2}
-  - {fileID: 11400000, guid: 68d50c922414588468de1345ad54f22f, type: 2}
-  - {fileID: 11400000, guid: ecfba1879faf4644f94e883e40e9b42b, type: 2}
-  - {fileID: 11400000, guid: c6031dd67dff2bf47aea022e7da42e00, type: 2}
   movementFadeDuration: 1.5
+  extraLargePlatform: {fileID: 11400000, guid: c6031dd67dff2bf47aea022e7da42e00, type: 2}
+  largePlatform: {fileID: 11400000, guid: ecfba1879faf4644f94e883e40e9b42b, type: 2}
+  mediumPlatform: {fileID: 11400000, guid: 68d50c922414588468de1345ad54f22f, type: 2}
+  smallPlatform: {fileID: 11400000, guid: fa29c87776c57a34eb9aef68ce0e2a3c, type: 2}
+  extraSmallPlatform: {fileID: 11400000, guid: f2268271802f23a488512fe3e8c2b541, type: 2}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,9 +1622,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3576973009973384567, guid: 8897377576658b6449fddc3697931cd5, type: 3}
+      propertyPath: m_Size.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3576973009973384567, guid: 8897377576658b6449fddc3697931cd5, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 46d089b40e83d0c40bda74b76b065f74, type: 3}
+    - target: {fileID: 3576973009973384567, guid: 8897377576658b6449fddc3697931cd5, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4165908572286475613, guid: 8897377576658b6449fddc3697931cd5, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -1669,6 +1680,10 @@ PrefabInstance:
     - target: {fileID: 4165908572286475613, guid: 8897377576658b6449fddc3697931cd5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717173952702929010, guid: 8897377576658b6449fddc3697931cd5, type: 3}
+      propertyPath: platformSize
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7717173952702929010, guid: 8897377576658b6449fddc3697931cd5, type: 3}
       propertyPath: soPlatformSize

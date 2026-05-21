@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aceaca885394ff2a197d361277e8212, type: 3}
   m_Name: PlatformSize - XLARGE
   m_EditorClassIdentifier: 
-  platformSize: 3
+  platformSize: 4
   speed: 5
   smoothTime: 0.05
-  sprite: {fileID: 21300000, guid: 46d089b40e83d0c40bda74b76b065f74, type: 3}
-  colliderHorizontalSize: 4.2
+  colliderSize: {x: 4.15, y: 1.25}

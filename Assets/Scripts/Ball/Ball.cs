@@ -1,21 +1,22 @@
 using System;
-using NUnit.Framework;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
-[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
 public class Ball : MonoBehaviour
 {
     
+    private static readonly String AnimationTriggerSpawn = "SpawnTrigger";
+    private static readonly String AnimationTriggerBallBigger = "BiggerBallTrigger";
+    private static readonly String AnimationTriggerBallSmaller = "SmallerBallTrigger";
+    
     private Rigidbody2D _rigidBody;
     private CircleCollider2D _circleCollider;
-    private SpriteRenderer _spriteRenderer;
     private Animator _animator;
-    
-    [SerializeField] private SOBallSize soBallSize;
-    public SOBallSize SoBallSize => soBallSize;
+
+    [SerializeField] private EBallSize ballSize;
+    public EBallSize BallSize => ballSize;
 
     [Header("Damage")] 
     [SerializeField, Min(1)] private int damage;
@@ -30,15 +31,12 @@ public class Ball : MonoBehaviour
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _circleCollider = GetComponent<CircleCollider2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-        
-        Assert.IsNotNull(SoBallSize);
     }
 
     private void Start()
     {
-        UpdateBallSize();
+        UpdateBallSize(BallSize);
         
         Debug.Log($"[Ball / {name}] Send notification to {BallsManager.Instance.name} : Ball created.");
         BallsManager.Instance.OnBallInitializedNotification(this);
@@ -102,7 +100,7 @@ public class Ball : MonoBehaviour
     public void StartBallSpawn()
     {
         Debug.Log($"[Ball / {name}] Start animation");
-        _animator.SetTrigger("SpawnTrigger");
+        _animator.SetTrigger(AnimationTriggerSpawn);
     }
     
     /// <summary>
@@ -117,14 +115,17 @@ public class Ball : MonoBehaviour
     /// <summary>
     /// Update ball size.
     /// </summary>
-    private void UpdateBallSize()
+    /// <param name="newBallSizeType"></param>
+    private void UpdateBallSize(EBallSize newBallSizeType)
     {
-        _spriteRenderer.sprite = SoBallSize.Sprite;
-        _circleCollider.radius = SoBallSize.ColliderRadius;
-        speed = SoBallSize.Speed;
-        damage = SoBallSize.Damage;
+        ballSize = newBallSizeType;
+        SOBallSize ballSizeProperties = BallsManager.Instance.GetBallSizeByItsType(BallSize);
+        
+        _circleCollider.radius = ballSizeProperties.ColliderRadius;
+        speed = ballSizeProperties.Speed;
+        damage = ballSizeProperties.Damage;
     }
-
+ 
     /// <summary>
     /// Update ball's velocity, based on its direction.
     /// </summary>
@@ -139,16 +140,24 @@ public class Ball : MonoBehaviour
     /// <summary>
     /// Update new ball size.
     /// </summary>
-    /// <param name="newSoBallSize"></param>
-    public void SetUpNewBallSize(SOBallSize newSoBallSize)
+    /// <param name="powerUpType"></param>
+    /// <param name="newBallSizeType"></param>
+    public void SetUpNewBallSize(EPowerUp powerUpType, EBallSize newBallSizeType)
     {
-        if (newSoBallSize == null || newSoBallSize.BallSize.Equals(SoBallSize.BallSize))
-        {
+        if (BallSize.Equals(newBallSizeType))
             return;
+
+        switch (powerUpType)
+        {
+            case EPowerUp.BallBigger:
+                _animator.SetTrigger(AnimationTriggerBallBigger);
+                break;
+            case EPowerUp.BallSmaller:
+                _animator.SetTrigger(AnimationTriggerBallSmaller);
+                break;
         }
         
-        soBallSize = newSoBallSize;
-        UpdateBallSize();
+        UpdateBallSize(newBallSizeType);
     }
     
 }

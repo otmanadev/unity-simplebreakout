@@ -15,5 +15,4 @@ MonoBehaviour:
   platformSize: 2
   speed: 6.5
   smoothTime: 0.05
-  sprite: {fileID: 21300000, guid: a80c0a9a411650c4390e93d3b5b495ac, type: 3}
-  colliderHorizontalSize: 3.3
+  colliderSize: {x: 3.35, y: 1}

@@ -59,7 +59,7 @@ public class PowerUpsManager : MonoBehaviour
         {
             case EPowerUp.BallBigger:
             case EPowerUp.BallSmaller:
-                BallsManager.Instance.ActivateBallPowerUp(powerUpType);
+                BallsManager.Instance.EnablePickedPowerUp(powerUpType);
                 break;
             
             case EPowerUp.PlatformBigger:

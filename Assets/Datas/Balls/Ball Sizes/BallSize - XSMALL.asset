@@ -15,5 +15,4 @@ MonoBehaviour:
   ballSize: 0
   damage: 1
   speed: 7
-  sprite: {fileID: 21300000, guid: 84bc3d9b9f982d1428c2cb68ffcdf609, type: 3}
-  colliderRadius: 0.24
+  colliderRadius: 0.25

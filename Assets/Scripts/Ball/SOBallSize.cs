@@ -15,10 +15,6 @@ public class SOBallSize : ScriptableObject
     [SerializeField] private float speed;
     public float Speed => speed;
     
-    [Header("Sprite")]
-    [SerializeField] private Sprite sprite;
-    public Sprite Sprite => sprite;
-    
     [Header("Collider")]
     [SerializeField] private float colliderRadius;
     public float ColliderRadius => colliderRadius;

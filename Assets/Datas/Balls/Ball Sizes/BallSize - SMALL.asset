@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BallSize - SMALL
   m_EditorClassIdentifier: 
   ballSize: 1
+  animationName: SmallBallTrigger
   damage: 2
   speed: 6.5
   sprite: {fileID: 21300000, guid: a6e5e2ad0f016384cbef3d81e8aa0c56, type: 3}

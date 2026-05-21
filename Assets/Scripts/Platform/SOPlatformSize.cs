@@ -14,11 +14,8 @@ public class SOPlatformSize : ScriptableObject
     [SerializeField] private float smoothTime;
     public float SmoothTime => smoothTime;
     
-    [Header("Sprite")][SerializeField] private Sprite sprite;
-    public Sprite Sprite => sprite;
-    
     [Header("Collider")]
-    [SerializeField] private float colliderHorizontalSize;
-    public float ColliderHorizontalSize => colliderHorizontalSize;
+    [SerializeField] private Vector2 colliderSize;
+    public Vector2 ColliderSize => colliderSize;
     
 }

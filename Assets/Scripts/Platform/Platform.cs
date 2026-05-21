@@ -1,4 +1,4 @@
-using NUnit.Framework;
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -8,14 +8,16 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
     
+    private static readonly String AnimationTriggerSpawn = "SpawnTrigger";
+    private static readonly String AnimationTriggerPlatformBigger = "BiggerPlatformTrigger";
+    private static readonly String AnimationTriggerPlatformSmaller = "SmallerPlatformTrigger";
+    
     private Rigidbody2D _rigidBody;
     private BoxCollider2D _boxCollider;
-    private SpriteRenderer _spriteRenderer;
     private Animator _animator;
     
-    [Header("Platform Properties")]
-    [SerializeField] private SOPlatformSize soPlatformSize;
-    public SOPlatformSize SoPlatformSize => soPlatformSize;
+    [SerializeField] private EPlatformSize platformSize;
+    public EPlatformSize PlatformSize => platformSize;
 
     [Header("Movement")]
     [SerializeField] private float speed = 1.0f;
@@ -33,17 +35,14 @@ public class Platform : MonoBehaviour
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-        
-        Assert.IsNotNull(SoPlatformSize);
         
         _yPosition = transform.position.y;
     }
     
     private void Start()
     {
-        UpdatePlatformSize();
+        UpdatePlatformSize(PlatformSize);
         
         Debug.Log($"[Platform / {name}] Send notification to Platforms Manager : <color=orange>Platform initialized</color>");
         PlatformsManager.Instance.OnPlatformInitializedNotification(this);
@@ -61,7 +60,7 @@ public class Platform : MonoBehaviour
     public void SpawnPlatform()
     {
         Debug.Log($"[Platform / {name}] Start animation");
-        _animator.SetTrigger("SpawnTrigger");
+        _animator.SetTrigger(AnimationTriggerSpawn);
     }
 
     /// <summary>
@@ -76,12 +75,15 @@ public class Platform : MonoBehaviour
     /// <summary>
     /// Update platform size.
     /// </summary>
-    private void UpdatePlatformSize()
+    /// <param name="newPlatformSize"></param>
+    private void UpdatePlatformSize(EPlatformSize newPlatformSize)
     {
-        _spriteRenderer.sprite = SoPlatformSize.Sprite;
-        _boxCollider.size = new Vector2(SoPlatformSize.ColliderHorizontalSize, _boxCollider.size.y);
-        speed = SoPlatformSize.Speed;
-        smoothTimeSpeed = SoPlatformSize.SmoothTime;
+        platformSize = newPlatformSize;
+        SOPlatformSize platformSizeProperties = PlatformsManager.Instance.GetPlatformSizeByItsType(platformSize);
+
+        _boxCollider.size = platformSizeProperties.ColliderSize;
+        speed = platformSizeProperties.Speed;
+        smoothTimeSpeed = platformSizeProperties.SmoothTime;
     }
 
     /// <summary>
@@ -122,16 +124,24 @@ public class Platform : MonoBehaviour
     /// <summary>
     /// Update new platform size.
     /// </summary>
-    /// <param name="newSoPlatformSize"></param>
-    public void SetUpNewPlatformSize(SOPlatformSize newSoPlatformSize)
+    /// <param name="powerUpType"></param>
+    /// <param name="newPlatformSizeType"></param>
+    public void SetUpNewPlatformSize(EPowerUp powerUpType, EPlatformSize newPlatformSizeType)
     {
-        if (newSoPlatformSize == null || newSoPlatformSize.PlatformSize.Equals(SoPlatformSize.PlatformSize))
-        {
+        if (PlatformSize.Equals(newPlatformSizeType))
             return;
+        
+        switch (powerUpType)
+        {
+            case EPowerUp.PlatformBigger:
+                _animator.SetTrigger(AnimationTriggerPlatformBigger);
+                break;
+            case EPowerUp.PlatformSmaller:
+                _animator.SetTrigger(AnimationTriggerPlatformSmaller);
+                break;
         }
         
-        soPlatformSize = newSoPlatformSize;
-        UpdatePlatformSize();
+        UpdatePlatformSize(newPlatformSizeType);
     }
     
 }
