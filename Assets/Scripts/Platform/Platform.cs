@@ -21,7 +21,7 @@ public class Platform : MonoBehaviour
     [SerializeField] private EPlatformSize platformSize;
     public EPlatformSize PlatformSize => platformSize;
 
-    [Header("Movement")]
+    [Header("Movement Properties")]
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float smoothTimeSpeed = .05f;
     
@@ -30,13 +30,16 @@ public class Platform : MonoBehaviour
     private float _refZeroVelocity = .0f;
     private float _yPosition;
 
+    [Header("Ball Direction Properties")] 
+    [SerializeField, Min(.0f)] private float maxAngleOnCorners;
+
     [Header("Ball direction preview properties")]
-    private Dictionary<int, List<GameObject>> _ballPreviewsInstances;
-    [SerializeField, Min(.0f)] private float ballDistanceForBallDirectionPreview;
-    [SerializeField, Min(.0f)] private float minDistanceForBallDirectionPreview;
     [SerializeField] private GameObject ballPreviewPrefab;
-    [SerializeField, Min(0)] private int numberOfBallPreviews;
+    [SerializeField, Min(.0f)] private float ballDistanceToShowPreviewBalls;
+    [SerializeField, Min(0L)] private int numberOfBallPreviews;
+    [SerializeField, Min(.0f)] private float minDistanceForBallDirectionPreview;
     [SerializeField, Min(.0f)] private float ballPreviewDistance;
+    private Dictionary<int, List<GameObject>> _ballPreviewsInstances;
 
     private void Awake()
     {
@@ -126,15 +129,33 @@ public class Platform : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns normalized direction from given position.
-    /// For example : the ball collides with the platform and needs to be sent back.
+    /// Returns normalized direction from given position (x).
+    /// For example : the ball collides with the platform and needs a reflection.
     /// </summary>
     /// <param name="givenPosition"></param>
     /// <returns></returns>
-    public Vector2 GetNormalizedDirection(Vector2 givenPosition)
+    public Vector2 GetBallNormalizedDirectionFromGivenPosition(float givenPosition)
     {
-        Vector2 currentPosition = new Vector2(transform.position.x, transform.position.y);
-        return (givenPosition - currentPosition).normalized;
+        float minCornerPosition = transform.position.x - _boxCollider.size.x / 2;
+        float maxCornerPosition = transform.position.x + _boxCollider.size.x / 2;
+        
+        // On garde la coordonnée dans les bornes
+        float clampedGivenPosition = Mathf.Clamp(givenPosition, 
+            minCornerPosition,
+            maxCornerPosition);
+
+        // Renvoie une valeur entre 0 et 1
+        float t = Mathf.InverseLerp(minCornerPosition, maxCornerPosition, clampedGivenPosition);
+
+        // Renvoie l'angle à renvoyer
+        float angle = Mathf.Lerp(-maxAngleOnCorners, maxAngleOnCorners, t);
+        
+        // On part de Vector2.up, il faut donc inverser
+        float radians = angle * Mathf.Deg2Rad;
+        return new Vector2(
+            Mathf.Sin(radians),
+            Mathf.Cos(radians)
+        );
     }
 
     /// <summary>
@@ -187,7 +208,7 @@ public class Platform : MonoBehaviour
             if (!LevelManager.Instance.LevelState.Equals(ELevelState.ActivePhase)
                 || ball.transform.position.x < minX 
                 || ball.transform.position.x > maxX 
-                || distance > ballDistanceForBallDirectionPreview 
+                || distance > ballDistanceToShowPreviewBalls 
                 || ball.Direction.y >= .0f)
             {
                 UpdatePreviewBallsWithVisibility(ball, false);
@@ -203,10 +224,17 @@ public class Platform : MonoBehaviour
         int ballId = ball.GetInstanceID();
         if (!_ballPreviewsInstances.TryGetValue(ballId, out List<GameObject> ballPreviews))
             return;
-        
+
+        Vector2 origin = ball.transform.position;
+        Vector2 direction = GetBallNormalizedDirectionFromGivenPosition(origin.x);
         foreach (GameObject previewBallInstance in ballPreviews)
         {
-            Vector2 ballPreviewCoordinates = new Vector2(ball.transform.position.x, previewBallInstance.transform.position.y);
+            // Calcul de la coordonnée X en fonction du point d'origine, la direction et la coordonnée Y connue.
+            float targetY = previewBallInstance.transform.position.y;
+            float t = (targetY - origin.y) / direction.y;
+            float targetX = origin.x + t * direction.x;
+            Vector2 ballPreviewCoordinates = new Vector2(targetX, targetY);
+            
             previewBallInstance.transform.position = ballPreviewCoordinates; 
             previewBallInstance.SetActive(visible);
         }

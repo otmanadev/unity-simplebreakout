@@ -65,7 +65,7 @@ public class Ball : MonoBehaviour
         
         if (collidedObject.TryGetComponent(out Platform platform))
         {
-            _direction = platform.GetNormalizedDirection(transform.position);
+            _direction = platform.GetBallNormalizedDirectionFromGivenPosition(transform.position.x);
             return;
         }
 

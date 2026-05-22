@@ -1360,6 +1360,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4252231004838117511, guid: 43ff0b9227b400741833733214c2d180, type: 3}
+      propertyPath: ballSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252231004838117511, guid: 43ff0b9227b400741833733214c2d180, type: 3}
       propertyPath: soBallSize
       value: 
       objectReference: {fileID: 11400000, guid: f21a4edc2bc8ea341acad86dc3ecb1d4, type: 2}
@@ -1691,12 +1695,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7392780525699250837, guid: 7691a7afc96e53d479805f44438df77c, type: 3}
     - target: {fileID: 7717173952702929010, guid: 8897377576658b6449fddc3697931cd5, type: 3}
+      propertyPath: maxAngleOnCorners
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717173952702929010, guid: 8897377576658b6449fddc3697931cd5, type: 3}
       propertyPath: ballPreviewDistance
       value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 7717173952702929010, guid: 8897377576658b6449fddc3697931cd5, type: 3}
       propertyPath: numberOfBallPreviews
-      value: 3
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717173952702929010, guid: 8897377576658b6449fddc3697931cd5, type: 3}
+      propertyPath: ballDistanceToShowPreviewBalls
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 7717173952702929010, guid: 8897377576658b6449fddc3697931cd5, type: 3}
       propertyPath: minDistanceForBallDirectionPreview
