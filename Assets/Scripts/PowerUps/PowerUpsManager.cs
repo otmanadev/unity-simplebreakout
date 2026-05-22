@@ -8,6 +8,7 @@ public class PowerUpsManager : MonoBehaviour
 
     public static PowerUpsManager Instance;
 
+    [SerializeField] private GameObject throwingPowerUpPrefab;
     [SerializeField] private List<SOPowerUp> powerUps;
 
     private void Awake()
@@ -20,6 +21,8 @@ public class PowerUpsManager : MonoBehaviour
         }
 
         Instance = this;
+        Assert.IsNotNull(throwingPowerUpPrefab);
+        Assert.IsTrue(throwingPowerUpPrefab.GetComponent<PowerUp>());
     }
 
     /// <summary>
@@ -27,24 +30,39 @@ public class PowerUpsManager : MonoBehaviour
     /// </summary>
     public void LinkPowerUpsToBricks()
     {
-        List<Brick> bricks = BricksManager.Instance.AllBricks.ToList();
+        List<Brick> bricksWithNoAttachedPowerUp = BricksManager.Instance.AllBricks.ToList();
         
         // Put randomly power ups to bricks
-        foreach (SOPowerUp powerUpSo in powerUps)
+        foreach (SOPowerUp powerUp in powerUps)
         {
-            PowerUp powerUp = powerUpSo.PowerUpPrefab.gameObject.GetComponent<PowerUp>();
-            Assert.IsNotNull(powerUp);
+            if (bricksWithNoAttachedPowerUp.Count == 0)
+            {
+                Debug.LogWarning($"[PowerUpsManager / {name}] Cannot attach more power ups because there is no bricks with no power up attached.");
+                break;
+            }
+            Brick randomBrick = bricksWithNoAttachedPowerUp[Random.Range(0, bricksWithNoAttachedPowerUp.Count)];
             
-            Brick randomBrick = bricks[Random.Range(0, bricks.Count)];
+            Debug.Log($"[<color=orange>PowerUpsManager / {name}</color>] Put power up {powerUp.Type} to brick {randomBrick.name}.");
+            randomBrick.SetUpPowerUp(powerUp);
             
-            Debug.Log($"[<color=orange>PowerUpsManager / {name}</color>] Put power up {powerUp.PowerUpType} to brick {randomBrick.name}.");
-            randomBrick.SetUpPowerUp(powerUpSo);
-            
-            bricks.Remove(randomBrick);
+            bricksWithNoAttachedPowerUp.Remove(randomBrick);
         }
         
         Debug.Log($"[<color=orange>PowerUpsManager / {name}</color>] Notify Level Manager");
         LevelManager.Instance.OnPowerUpsManagerSuccesfullyNotified();
+    }
+
+    /// <summary>
+    /// Spawn new throwing power up in given coordinates.
+    /// </summary>
+    /// <param name="powerUp"></param>
+    /// <param name="position"></param>
+    public void SpawnThrowingPowerUp(SOPowerUp powerUp, Vector2 position)
+    {
+        GameObject throwingPowerUpInstance = throwingPowerUpPrefab;
+        throwingPowerUpInstance.GetComponent<PowerUp>().Type = powerUp.Type;
+        throwingPowerUpInstance.GetComponent<SpriteRenderer>().sprite = powerUp.Sprite;
+        Instantiate(throwingPowerUpInstance, position, Quaternion.identity);
     }
 
     /// <summary>

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 888582ec15aaa4149b2526d2abe30a98, type: 3}
   m_Name: PowerUp - BALL BIGGER
   m_EditorClassIdentifier: 
-  powerUpPrefab: {fileID: 5459947136880005606, guid: 5af6da5f26c1d4f4182da288ac87c87e, type: 3}
-  glowColor: {r: 1, g: 0.6691481, b: 0, a: 0}
-  glowStrength: 2.34
+  type: 0
+  sprite: {fileID: 21300000, guid: a777de5877b864842b65e7700867df89, type: 3}
+  brickMaterial: {fileID: 2100000, guid: fa482a8de92a2894184978052739983f, type: 2}

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 888582ec15aaa4149b2526d2abe30a98, type: 3}
   m_Name: PowerUp - BALL SMALLER
   m_EditorClassIdentifier: 
-  powerUpPrefab: {fileID: 5459947136880005606, guid: 052cab6bc1b7b844ba4a4eae9d6aa2d8, type: 3}
-  glowColor: {r: 0.24347973, g: 1, b: 0, a: 0}
-  glowStrength: 0.33
+  type: 1
+  sprite: {fileID: 21300000, guid: 96f80ae22d3cc534a94b93392ab0fcb1, type: 3}
+  brickMaterial: {fileID: 2100000, guid: fa482a8de92a2894184978052739983f, type: 2}

@@ -22,14 +22,13 @@ public class Platform : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float smoothTimeSpeed = .05f;
+    
     private float _inputHorizontalDirection = .0f;
+    public float InputHorizontalDirection { set => _inputHorizontalDirection = value; }
+    
     private float _refZeroVelocity = .0f;
-    private bool _canMoveToRight = true;
-    private bool _canMoveToLeft = true;
     
     private float _yPosition;
-    
-    public float InputHorizontalDirection { set => _inputHorizontalDirection = value; }
 
     private void Awake()
     {
@@ -103,15 +102,8 @@ public class Platform : MonoBehaviour
     /// </summary>
     private void MovePlatform()
     {
-        float currentInputHorizontalDirection = _inputHorizontalDirection;
-
-        if ((currentInputHorizontalDirection < .0f && !_canMoveToLeft) || (currentInputHorizontalDirection > .0f && !_canMoveToRight))
-        {
-            currentInputHorizontalDirection = .0f;
-        }
-        
         float currentHorizontalVelocity = _rigidBody.linearVelocityX;
-        float targetHorizontalVelocity = currentInputHorizontalDirection * speed;
+        float targetHorizontalVelocity = _inputHorizontalDirection * speed;
         _rigidBody.linearVelocityX = Mathf.SmoothDamp(currentHorizontalVelocity, targetHorizontalVelocity, ref _refZeroVelocity, smoothTimeSpeed);
     }
 

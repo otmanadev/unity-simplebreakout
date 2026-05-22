@@ -1,14 +1,20 @@
-using NUnit.Framework;
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Brick : MonoBehaviour
 {
 
+    private static readonly String AnimationTriggerSpawn = "SpawnTrigger";
+    
     private BoxCollider2D _boxCollider2D;
     private Animator _animator;
-    [SerializeField] private GameObject powerUpGo;
+    private SpriteRenderer _spriteRenderer;
+    
+    [Header("Attached Power Up")]
+    [SerializeField] private SOPowerUp powerUp;
 
     [Header("Health")]
     [SerializeField, Min(0)] private int health;
@@ -16,14 +22,17 @@ public class Brick : MonoBehaviour
     protected virtual void Awake()
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
-        Assert.IsNotNull(_boxCollider2D);
-        
         _animator = GetComponent<Animator>();
-        Assert.IsNotNull(_animator);
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     protected virtual void Start()
     {
+        if (powerUp != null)
+        {
+            Debug.Log($"[Brick / {name}] Brick has attached power up {powerUp.Type}");
+            SetUpPowerUp(powerUp);
+        }
         Debug.Log($"[Brick / {name}] Send notification to Bricks Manager : <color=orange>Brick initialized</color>");
         BricksManager.Instance.OnBrickInitializedNotification(this);
     }
@@ -34,7 +43,7 @@ public class Brick : MonoBehaviour
     public void StartBrickSpawn()
     {
         Debug.Log($"[Brick / {name}] Start animation");
-        _animator.SetTrigger("SpawnTrigger");
+        _animator.SetTrigger(AnimationTriggerSpawn);
     }
 
     /// <summary>
@@ -49,12 +58,15 @@ public class Brick : MonoBehaviour
     /// <summary>
     /// Receive given power up.
     /// </summary>
-    /// <param name="givenSoPowerUpGo"></param>
-    public void SetUpPowerUp(SOPowerUp givenSoPowerUpGo)
+    /// <param name="givenPowerUp"></param>
+    public void SetUpPowerUp(SOPowerUp givenPowerUp)
     {
-        PowerUp powerUp = givenSoPowerUpGo.PowerUpPrefab.gameObject.GetComponent<PowerUp>();
-        Debug.Log($"[Brick / {name}] Received power up {powerUp.PowerUpType}.");
-        powerUpGo = givenSoPowerUpGo.PowerUpPrefab;
+        powerUp = givenPowerUp;
+        if (powerUp.BrickMaterial != null)
+        {
+            Material material = new Material(powerUp.BrickMaterial);
+            _spriteRenderer.material = material;
+        }
     }
 
     /// <summary>
@@ -81,10 +93,11 @@ public class Brick : MonoBehaviour
     /// </summary>
     private void SpawnAttachedPowerUp()
     {
-        if (powerUpGo == null)
+        if (powerUp == null)
             return;
         
-        Instantiate(powerUpGo, transform.position, Quaternion.identity);
+        Debug.Log($"[Brick / {name}] Notify Power Ups Manager to spawn throwing Power Up from type {powerUp.Type} in given coordinates {transform.position}");
+        PowerUpsManager.Instance.SpawnThrowingPowerUp(powerUp, transform.position);
     }
     
 }

@@ -6,9 +6,8 @@ public class PowerUp : MonoBehaviour
 
     private Rigidbody2D _rigidBody;
     
-    [SerializeField] private EPowerUp powerUpType;
-    
-    public EPowerUp PowerUpType => powerUpType;
+    [SerializeField] private EPowerUp type;
+    public EPowerUp Type { get => type; set => type = value; }
     
     [Header("Movement")]
     [SerializeField] private float speed = 1.0f;
@@ -34,8 +33,8 @@ public class PowerUp : MonoBehaviour
             return;
         }
         
-        Debug.Log($"[PowerUp / {name}] Send notification to {PowerUpsManager.Instance.name} : Activate power up {PowerUpType}.");
-        PowerUpsManager.Instance.ActivatePowerUp(PowerUpType);
+        Debug.Log($"[PowerUp / {name}] Send notification to {PowerUpsManager.Instance.name} : Activate power up {Type}.");
+        PowerUpsManager.Instance.ActivatePowerUp(Type);
         Destroy(gameObject);
     }
 

@@ -633,6 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c5d7c5566270049bac25f713f8343f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwingPowerUpPrefab: {fileID: 5459947136880005606, guid: 5af6da5f26c1d4f4182da288ac87c87e, type: 3}
   powerUps:
   - {fileID: 11400000, guid: 064bae28fd438ca4c8041b180a893d53, type: 2}
   - {fileID: 11400000, guid: ddebb82e53944444384998264e76cf52, type: 2}
