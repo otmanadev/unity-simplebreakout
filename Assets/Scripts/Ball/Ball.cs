@@ -20,6 +20,9 @@ public class Ball : MonoBehaviour
 
     [Header("Damage")] 
     [SerializeField, Min(1)] private int damage;
+
+    private bool _hasReflection;
+    private Collision2D _collidedGameObject;
     
     [Header("Movement")]
     [SerializeField] private float speed = 1.0f;
@@ -45,35 +48,21 @@ public class Ball : MonoBehaviour
 
     private void FixedUpdate()
     {
+        HandleReflection();
         MoveBall();
     }
     
     private void OnCollisionEnter2D(Collision2D other)
     {
         GameObject collidedObject = other.gameObject;
-        ContactPoint2D contact = other.GetContact(0);
-        Vector2 normal = contact.normal;
-        
-        Debug.Log($"{name} collided with {collidedObject.name} on position {normal}");
-        
-        if (collidedObject.TryGetComponent(out Brick brick))
-        {
-            _direction = Vector2.Reflect(_direction, normal).normalized;
-            brick.TryHitBrick(damage);
-            return;
-        }
-        
-        if (collidedObject.TryGetComponent(out Platform platform))
-        {
-            _direction = platform.GetBallNormalizedDirectionFromGivenPosition(transform.position.x);
-            return;
-        }
 
-        if (collidedObject.TryGetComponent(out StaticCollider _))
+        if (collidedObject.TryGetComponent(out Brick _)
+            || collidedObject.TryGetComponent(out StaticCollider _)
+            || collidedObject.TryGetComponent(out Platform _))
         {
-            _direction = Vector2.Reflect(_direction, normal).normalized;
+            _hasReflection = true;
+            _collidedGameObject = other;
         }
-        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -92,7 +81,7 @@ public class Ball : MonoBehaviour
     /// </summary>
     public void StartMoveBall()
     {
-        _direction = Vector2.down;
+        _direction = Vector2.up;
     }
     
     /// <summary>
@@ -136,6 +125,37 @@ public class Ball : MonoBehaviour
         float currentSpeed = BallsManager.Instance.MovementMultiplier * speed;
         Vector2 targetVelocity = _direction * currentSpeed;
         _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, .0f);
+    }
+
+    private void HandleReflection()
+    {
+        if (!_hasReflection)
+            return;
+        
+        GameObject collidedObject = _collidedGameObject.gameObject;
+        ContactPoint2D contact = _collidedGameObject.GetContact(0);
+        Vector2 normal = contact.normal;
+        
+        Debug.Log($"{name} collided with {collidedObject.name} on position {normal}");
+        
+        if (collidedObject.TryGetComponent(out Brick brick))
+        {
+            _direction = Vector2.Reflect(_direction, normal).normalized;
+            brick.TryHitBrick(damage);
+        }
+        
+        if (collidedObject.TryGetComponent(out Platform platform))
+        {
+            _direction = platform.GetBallNormalizedDirectionFromGivenPosition(transform.position.x);
+        }
+
+        if (collidedObject.TryGetComponent(out StaticCollider _))
+        {
+            _direction = Vector2.Reflect(_direction, normal).normalized;
+        }
+
+        _hasReflection = false;
+        _collidedGameObject = null;
     }
 
     /// <summary>
