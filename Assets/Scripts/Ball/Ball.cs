@@ -25,6 +25,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private float speed = 1.0f;
     
     private Vector2 _direction;
+    public Vector2 Direction => _direction;
     private Vector2 _refZeroVelocity = Vector2.zero;
 
     private void Awake()

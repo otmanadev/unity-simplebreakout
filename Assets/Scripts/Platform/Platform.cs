@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -25,10 +27,16 @@ public class Platform : MonoBehaviour
     
     private float _inputHorizontalDirection = .0f;
     public float InputHorizontalDirection { set => _inputHorizontalDirection = value; }
-    
     private float _refZeroVelocity = .0f;
-    
     private float _yPosition;
+
+    [Header("Ball direction preview properties")]
+    private Dictionary<int, List<GameObject>> _ballPreviewsInstances;
+    [SerializeField, Min(.0f)] private float ballDistanceForBallDirectionPreview;
+    [SerializeField, Min(.0f)] private float minDistanceForBallDirectionPreview;
+    [SerializeField] private GameObject ballPreviewPrefab;
+    [SerializeField, Min(0)] private int numberOfBallPreviews;
+    [SerializeField, Min(.0f)] private float ballPreviewDistance;
 
     private void Awake()
     {
@@ -37,11 +45,15 @@ public class Platform : MonoBehaviour
         _animator = GetComponent<Animator>();
         
         _yPosition = transform.position.y;
+        Assert.IsNotNull(ballPreviewPrefab);
+
+        _ballPreviewsInstances = new Dictionary<int, List<GameObject>>();
     }
     
     private void Start()
     {
         UpdatePlatformSize(PlatformSize);
+        InitializeBallPreviewInstancesForEachBall();
         
         Debug.Log($"[Platform / {name}] Send notification to Platforms Manager : <color=orange>Platform initialized</color>");
         PlatformsManager.Instance.OnPlatformInitializedNotification(this);
@@ -51,6 +63,34 @@ public class Platform : MonoBehaviour
     {
         MovePlatform();
         FixVerticalVelocity();
+        UpdatePreviewBalls();
+    }
+
+    private void InitializeBallPreviewInstancesForEachBall()
+    {
+        foreach (Ball ball in BallsManager.Instance.AllBalls)
+        {
+            int ballId = ball.GetInstanceID();
+            _ballPreviewsInstances.Add(ballId, new List<GameObject>());
+            
+            for (int i = 0; i < numberOfBallPreviews; i++)
+            {
+                Vector2 ballPreviewCoordinates = new Vector2(ball.transform.position.x,
+                    transform.position.y + minDistanceForBallDirectionPreview + i * ballPreviewDistance);
+                
+                GameObject ballPreviewInstance = ballPreviewPrefab;
+                ballPreviewInstance.SetActive(false);
+                
+                Color ballPreviewColor = ballPreviewInstance.GetComponent<SpriteRenderer>().color;
+                ballPreviewColor.a = (numberOfBallPreviews + 1f - (i + 1f)) / numberOfBallPreviews;
+                ballPreviewInstance.GetComponent<SpriteRenderer>().color = ballPreviewColor;
+                
+                GameObject ballPreviewCreatedInstance = Instantiate(ballPreviewInstance, ballPreviewCoordinates, Quaternion.identity);
+                _ballPreviewsInstances[ballId].Add(ballPreviewCreatedInstance);
+            }
+            
+            Debug.Log($"<color=red>Added ball {ballId} with {_ballPreviewsInstances[ballId].Count} preview balls</color>");
+        }
     }
     
     /// <summary>
@@ -134,6 +174,42 @@ public class Platform : MonoBehaviour
         }
         
         UpdatePlatformSize(newPlatformSizeType);
+    }
+    
+    private void UpdatePreviewBalls()
+    {
+        float minX = transform.position.x - _boxCollider.size.x / 2;
+        float maxX = transform.position.x + _boxCollider.size.x / 2;
+
+        foreach (Ball ball in BallsManager.Instance.AllBalls)
+        {
+            float distance = Vector2.Distance(Vector2.up * ball.transform.position.y, Vector2.up * transform.position.y);
+            if (!LevelManager.Instance.LevelState.Equals(ELevelState.ActivePhase)
+                || ball.transform.position.x < minX 
+                || ball.transform.position.x > maxX 
+                || distance > ballDistanceForBallDirectionPreview 
+                || ball.Direction.y >= .0f)
+            {
+                UpdatePreviewBallsWithVisibility(ball, false);
+                continue;
+            }
+
+            UpdatePreviewBallsWithVisibility(ball, true);
+        }
+    }
+
+    private void UpdatePreviewBallsWithVisibility(Ball ball, bool visible)
+    {
+        int ballId = ball.GetInstanceID();
+        if (!_ballPreviewsInstances.TryGetValue(ballId, out List<GameObject> ballPreviews))
+            return;
+        
+        foreach (GameObject previewBallInstance in ballPreviews)
+        {
+            Vector2 ballPreviewCoordinates = new Vector2(ball.transform.position.x, previewBallInstance.transform.position.y);
+            previewBallInstance.transform.position = ballPreviewCoordinates; 
+            previewBallInstance.SetActive(visible);
+        }
     }
     
 }

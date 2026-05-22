@@ -176,9 +176,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d3dab70bd91df4a9b75e9dd971189d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformSize: 0
+  platformSize: 2
   speed: 6.5
   smoothTimeSpeed: 0.05
+  ballDistanceForBallDirectionPreview: 5
 --- !u!95 &5750553333060297510
 Animator:
   serializedVersion: 7

@@ -13,6 +13,7 @@ public class BallsManager : MonoBehaviour
     private int _ballsCount;
     private readonly List<Ball> _allBalls = new();
     private readonly List<Ball> _spawnedBalls = new();
+    public List<Ball> AllBalls => _allBalls;
     
     [Header("Ball movement fade properties")] 
     [SerializeField, Min(.0f)] private float movementFadeDuration;

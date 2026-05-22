@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
 
     private ELevelState _levelState;
+    public ELevelState LevelState => _levelState;
 
     private bool _bricksManagerNotificationReceived;
     private bool _powerUpsManagerNotificationReceived;
