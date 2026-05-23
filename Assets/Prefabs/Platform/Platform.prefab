@@ -179,7 +179,15 @@ MonoBehaviour:
   platformSize: 2
   speed: 6.5
   smoothTimeSpeed: 0.05
-  ballDistanceForBallDirectionPreview: 5
+  maxAngleOnCorners: 0
+  ballPreviewPrefab: {fileID: 0}
+  ballDistanceToShowPreviewBalls: 0
+  numberOfBallPreviews: 0
+  minDistanceForBallDirectionPreview: 0
+  ballPreviewDistance: 0
+  bulletPrefab: {fileID: 6558989489541313429, guid: 3e44b96fbcd27624b990dc760f260f7e, type: 3}
+  bulletAudioPrefab: {fileID: 5779626372241303908, guid: 8cb9af289c2fc224cadc531111ca6b83, type: 3}
+  fireRate: 0.5
 --- !u!95 &5750553333060297510
 Animator:
   serializedVersion: 7

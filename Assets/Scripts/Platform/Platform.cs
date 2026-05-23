@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -41,8 +42,10 @@ public class Platform : MonoBehaviour
 
     [Header("Shoot Properties")]
     [SerializeField] private GameObject bulletPrefab; // TODO modifier cette partie
+    [SerializeField] private GameObject bulletAudioPrefab; // TODO modifier cette partie
     [SerializeField, Min(.0f)] private float fireRate;
     private float _remainingFireRate;
+    
 
     private void Awake()
     {
@@ -55,6 +58,8 @@ public class Platform : MonoBehaviour
         
         Assert.IsNotNull(bulletPrefab);
         Assert.IsTrue(bulletPrefab.GetComponent<Bullet>());
+        Assert.IsNotNull(bulletAudioPrefab);
+        Assert.IsTrue(bulletAudioPrefab.GetComponent<Audio>());
 
         _ballPreviewsInstances = new Dictionary<int, List<GameObject>>();
     }
@@ -239,6 +244,7 @@ public class Platform : MonoBehaviour
             {
                 _remainingFireRate = fireRate;
                 Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                Instantiate(bulletAudioPrefab, transform.position, Quaternion.identity);
             }
             return;
         }

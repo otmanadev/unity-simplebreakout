@@ -1820,6 +1820,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 68d50c922414588468de1345ad54f22f, type: 2}
     - target: {fileID: 7717173952702929010, guid: 8897377576658b6449fddc3697931cd5, type: 3}
+      propertyPath: bulletShotMixer
+      value: 
+      objectReference: {fileID: 24300002, guid: 12360e30d7fcbf34d90636740352ea2f, type: 2}
+    - target: {fileID: 7717173952702929010, guid: 8897377576658b6449fddc3697931cd5, type: 3}
       propertyPath: ballPreviewPrefab
       value: 
       objectReference: {fileID: 7392780525699250837, guid: 7691a7afc96e53d479805f44438df77c, type: 3}
