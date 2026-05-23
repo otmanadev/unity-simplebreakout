@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PowerUp : MonoBehaviour
@@ -13,10 +14,16 @@ public class PowerUp : MonoBehaviour
     [SerializeField] private float speed = 1.0f;
 
     private float _refZeroVelocity = .0f;
+    
+    [Header("Pickup properties")]
+    [SerializeField] private GameObject pickupAudioPrefab;
 
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+        
+        Assert.IsNotNull(pickupAudioPrefab);
+        Assert.IsTrue(pickupAudioPrefab.GetComponent<Audio>());
     }
 
     private void FixedUpdate()
@@ -34,6 +41,7 @@ public class PowerUp : MonoBehaviour
         }
         
         Debug.Log($"[PowerUp / {name}] Send notification to {PowerUpsManager.Instance.name} : Activate power up {Type}.");
+        Instantiate(pickupAudioPrefab, transform.position, Quaternion.identity);
         PowerUpsManager.Instance.ActivatePowerUp(Type);
         Destroy(gameObject);
     }

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -30,12 +31,21 @@ public class Ball : MonoBehaviour
     private Vector2 _direction;
     public Vector2 Direction => _direction;
     private Vector2 _refZeroVelocity = Vector2.zero;
+    
+    [Header("Hit properties")]
+    [SerializeField] private GameObject hitStaticColliderAudioPrefab;
+    [SerializeField] private GameObject hitPlatformAudioPrefab;
 
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _circleCollider = GetComponent<CircleCollider2D>();
         _animator = GetComponent<Animator>();
+        
+        Assert.IsNotNull(hitStaticColliderAudioPrefab);
+        Assert.IsTrue(hitStaticColliderAudioPrefab.GetComponent<Audio>());
+        Assert.IsNotNull(hitPlatformAudioPrefab);
+        Assert.IsTrue(hitPlatformAudioPrefab.GetComponent<Audio>());
     }
 
     private void Start()
@@ -147,11 +157,13 @@ public class Ball : MonoBehaviour
         if (collidedObject.TryGetComponent(out Platform platform))
         {
             _direction = platform.GetBallNormalizedDirectionFromGivenPosition(transform.position.x);
+            Instantiate(hitPlatformAudioPrefab, transform.position, Quaternion.identity);
         }
 
         if (collidedObject.TryGetComponent(out StaticCollider _))
         {
             _direction = Vector2.Reflect(_direction, normal).normalized;
+            Instantiate(hitStaticColliderAudioPrefab, transform.position, Quaternion.identity);
         }
 
         _hasReflection = false;

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Animator))]
@@ -18,12 +19,19 @@ public class Brick : MonoBehaviour
 
     [Header("Health")]
     [SerializeField, Min(0)] private int health;
+    [SerializeField] private GameObject brickHitAudioPrefab;
+    [SerializeField] private GameObject brickDestroyedAudioPrefab;
     
     protected virtual void Awake()
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        
+        Assert.IsNotNull(brickHitAudioPrefab);
+        Assert.IsTrue(brickHitAudioPrefab.GetComponent<Audio>());
+        Assert.IsNotNull(brickDestroyedAudioPrefab);
+        Assert.IsTrue(brickDestroyedAudioPrefab.GetComponent<Audio>());
     }
 
     protected virtual void Start()
@@ -80,9 +88,13 @@ public class Brick : MonoBehaviour
         Debug.Log($"[Brick / {name}] Received {givenDamage} damage. Now has {health} health point(s) left.");
 
         if (health > 0)
+        {
+            Instantiate(brickHitAudioPrefab, transform.position, Quaternion.identity);
             return;
+        }
         
         Debug.Log($"[Brick / {name}] Send notification to {BricksManager.Instance.name} : Brick destroyed.");
+        Instantiate(brickDestroyedAudioPrefab, transform.position, Quaternion.identity);
         BricksManager.Instance.OnBrickDestroyedNotification(this);
         SpawnAttachedPowerUp();
         Destroy(gameObject);

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3206950792156706848}
   - component: {fileID: 8062238870127439780}
   - component: {fileID: 4634948644182470811}
-  - component: {fileID: 8808142300208199837}
+  - component: {fileID: 3439102173668863072}
   m_Layer: 0
-  m_Name: Brick 3x3
+  m_Name: Brick 1x1
   m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8a0572dbc86a1864bb4b0a1971327474, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c6ab2da6f71f90d45a6046a697d8eee8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,13 +128,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3, y: 3}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &4634948644182470811
 MonoBehaviour:
@@ -148,9 +148,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce0afc5f570296f458c6a5b71a6877a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpGo: {fileID: 0}
-  health: 12
---- !u!95 &8808142300208199837
+  powerUp: {fileID: 0}
+  health: 2
+  brickHitAudioPrefab: {fileID: 5779626372241303908, guid: 93cb9bdf66d830a42984e2b4674b3dc0, type: 3}
+  brickDestroyedAudioPrefab: {fileID: 5779626372241303908, guid: 395bc598140985843842725b603eb8a5, type: 3}
+--- !u!95 &3439102173668863072
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -160,7 +162,7 @@ Animator:
   m_GameObject: {fileID: 8443655747730940435}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 3822e71b74c82f54d8c3789cbf50b6ce, type: 2}
+  m_Controller: {fileID: 22100000, guid: 4a9b97e58057ff840a1a75bd91f32cd2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

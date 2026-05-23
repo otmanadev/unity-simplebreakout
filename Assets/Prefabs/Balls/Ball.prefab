@@ -166,9 +166,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b501c92faac7c60498aaa7e8b280ecef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soBallSize: {fileID: 0}
+  ballSize: 2
   damage: 0
   speed: 6
+  hitStaticColliderAudioPrefab: {fileID: 5779626372241303908, guid: 2255cfe32503c4b478924b8f41e500aa, type: 3}
+  hitPlatformAudioPrefab: {fileID: 5779626372241303908, guid: 968c2a05e94c6984eba7b3b91f63d46e, type: 3}
 --- !u!95 &4665327464070248783
 Animator:
   serializedVersion: 7
