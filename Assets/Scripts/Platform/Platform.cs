@@ -25,8 +25,6 @@ public class Platform : MonoBehaviour
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float smoothTimeSpeed = .05f;
     
-    private float _inputHorizontalDirection = .0f;
-    public float InputHorizontalDirection { set => _inputHorizontalDirection = value; }
     private float _refZeroVelocity = .0f;
     private float _yPosition;
 
@@ -41,6 +39,11 @@ public class Platform : MonoBehaviour
     [SerializeField, Min(.0f)] private float ballPreviewDistance;
     private Dictionary<int, List<GameObject>> _ballPreviewsInstances;
 
+    [Header("Shoot Properties")]
+    [SerializeField] private GameObject bulletPrefab; // TODO modifier cette partie
+    [SerializeField, Min(.0f)] private float fireRate;
+    private float _remainingFireRate;
+
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
@@ -49,6 +52,9 @@ public class Platform : MonoBehaviour
         
         _yPosition = transform.position.y;
         Assert.IsNotNull(ballPreviewPrefab);
+        
+        Assert.IsNotNull(bulletPrefab);
+        Assert.IsTrue(bulletPrefab.GetComponent<Bullet>());
 
         _ballPreviewsInstances = new Dictionary<int, List<GameObject>>();
     }
@@ -67,6 +73,7 @@ public class Platform : MonoBehaviour
         MovePlatform();
         FixVerticalVelocity();
         UpdatePreviewBalls();
+        UpdateFire();
     }
 
     private void InitializeBallPreviewInstancesForEachBall()
@@ -164,7 +171,7 @@ public class Platform : MonoBehaviour
     private void MovePlatform()
     {
         float currentHorizontalVelocity = _rigidBody.linearVelocityX;
-        float targetHorizontalVelocity = _inputHorizontalDirection * speed;
+        float targetHorizontalVelocity = PlatformsManager.Instance.inputHorizontalDirection * speed;
         _rigidBody.linearVelocityX = Mathf.SmoothDamp(currentHorizontalVelocity, targetHorizontalVelocity, ref _refZeroVelocity, smoothTimeSpeed);
     }
 
@@ -216,6 +223,30 @@ public class Platform : MonoBehaviour
             }
 
             UpdatePreviewBallsWithVisibility(ball, true);
+        }
+    }
+
+    private void UpdateFire()
+    {
+        if (!LevelManager.Instance.LevelState.Equals(ELevelState.ActivePhase))
+        {
+            return;
+        }
+        
+        if (_remainingFireRate.Equals(.0f))
+        {
+            if (PlatformsManager.Instance.inputFirePressed)
+            {
+                _remainingFireRate = fireRate;
+                Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            }
+            return;
+        }
+        
+        _remainingFireRate -= Time.fixedDeltaTime;
+        if (_remainingFireRate < .0f)
+        {
+            _remainingFireRate = .0f;
         }
     }
 

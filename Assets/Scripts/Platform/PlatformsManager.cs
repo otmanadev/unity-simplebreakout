@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlatformsManager : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class PlatformsManager : MonoBehaviour
     private int _platformsCount;
     private readonly List<Platform> _allPlatforms = new();
     private readonly List<Platform> _spawnedPlatforms = new();
+
+    [Header("Inputs")] 
+    public float inputHorizontalDirection = .0f;
+    public bool inputFirePressed = false;
 
     [Header("Controls")] 
     [SerializeField, UnityEngine.Range(.5f, 2f)] private float sensitivityHorizontalPlatformVelocity = 1.5f;
@@ -66,13 +71,22 @@ public class PlatformsManager : MonoBehaviour
         UpdateMousePositions();
     }
 
+    /// <summary>
+    /// Called when fire button is pressed.
+    /// </summary>
+    /// <param name="callbackContext"></param>
+    public void CallbackFireAction(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed) return;
+        
+        if (callbackContext.started) inputFirePressed = true;
+        
+        if (callbackContext.canceled) inputFirePressed = false;
+    }
+
     private void UpdateMousePositions()
     {
-        float delta = _movementMultiplier * sensitivityHorizontalPlatformVelocity * Input.GetAxis("Mouse X");
-        foreach (Platform platform in _allPlatforms)
-        {
-            platform.InputHorizontalDirection = delta;
-        }
+        inputHorizontalDirection = _movementMultiplier * sensitivityHorizontalPlatformVelocity * Input.GetAxis("Mouse X");
     }
 
     private void UpdateMovementMultiplier()
