@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -13,6 +14,9 @@ public class Brick : MonoBehaviour
     private BoxCollider2D _boxCollider2D;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
+    
+    private List<IBrickPassive> _brickPassives = new List<IBrickPassive>();
+    public List<IBrickPassive> BrickPassives => _brickPassives;
     
     [Header("Attached Power Up")]
     [SerializeField] private SOPowerUp powerUp;
@@ -90,12 +94,20 @@ public class Brick : MonoBehaviour
         if (health > 0)
         {
             Instantiate(brickHitAudioPrefab, transform.position, Quaternion.identity);
+            foreach (IBrickPassive brickPassive in _brickPassives)
+            {
+                brickPassive.OnBrickHurt();
+            }
             return;
         }
         
         Debug.Log($"[Brick / {name}] Send notification to {BricksManager.Instance.name} : Brick destroyed.");
         Instantiate(brickDestroyedAudioPrefab, transform.position, Quaternion.identity);
         BricksManager.Instance.OnBrickDestroyedNotification(this);
+        foreach (IBrickPassive brickPassive in _brickPassives)
+        {
+            brickPassive.OnBrickDeactivated();
+        }
         SpawnAttachedPowerUp();
         Destroy(gameObject);
     }
@@ -110,6 +122,14 @@ public class Brick : MonoBehaviour
         
         Debug.Log($"[Brick / {name}] Notify Power Ups Manager to spawn throwing Power Up from type {powerUp.Type} in given coordinates {transform.position}");
         PowerUpsManager.Instance.SpawnThrowingPowerUp(powerUp, transform.position);
+    }
+
+    public void NotifyBrickPassives()
+    {
+        foreach (IBrickPassive brickPassive in _brickPassives)
+        {
+            brickPassive.OnBrickActivated();
+        }
     }
     
 }

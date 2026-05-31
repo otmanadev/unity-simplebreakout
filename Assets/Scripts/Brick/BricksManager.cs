@@ -95,6 +95,14 @@ public class BricksManager : MonoBehaviour
         LevelManager.Instance.OnBricksManagerSuccesfullyNotified();
     }
 
+    public void NotifyBricksPassives()
+    {
+        foreach (Brick brick in AllBricks)
+        {
+            brick.NotifyBrickPassives();
+        }
+    }
+
     /// <summary>
     /// Receive notification from brick when he is destroyed.
     /// </summary>

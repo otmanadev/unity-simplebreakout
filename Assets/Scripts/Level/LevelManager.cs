@@ -53,6 +53,7 @@ public class LevelManager : MonoBehaviour
             case ELevelState.ActivePhase:
                 BallsManager.Instance.StartMoveBalls();
                 PlatformsManager.Instance.StartMovePlatforms();
+                BricksManager.Instance.NotifyBricksPassives();
                 break;
             default:
                 break;
