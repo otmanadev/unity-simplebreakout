@@ -67,7 +67,6 @@ public class Platform : MonoBehaviour
     private void Start()
     {
         UpdatePlatformSize(PlatformSize);
-        InitializeBallPreviewInstancesForEachBall();
         
         Debug.Log($"[Platform / {name}] Send notification to Platforms Manager : <color=orange>Platform initialized</color>");
         PlatformsManager.Instance.OnPlatformInitializedNotification(this);
@@ -114,6 +113,7 @@ public class Platform : MonoBehaviour
     public void SpawnPlatform()
     {
         Debug.Log($"[Platform / {name}] Start animation");
+        InitializeBallPreviewInstancesForEachBall();
         _animator.SetTrigger(AnimationTriggerSpawn);
     }
 

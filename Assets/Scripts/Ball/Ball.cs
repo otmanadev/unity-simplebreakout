@@ -91,7 +91,7 @@ public class Ball : MonoBehaviour
     /// </summary>
     public void StartMoveBall()
     {
-        _direction = Vector2.up;
+        _direction = Vector2.down;
     }
     
     /// <summary>
