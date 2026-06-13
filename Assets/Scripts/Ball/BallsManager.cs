@@ -168,7 +168,7 @@ public class BallsManager : MonoBehaviour
     /// <param name="ball"></param>
     public void OnBallReachDeadZoneNotification(Ball ball)
     {
-        if (!_allBalls.Contains(ball))
+        if (!AllBalls.Contains(ball))
         {
             return;
         }

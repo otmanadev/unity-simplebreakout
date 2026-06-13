@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BallSize - XLARGE
   m_EditorClassIdentifier: 
   ballSize: 4
+  sizeLevel: 2
   damage: 8
   speed: 5
   colliderRadius: 0.58

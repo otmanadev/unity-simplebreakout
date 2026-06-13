@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: BallSize - MEDIUM
   m_EditorClassIdentifier: 
   ballSize: 2
-  animationName: MediumBallTrigger
+  sprite: {fileID: 21300000, guid: e962df8496c02e74688548d1e669b3fd, type: 3}
   damage: 4
   speed: 6
-  sprite: {fileID: 21300000, guid: d192fb37a11b1b548a1b8d22c368705d, type: 3}
   colliderRadius: 0.4

@@ -6,6 +6,9 @@ public class SOPlatformSize : ScriptableObject
     
     [SerializeField] private EPlatformSize platformSize;
     public EPlatformSize PlatformSize => platformSize;
+
+    [SerializeField, Range(-2, 2)] private int sizeLevel;
+    public int SizeLevel => sizeLevel;
     
     [Header("Movement")]
     [SerializeField] private float speed;

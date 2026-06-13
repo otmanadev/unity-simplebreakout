@@ -5,12 +5,14 @@ using UnityEngine.Assertions;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Ball : MonoBehaviour
 {
     
     private static readonly String AnimationTriggerSpawn = "SpawnTrigger";
-    private static readonly String AnimationTriggerBallBigger = "BiggerBallTrigger";
-    private static readonly String AnimationTriggerBallSmaller = "SmallerBallTrigger";
+    private static readonly String AnimationTriggerBallBigger = "BallBiggerTrigger";
+    private static readonly String AnimationTriggerBallSmaller = "BallSmallerTrigger";
+    private static readonly String AnimationIntegerBallSizeLevel = "BallSizeLevel";
     
     private Rigidbody2D _rigidBody;
     private CircleCollider2D _circleCollider;
@@ -121,6 +123,7 @@ public class Ball : MonoBehaviour
         ballSize = newBallSizeType;
         SOBallSize ballSizeProperties = BallsManager.Instance.GetBallSizeByItsType(BallSize);
         
+        _animator.SetInteger(AnimationIntegerBallSizeLevel, ballSizeProperties.SizeLevel);
         _circleCollider.radius = ballSizeProperties.ColliderRadius;
         speed = ballSizeProperties.Speed;
         damage = ballSizeProperties.Damage;

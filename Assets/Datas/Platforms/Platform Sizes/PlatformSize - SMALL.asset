@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PlatformSize - SMALL
   m_EditorClassIdentifier: 
   platformSize: 1
+  sizeLevel: -1
   speed: 7.25
   smoothTime: 0.05
   colliderSize: {x: 2.6, y: 0.85}

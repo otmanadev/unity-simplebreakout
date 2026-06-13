@@ -12,8 +12,9 @@ public class Platform : MonoBehaviour
 {
     
     private static readonly String AnimationTriggerSpawn = "SpawnTrigger";
-    private static readonly String AnimationTriggerPlatformBigger = "BiggerPlatformTrigger";
-    private static readonly String AnimationTriggerPlatformSmaller = "SmallerPlatformTrigger";
+    private static readonly String AnimationTriggerPlatformBigger = "PlatformBiggerTrigger";
+    private static readonly String AnimationTriggerPlatformSmaller = "PlatformSmallerTrigger";
+    private static readonly String AnimationIntegerPlatformSizeLevel = "PlatformSizeLevel";
     
     private Rigidbody2D _rigidBody;
     private BoxCollider2D _boxCollider;
@@ -134,7 +135,8 @@ public class Platform : MonoBehaviour
     {
         platformSize = newPlatformSize;
         SOPlatformSize platformSizeProperties = PlatformsManager.Instance.GetPlatformSizeByItsType(platformSize);
-
+        
+        _animator.SetInteger(AnimationIntegerPlatformSizeLevel, platformSizeProperties.SizeLevel);
         _boxCollider.size = platformSizeProperties.ColliderSize;
         speed = platformSizeProperties.Speed;
         smoothTimeSpeed = platformSizeProperties.SmoothTime;
@@ -205,7 +207,7 @@ public class Platform : MonoBehaviour
                 _animator.SetTrigger(AnimationTriggerPlatformSmaller);
                 break;
         }
-        
+
         UpdatePlatformSize(newPlatformSizeType);
     }
     

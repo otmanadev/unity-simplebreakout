@@ -7,6 +7,9 @@ public class SOBallSize : ScriptableObject
     [SerializeField] private EBallSize ballSize;
     public EBallSize BallSize => ballSize;
     
+    [SerializeField, Range(-2, 2)] private int sizeLevel;
+    public int SizeLevel => sizeLevel;
+    
     [Header("Damage")]
     [SerializeField, Min(1)] private int damage;
     public int Damage => damage;
