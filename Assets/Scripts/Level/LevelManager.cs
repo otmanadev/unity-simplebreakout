@@ -55,6 +55,12 @@ public class LevelManager : MonoBehaviour
                 PlatformsManager.Instance.StartMovePlatforms();
                 BricksManager.Instance.NotifyBricksPassives();
                 break;
+            case ELevelState.VanishingObjects:
+                BallsManager.Instance.DespawnAllBalls();
+                // TODO gérer la disparition des briques et plateformes
+                _bricksManagerNotificationReceived = true;
+                _platformsManagerNotificationReceived = true;
+                break;
             default:
                 break;
         }
@@ -78,6 +84,9 @@ public class LevelManager : MonoBehaviour
                 break;
             case ELevelState.ActivePhase:
                 UpdateLevelState(ELevelState.VanishingObjects);
+                break;
+            case ELevelState.VanishingObjects:
+                Debug.Log("LEVEL FINISHED");
                 break;
             default:
                 return;
@@ -155,13 +164,13 @@ public class LevelManager : MonoBehaviour
     public void OnNoMoreBricksNotification()
     {
         Debug.Log($"[<color=orange>LevelManager / {name}</color>] Receive notification from {BricksManager.Instance.name} : No more bricks to destroy.");
-        Debug.Break();
+        UpdateLevelState(ELevelState.VanishingObjects);
     }
 
     public void OnBallReachedDeadZoneNotification()
     {
         Debug.Log($"[<color=orange>LevelManager / {name}</color>] Receive notification from {BallsManager.Instance.name} : Ball reached dead zone.");
-        Debug.Break();
+        UpdateLevelState(ELevelState.VanishingObjects);
     }
     
 }

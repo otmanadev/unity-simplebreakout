@@ -109,23 +109,21 @@ public class BricksManager : MonoBehaviour
     /// <param name="brick"></param>
     public void OnBrickDestroyedNotification(Brick brick)
     {
-        /*
-        if (!_bricks.Contains(brick))
+        if (!_spawnedBricks.Contains(brick))
         {
             return;
         }
         
-        _bricks.Remove(brick);
+        _spawnedBricks.Remove(brick);
         Debug.Log($"[<color=orange>BricksManager / {name}</color>] Received notification from {brick.name} : Brick destroyed.");
 
-        if (_bricks.Count > 0)
+        if (_spawnedBricks.Count > 0)
         {
             return;
         }
         
         Debug.Log($"[<color=orange>BricksManager / {name}</color>] Send notification to {LevelManager.Instance.name} : No more bricks to destroy.");
         LevelManager.Instance.OnNoMoreBricksNotification();
-        */
     }
     
 }

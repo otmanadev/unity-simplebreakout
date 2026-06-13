@@ -13,6 +13,7 @@ public class Ball : MonoBehaviour
     private static readonly String AnimationTriggerBallBigger = "BallBiggerTrigger";
     private static readonly String AnimationTriggerBallSmaller = "BallSmallerTrigger";
     private static readonly String AnimationIntegerBallSizeLevel = "BallSizeLevel";
+    private static readonly String AnimationTriggerDespawn = "DespawnTrigger";
     
     private Rigidbody2D _rigidBody;
     private CircleCollider2D _circleCollider;
@@ -48,6 +49,8 @@ public class Ball : MonoBehaviour
         Assert.IsTrue(hitStaticColliderAudioPrefab.GetComponent<Audio>());
         Assert.IsNotNull(hitPlatformAudioPrefab);
         Assert.IsTrue(hitPlatformAudioPrefab.GetComponent<Audio>());
+        
+        _circleCollider.enabled = false;
     }
 
     private void Start()
@@ -93,7 +96,28 @@ public class Ball : MonoBehaviour
     /// </summary>
     public void StartMoveBall()
     {
+        _circleCollider.enabled = true;
         _direction = Vector2.down;
+    }
+
+    /// <summary>
+    /// Despawn ball.
+    /// </summary>
+    public void DespawnBall()
+    {
+        _circleCollider.enabled = false;
+        _direction = Vector2.zero;
+        _animator.SetTrigger(AnimationTriggerDespawn);
+    }
+    
+    /// <summary>
+    /// Notify Balls Manager the ball finished his despawn animation.
+    /// </summary>
+    public void OnReceiveNotificationFromAnimatorBallDespawned()
+    {
+        Debug.Log($"[Ball / {name}] Send notification to Balls Manager : <color=orange>Ball despawned</color>");
+        BallsManager.Instance.OnBallDespawnedNotification(this);
+        Destroy(gameObject);
     }
     
     /// <summary>

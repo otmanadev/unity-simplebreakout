@@ -161,6 +161,45 @@ public class BallsManager : MonoBehaviour
         }
         _fadeInProgress = true;
     }
+
+    /// <summary>
+    /// Despawn all balls.
+    /// </summary>
+    public void DespawnAllBalls()
+    {
+        foreach (Ball ball in _spawnedBalls)
+        {
+            ball.DespawnBall();
+        }
+    }
+    
+    /// <summary>
+    /// Receive notification from single ball when despawned.
+    /// </summary>
+    /// <param name="ball"></param>
+    public void OnBallDespawnedNotification(Ball ball)
+    {
+        if (!_spawnedBalls.Contains(ball))
+        {
+            Debug.LogWarning($"[<color=orange>BallsManager / {name}</color>] Received notification from Ball {ball.name} but was already despawned");
+            return;
+        }
+        
+        _spawnedBalls.Remove(ball);
+        VerifyIfAllBallsAreDespawnedBeforeNotifyLevelManager();
+    }
+    
+    /// <summary>
+    /// Verify if all balls are despawned before notify Level Manager so that the level can finish.
+    /// </summary>
+    private void VerifyIfAllBallsAreDespawnedBeforeNotifyLevelManager()
+    {
+        if (_spawnedBalls.Count > 0)
+            return;
+        
+        Debug.Log($"[<color=orange>BallsManager / {name}</color>] Notify Level Manager");
+        LevelManager.Instance.OnBallsManagerSuccesfullyNotified();
+    }
     
     /// <summary>
     /// Receive notification from ball when he is created.
