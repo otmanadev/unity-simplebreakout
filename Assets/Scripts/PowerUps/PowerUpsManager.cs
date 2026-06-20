@@ -30,7 +30,7 @@ public class PowerUpsManager : MonoBehaviour
     /// </summary>
     public void LinkPowerUpsToBricks()
     {
-        List<Brick> bricksWithNoAttachedPowerUp = BricksManager.Instance.AllBricks.ToList();
+        List<Brick> bricksWithNoAttachedPowerUp = new List<Brick>(BricksManager.Instance.AllBricks);
         
         // Put randomly power ups to bricks
         foreach (SOPowerUp powerUp in powerUps)
@@ -47,9 +47,6 @@ public class PowerUpsManager : MonoBehaviour
             
             bricksWithNoAttachedPowerUp.Remove(randomBrick);
         }
-        
-        Debug.Log($"[<color=orange>PowerUpsManager / {name}</color>] Notify Level Manager");
-        LevelManager.Instance.OnPowerUpsManagerSuccesfullyNotified();
     }
 
     /// <summary>

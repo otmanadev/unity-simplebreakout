@@ -2,9 +2,8 @@
 {
     
     LoadingObjects,
-    AppearingObjects,
-    PassivePhase,
-    ActivePhase,
-    VanishingObjects,
+    StartSequences,
+    GameStarted,
+    EndSequences,
     
 }

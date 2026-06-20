@@ -64,14 +64,6 @@ public class Platform : MonoBehaviour
 
         _ballPreviewsInstances = new Dictionary<int, List<GameObject>>();
     }
-    
-    private void Start()
-    {
-        UpdatePlatformSize(PlatformSize);
-        
-        Debug.Log($"[Platform / {name}] Send notification to Platforms Manager : <color=orange>Platform initialized</color>");
-        PlatformsManager.Instance.OnPlatformInitializedNotification(this);
-    }
 
     private void FixedUpdate()
     {
@@ -109,10 +101,11 @@ public class Platform : MonoBehaviour
     }
     
     /// <summary>
-    /// Play platform spawn animation.
+    /// Joue l'animation d'apparition de la plateforme.
     /// </summary>
     public void SpawnPlatform()
     {
+        UpdatePlatformSize(PlatformSize);
         Debug.Log($"[Platform / {name}] Start animation");
         InitializeBallPreviewInstancesForEachBall();
         _animator.SetTrigger(AnimationTriggerSpawn);
@@ -123,8 +116,7 @@ public class Platform : MonoBehaviour
     /// </summary>
     public void OnReceiveNotificationFromAnimatorPlatformSpawned()
     {
-        Debug.Log($"[Platform / {name}] Send notification to Platforms Manager : <color=orange>Platform spawned</color>");
-        PlatformsManager.Instance.OnPlatformSpawnedNotification(this);
+        PlatformsManager.Instance.OnReceivedNotificationFromUnityObject(this);
     }
     
     /// <summary>
@@ -219,7 +211,7 @@ public class Platform : MonoBehaviour
         foreach (Ball ball in BallsManager.Instance.AllBalls)
         {
             float distance = Vector2.Distance(Vector2.up * ball.transform.position.y, Vector2.up * transform.position.y);
-            if (!LevelManager.Instance.LevelState.Equals(ELevelState.ActivePhase)
+            if (!LevelManager.Instance.LevelState.Equals(ELevelState.GameStarted)
                 || ball.transform.position.x < minX 
                 || ball.transform.position.x > maxX 
                 || distance > ballDistanceToShowPreviewBalls 
@@ -235,7 +227,7 @@ public class Platform : MonoBehaviour
 
     private void UpdateFire()
     {
-        if (!LevelManager.Instance.LevelState.Equals(ELevelState.ActivePhase))
+        if (!LevelManager.Instance.LevelState.Equals(ELevelState.GameStarted))
         {
             return;
         }

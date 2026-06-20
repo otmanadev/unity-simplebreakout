@@ -34,23 +34,24 @@ public class Brick : MonoBehaviour
         
         Assert.IsNotNull(brickHitAudioPrefab);
         Assert.IsTrue(brickHitAudioPrefab.GetComponent<Audio>());
+        
         Assert.IsNotNull(brickDestroyedAudioPrefab);
         Assert.IsTrue(brickDestroyedAudioPrefab.GetComponent<Audio>());
+
+        CheckHasAttachedPowerUp();
     }
 
-    protected virtual void Start()
+    private void CheckHasAttachedPowerUp()
     {
-        if (powerUp != null)
-        {
-            Debug.Log($"[Brick / {name}] Brick has attached power up {powerUp.Type}");
-            SetUpPowerUp(powerUp);
-        }
-        Debug.Log($"[Brick / {name}] Send notification to Bricks Manager : <color=orange>Brick initialized</color>");
-        BricksManager.Instance.OnBrickInitializedNotification(this);
+        if (powerUp == null)
+            return;
+        
+        Debug.Log($"[Brick / {name}] Brick has attached power up {powerUp.Type}");
+        SetUpPowerUp(powerUp);
     }
 
     /// <summary>
-    /// Play brick spawn animation.
+    /// Joue l'animation d'apparition de la brique.
     /// </summary>
     public void StartBrickSpawn()
     {
@@ -59,12 +60,11 @@ public class Brick : MonoBehaviour
     }
 
     /// <summary>
-    /// Notify Bricks Manager the brick finished his spawn animation.
+    /// Notifie Level Step que l'apparition de la brique s'est finalisée.
     /// </summary>
     public void OnReceiveNotificationFromAnimatorBrickSpawned()
     {
-        Debug.Log($"[Brick / {name}] Send notification to Bricks Manager : <color=orange>Brick spawned</color>");
-        BricksManager.Instance.OnBrickSpawnedNotification(this);
+        BricksManager.Instance.OnReceivedNotificationFromUnityObject(this);
     }
     
     /// <summary>

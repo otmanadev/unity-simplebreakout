@@ -5,14 +5,13 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Serialization;
 
-public class BallsManager : MonoBehaviour
+public class BallsManager : Manager
 {
 
     public static BallsManager Instance;
 
-    private int _ballsCount;
-    private readonly List<Ball> _allBalls = new();
-    private readonly List<Ball> _spawnedBalls = new();
+    [Header("Balls")]
+    [SerializeField] private List<Ball> _allBalls;
     public List<Ball> AllBalls => _allBalls;
     
     [Header("Ball movement fade properties")] 
@@ -55,82 +54,12 @@ public class BallsManager : MonoBehaviour
         Assert.IsNotNull(extraSmallBall);
         Assert.IsTrue(extraSmallBall.BallSize.Equals(EBallSize.ExtraSmall));
         
-        // Balls
-        _ballsCount = GameObject.FindGameObjectsWithTag("Ball")
-            .Where(o => o.GetComponent<Ball>() != null)
-            .Count();
+        _allBalls = FindObjectsByType<Ball>(FindObjectsSortMode.InstanceID).ToList();
     }
 
     private void Update()
     {
         UpdateMovementMultiplier();
-    }
-
-    /// <summary>
-    /// Receive notification from ball when initialized.
-    /// </summary>
-    /// <param name="ball"></param>
-    public void OnBallInitializedNotification(Ball ball)
-    {
-        if (_allBalls.Contains(ball))
-        {
-            Debug.LogWarning($"[<color=orange>BallsManager / {name}</color>] Received notification from Ball {ball.name} but was already initialized");
-            return;
-        }
-        
-        _allBalls.Add(ball);
-        VerifyIfAllBallsAreInstanciatedBeforeNotifyLevelManager();
-    }
-    
-    /// <summary>
-    /// Verify if all balls are instanciated before notify Level Manager so that the level can start.
-    /// </summary>
-    private void VerifyIfAllBallsAreInstanciatedBeforeNotifyLevelManager()
-    {
-        if (_allBalls.Count != _ballsCount)
-            return;
-        
-        Debug.Log($"[<color=orange>BallsManager / {name}</color>] Notify Level Manager");
-        LevelManager.Instance.OnBallsManagerSuccesfullyNotified();
-    }
-
-    /// <summary>
-    /// Spawn all balls.
-    /// </summary>
-    public void SpawnAllBalls()
-    {
-        foreach (Ball ball in _allBalls)
-        {
-            ball.StartBallSpawn();
-        }
-    }
-
-    /// <summary>
-    /// Receive notification from single ball when spawned.
-    /// </summary>
-    /// <param name="ball"></param>
-    public void OnBallSpawnedNotification(Ball ball)
-    {
-        if (_spawnedBalls.Contains(ball))
-        {
-            Debug.LogWarning($"[<color=orange>BallsManager / {name}</color>] Received notification from Ball {ball.name} but was already spawned");
-            return;
-        }
-        
-        _spawnedBalls.Add(ball);
-        VerifyIfAllBallsAreSpawnedBeforeNotifyLevelManager();
-    }
-    
-    /// <summary>
-    /// Verify if all balls are spawned before notify Level Manager so that the level can start.
-    /// </summary>
-    private void VerifyIfAllBallsAreSpawnedBeforeNotifyLevelManager()
-    {
-        if (_spawnedBalls.Count != _ballsCount)
-            return;
-        
-        Debug.Log($"[<color=orange>BallsManager / {name}</color>] Notify Level Manager");
-        LevelManager.Instance.OnBallsManagerSuccesfullyNotified();
     }
     
     private void UpdateMovementMultiplier()
@@ -155,50 +84,11 @@ public class BallsManager : MonoBehaviour
     /// </summary>
     public void StartMoveBalls()
     {
-        foreach (Ball ball in _allBalls)
+        foreach (Ball ball in AllBalls)
         {
             ball.StartMoveBall();
         }
         _fadeInProgress = true;
-    }
-
-    /// <summary>
-    /// Despawn all balls.
-    /// </summary>
-    public void DespawnAllBalls()
-    {
-        foreach (Ball ball in _spawnedBalls)
-        {
-            ball.DespawnBall();
-        }
-    }
-    
-    /// <summary>
-    /// Receive notification from single ball when despawned.
-    /// </summary>
-    /// <param name="ball"></param>
-    public void OnBallDespawnedNotification(Ball ball)
-    {
-        if (!_spawnedBalls.Contains(ball))
-        {
-            Debug.LogWarning($"[<color=orange>BallsManager / {name}</color>] Received notification from Ball {ball.name} but was already despawned");
-            return;
-        }
-        
-        _spawnedBalls.Remove(ball);
-        VerifyIfAllBallsAreDespawnedBeforeNotifyLevelManager();
-    }
-    
-    /// <summary>
-    /// Verify if all balls are despawned before notify Level Manager so that the level can finish.
-    /// </summary>
-    private void VerifyIfAllBallsAreDespawnedBeforeNotifyLevelManager()
-    {
-        if (_spawnedBalls.Count > 0)
-            return;
-        
-        Debug.Log($"[<color=orange>BallsManager / {name}</color>] Notify Level Manager");
-        LevelManager.Instance.OnBallsManagerSuccesfullyNotified();
     }
     
     /// <summary>

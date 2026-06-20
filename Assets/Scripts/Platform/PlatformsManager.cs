@@ -4,14 +4,13 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlatformsManager : MonoBehaviour
+public class PlatformsManager : Manager
 {
     
     public static PlatformsManager Instance;
 
-    private int _platformsCount;
-    private readonly List<Platform> _allPlatforms = new();
-    private readonly List<Platform> _spawnedPlatforms = new();
+    [SerializeField] private List<Platform> _allPlatforms;
+    public List<Platform> AllPlatforms => _allPlatforms;
 
     [Header("Inputs")] 
     public float inputHorizontalDirection = .0f;
@@ -59,10 +58,7 @@ public class PlatformsManager : MonoBehaviour
         Assert.IsNotNull(extraSmallPlatform);
         Assert.IsTrue(extraSmallPlatform.PlatformSize.Equals(EPlatformSize.ExtraSmall));
         
-        // Platforms
-        _platformsCount = GameObject.FindGameObjectsWithTag("Player")
-            .Where(o => o.GetComponent<Platform>() != null)
-            .Count();
+        _allPlatforms = FindObjectsByType<Platform>(FindObjectsSortMode.InstanceID).ToList();
     }
 
     private void Update()
@@ -104,73 +100,6 @@ public class PlatformsManager : MonoBehaviour
         }
 
         _movementMultiplier = _currentMovementFadeDuration / movementFadeDuration;
-    }
-
-    /// <summary>
-    /// Receive notification from platform when instanciated.
-    /// </summary>
-    /// <param name="platform"></param>
-    public void OnPlatformInitializedNotification(Platform platform)
-    {
-        if (_allPlatforms.Contains(platform))
-        {
-            Debug.LogWarning($"[<color=orange>PlatformsManager / {name}</color>] Received notification from Platform {platform.name} but was already initialized");
-            return;
-        }
-        
-        _allPlatforms.Add(platform);
-        VerifyIfAllPlatformsAreInstanciatedBeforeNotifyLevelManager();
-    }
-    
-    /// <summary>
-    /// Verify if all platforms are instanciated before notify Level Manager so that the level can start.
-    /// </summary>
-    private void VerifyIfAllPlatformsAreInstanciatedBeforeNotifyLevelManager()
-    {
-        if (_allPlatforms.Count != _platformsCount)
-            return;
-        
-        Debug.Log($"[<color=orange>PlatformsManager / {name}</color>] Notify Level Manager");
-        LevelManager.Instance.OnPlatformsManagerSuccesfullyNotified();
-    }
-
-    /// <summary>
-    /// Spawn all platforms.
-    /// </summary>
-    public void SpawnAllPlatforms()
-    {
-        foreach (Platform platform in _allPlatforms)
-        {
-            platform.SpawnPlatform();
-        }
-    }
-    
-    /// <summary>
-    /// Receive notification from single platform when spawned.
-    /// </summary>
-    /// <param name="platform"></param>
-    public void OnPlatformSpawnedNotification(Platform platform)
-    {
-        if (_spawnedPlatforms.Contains(platform))
-        {
-            Debug.LogWarning($"[<color=orange>PlatformsManager / {name}</color>] Received notification from Platform {platform.name} but was already spawned");
-            return;
-        }
-        
-        _spawnedPlatforms.Add(platform);
-        VerifyIfAllPlatformsAreSpawnedBeforeNotifyLevelManager();
-    }
-
-    /// <summary>
-    /// Verify if all platforms are spawned before notify Level Manager so that the level can start.
-    /// </summary>
-    private void VerifyIfAllPlatformsAreSpawnedBeforeNotifyLevelManager()
-    {
-        if (_spawnedPlatforms.Count != _platformsCount)
-            return;
-        
-        Debug.Log($"[<color=orange>PlatformsManager / {name}</color>] Notify Level Manager");
-        LevelManager.Instance.OnPlatformsManagerSuccesfullyNotified();
     }
 
     /// <summary>

@@ -53,14 +53,6 @@ public class Ball : MonoBehaviour
         _circleCollider.enabled = false;
     }
 
-    private void Start()
-    {
-        UpdateBallSize(BallSize);
-        
-        Debug.Log($"[Ball / {name}] Send notification to {BallsManager.Instance.name} : Ball created.");
-        BallsManager.Instance.OnBallInitializedNotification(this);
-    }
-
     private void FixedUpdate()
     {
         HandleReflection();
@@ -99,7 +91,33 @@ public class Ball : MonoBehaviour
         _circleCollider.enabled = true;
         _direction = Vector2.down;
     }
-
+    
+    // ///////////////////////////////////////////////////////////////
+    // SPAWN
+    // ///////////////////////////////////////////////////////////////
+    
+    /// <summary>
+    /// Fait apparaitre la balle.
+    /// </summary>
+    public void SpawnBall()
+    {
+        UpdateBallSize(BallSize);
+        Debug.Log($"[Ball / {name}] Start animation");
+        _animator.SetTrigger(AnimationTriggerSpawn);
+    }
+    
+    /// <summary>
+    /// Notifie Level Step que l'apparition de la balle s'est finalisée.
+    /// </summary>
+    public void OnReceiveNotificationFromAnimatorBallSpawned()
+    {
+        BallsManager.Instance.OnReceivedNotificationFromUnityObject(this);
+    }
+    
+    // ///////////////////////////////////////////////////////////////
+    // DESPAWN
+    // ///////////////////////////////////////////////////////////////
+    
     /// <summary>
     /// Despawn ball.
     /// </summary>
@@ -115,28 +133,11 @@ public class Ball : MonoBehaviour
     /// </summary>
     public void OnReceiveNotificationFromAnimatorBallDespawned()
     {
-        Debug.Log($"[Ball / {name}] Send notification to Balls Manager : <color=orange>Ball despawned</color>");
-        BallsManager.Instance.OnBallDespawnedNotification(this);
+        BallsManager.Instance.OnReceivedNotificationFromUnityObject(this);
         Destroy(gameObject);
     }
     
-    /// <summary>
-    /// Play ball spawn animation.
-    /// </summary>
-    public void StartBallSpawn()
-    {
-        Debug.Log($"[Ball / {name}] Start animation");
-        _animator.SetTrigger(AnimationTriggerSpawn);
-    }
     
-    /// <summary>
-    /// Notify Balls Manager the ball finished his spawn animation.
-    /// </summary>
-    public void OnReceiveNotificationFromAnimatorBallSpawned()
-    {
-        Debug.Log($"[Ball / {name}] Send notification to Balls Manager : <color=orange>Ball spawned</color>");
-        BallsManager.Instance.OnBallSpawnedNotification(this);
-    }
 
     /// <summary>
     /// Update ball size.
