@@ -1,4 +1,5 @@
 using System;
+using NUnit.Framework;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class LevelManager : MonoBehaviour
     public ELevelState LevelState => _levelState;
 
     [SerializeField] private LevelSequence startLevelSequence;
+    [SerializeField] private LevelSequence endLevelSequence;
 
     private void Awake()
     {
@@ -20,6 +22,9 @@ public class LevelManager : MonoBehaviour
             return;
         }
         Instance = this;
+        
+        Assert.IsNotNull(startLevelSequence);
+        Assert.IsNotNull(endLevelSequence);
     }
 
     private void Start()
@@ -53,6 +58,7 @@ public class LevelManager : MonoBehaviour
                 BricksManager.Instance.NotifyBricksPassives();
                 break;
             case ELevelState.EndSequences:
+                endLevelSequence.StartSequence();
                 break;
             default:
                 break;
@@ -60,13 +66,18 @@ public class LevelManager : MonoBehaviour
     }
     
     /// <summary>
-    /// Reçoit une notification de la q pour indiquer qu'il a été terminé.
+    /// Reçoit une notification de la séquence pour indiquer qu'il a été terminé.
     /// </summary>
     public void OnSequenceFinishedNotification()
     {
         Debug.Log($"[LevelManager] Steps Sequence finished");
-        // TODO passage à EndSequences non
-        UpdateLevelState(_levelState.Equals(ELevelState.StartSequences) ? ELevelState.GameStarted : ELevelState.EndSequences);
+        if (_levelState.Equals(ELevelState.StartSequences))
+        {
+            UpdateLevelState(ELevelState.GameStarted);
+            return;
+        }
+        
+        Debug.Break();
     }
 
     /// <summary>
