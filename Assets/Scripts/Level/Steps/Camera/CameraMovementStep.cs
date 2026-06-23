@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.U2D;
+using UnityEngine.Rendering.Universal;
 using Object = UnityEngine.Object;
 
 public class CameraMovementStep : LevelStep
@@ -33,14 +33,12 @@ public class CameraMovementStep : LevelStep
             return;
         }
         
-        /*
         _pixelPerfectCamera = _camera.gameObject.GetComponent<PixelPerfectCamera>();
         if (_pixelPerfectCamera == null)
         {
             Debug.LogError($"[CameraMovementStep] PixelPerfectCamera is not instancied, or does not exists");
             return;
         }
-        */
 
         MoveCameraToTarget();
     }
@@ -49,7 +47,7 @@ public class CameraMovementStep : LevelStep
     {
         _sourcePosition = _camera.transform.position;
         _zPosition = _camera.transform.position.z;
-        //_sourcePixelsPerUnit = _pixelPerfectCamera.assetsPPU;
+        _sourcePixelsPerUnit = _pixelPerfectCamera.assetsPPU;
         _elapsedTime = .0f;
         _isMoving = true;
     }
@@ -68,13 +66,13 @@ public class CameraMovementStep : LevelStep
             new Vector3(_sourcePosition.x, _sourcePosition.y, _zPosition), 
             new Vector3(targetPosition.x, targetPosition.y, _zPosition), 
             t);
-        //_pixelPerfectCamera.assetsPPU = (int) Mathf.Lerp(_sourcePixelsPerUnit, targetPixelsPerUnit, t);
+        _pixelPerfectCamera.assetsPPU = (int) Mathf.Lerp(_sourcePixelsPerUnit, targetPixelsPerUnit, t);
         
         if (t >= 1.0f)
         {
             _isMoving = false;
             _camera.transform.position = new Vector3(targetPosition.x, targetPosition.y, _zPosition);
-            //_pixelPerfectCamera.assetsPPU = targetPixelsPerUnit;
+            _pixelPerfectCamera.assetsPPU = targetPixelsPerUnit;
             OnLevelStepFinishedNotification();
             enabled = false;
         }
