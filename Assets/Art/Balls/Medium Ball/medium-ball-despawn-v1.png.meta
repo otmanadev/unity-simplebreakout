@@ -1,37 +1,82 @@
 fileFormatVersion: 2
-guid: 3b8eec5a01387d4449d1f4e42dcd2e83
+guid: a677da3a719c7d741aab784ed69667fc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8122238858908259937
-    second: medium-ball-spawn-v1_0
+      213: -6009824306740351085
+    second: medium-ball-despawn-v1_0
   - first:
-      213: -2860943926441561579
-    second: medium-ball-spawn-v1_1
+      213: -9012114232696507299
+    second: medium-ball-despawn-v1_1
   - first:
-      213: -3908856470095794017
-    second: medium-ball-spawn-v1_2
+      213: -8072375531013477288
+    second: medium-ball-despawn-v1_2
   - first:
-      213: 5811676793613959198
-    second: medium-ball-spawn-v1_3
+      213: -5572298076969222846
+    second: medium-ball-despawn-v1_3
   - first:
-      213: 7833775862432360451
-    second: medium-ball-spawn-v1_4
+      213: -8916850253099159962
+    second: medium-ball-despawn-v1_4
   - first:
-      213: -1018183932511720606
-    second: medium-ball-spawn-v1_5
+      213: 5447389488220450331
+    second: medium-ball-despawn-v1_5
   - first:
-      213: 1627984825557128458
-    second: medium-ball-spawn-v1_6
+      213: 1914833492533470935
+    second: medium-ball-despawn-v1_6
   - first:
-      213: 3322797126782676707
-    second: medium-ball-spawn-v1_7
+      213: -1665340416390281964
+    second: medium-ball-despawn-v1_7
   - first:
-      213: 4491935456660757719
-    second: medium-ball-spawn-v1_8
+      213: 4083138202407844035
+    second: medium-ball-despawn-v1_8
   - first:
-      213: 8138784758406457590
-    second: medium-ball-spawn-v1_9
+      213: -8810118422855722615
+    second: medium-ball-despawn-v1_9
+  - first:
+      213: -2820753918557291703
+    second: medium-ball-despawn-v1_10
+  - first:
+      213: -7162806301100442832
+    second: medium-ball-despawn-v1_11
+  - first:
+      213: 478634283570674401
+    second: medium-ball-despawn-v1_12
+  - first:
+      213: -8006390910085831346
+    second: medium-ball-despawn-v1_13
+  - first:
+      213: 5899949033967022780
+    second: medium-ball-despawn-v1_14
+  - first:
+      213: -6503652697192253561
+    second: medium-ball-despawn-v1_15
+  - first:
+      213: -7141253252732740010
+    second: medium-ball-despawn-v1_16
+  - first:
+      213: 4680649730037044261
+    second: medium-ball-despawn-v1_17
+  - first:
+      213: 4168541037380766573
+    second: medium-ball-despawn-v1_18
+  - first:
+      213: 3361954383629827047
+    second: medium-ball-despawn-v1_19
+  - first:
+      213: 7015574914188131141
+    second: medium-ball-despawn-v1_20
+  - first:
+      213: 7129571325615766492
+    second: medium-ball-despawn-v1_21
+  - first:
+      213: -1930028010011318248
+    second: medium-ball-despawn-v1_22
+  - first:
+      213: 7685004340952930161
+    second: medium-ball-despawn-v1_23
+  - first:
+      213: -730594593729115778
+    second: medium-ball-despawn-v1_24
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -127,7 +172,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_0
+      name: medium-ball-despawn-v1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -142,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 166d91e653df7b070800000000000000
-      internalID: 8122238858908259937
+      spriteID: 39fab3a62a0d89ca0800000000000000
+      internalID: -6009824306740351085
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_1
+      name: medium-ball-despawn-v1_1
       rect:
         serializedVersion: 2
         x: 48
@@ -164,14 +209,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 512b32628a2eb48d0800000000000000
-      internalID: -2860943926441561579
+      spriteID: d54f1e48ad98ee280800000000000000
+      internalID: -9012114232696507299
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_2
+      name: medium-ball-despawn-v1_2
       rect:
         serializedVersion: 2
         x: 96
@@ -186,14 +231,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f90f3fd10c3f0c9c0800000000000000
-      internalID: -3908856470095794017
+      spriteID: 85ce26c493929ff80800000000000000
+      internalID: -8072375531013477288
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_3
+      name: medium-ball-despawn-v1_3
       rect:
         serializedVersion: 2
         x: 144
@@ -208,14 +253,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e10cdb0904937a050800000000000000
-      internalID: 5811676793613959198
+      spriteID: 24d38ab1c683ba2b0800000000000000
+      internalID: -5572298076969222846
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_4
+      name: medium-ball-despawn-v1_4
       rect:
         serializedVersion: 2
         x: 192
@@ -230,14 +275,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3086f4a44a927bc60800000000000000
-      internalID: 7833775862432360451
+      spriteID: 66e2ca430fbf04480800000000000000
+      internalID: -8916850253099159962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_5
+      name: medium-ball-despawn-v1_5
       rect:
         serializedVersion: 2
         x: 240
@@ -252,14 +297,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 26be0a2ab1faed1f0800000000000000
-      internalID: -1018183932511720606
+      spriteID: b1ea396c0e3099b40800000000000000
+      internalID: 5447389488220450331
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_6
+      name: medium-ball-despawn-v1_6
       rect:
         serializedVersion: 2
         x: 288
@@ -274,14 +319,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a051f0bc293c79610800000000000000
-      internalID: 1627984825557128458
+      spriteID: 7d66a7e8aead29a10800000000000000
+      internalID: 1914833492533470935
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_7
+      name: medium-ball-despawn-v1_7
       rect:
         serializedVersion: 2
         x: 336
@@ -296,14 +341,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3eee192c162fc1e20800000000000000
-      internalID: 3322797126782676707
+      spriteID: 415c4f2f6b583e8e0800000000000000
+      internalID: -1665340416390281964
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_8
+      name: medium-ball-despawn-v1_8
       rect:
         serializedVersion: 2
         x: 384
@@ -318,8 +363,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7dc1f30af7f865e30800000000000000
-      internalID: 4491935456660757719
+      spriteID: 3c8b85bcf883aa830800000000000000
+      internalID: 4083138202407844035
       vertices: []
       indices: 
       edges: []
@@ -328,7 +373,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f4cc4b527138ca5408cc0b3827d6fbeb
+    spriteID: 87fb85d3352959e4bbc039eee76d023a
     internalID: 0
     vertices: []
     indices: 
@@ -338,15 +383,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      medium-ball-spawn-v1_0: 8122238858908259937
-      medium-ball-spawn-v1_1: -2860943926441561579
-      medium-ball-spawn-v1_2: -3908856470095794017
-      medium-ball-spawn-v1_3: 5811676793613959198
-      medium-ball-spawn-v1_4: 7833775862432360451
-      medium-ball-spawn-v1_5: -1018183932511720606
-      medium-ball-spawn-v1_6: 1627984825557128458
-      medium-ball-spawn-v1_7: 3322797126782676707
-      medium-ball-spawn-v1_8: 4491935456660757719
+      medium-ball-despawn-v1_0: -6009824306740351085
+      medium-ball-despawn-v1_1: -9012114232696507299
+      medium-ball-despawn-v1_2: -8072375531013477288
+      medium-ball-despawn-v1_3: -5572298076969222846
+      medium-ball-despawn-v1_4: -8916850253099159962
+      medium-ball-despawn-v1_5: 5447389488220450331
+      medium-ball-despawn-v1_6: 1914833492533470935
+      medium-ball-despawn-v1_7: -1665340416390281964
+      medium-ball-despawn-v1_8: 4083138202407844035
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

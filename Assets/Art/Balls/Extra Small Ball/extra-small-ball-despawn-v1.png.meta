@@ -1,37 +1,58 @@
 fileFormatVersion: 2
-guid: 3b8eec5a01387d4449d1f4e42dcd2e83
+guid: 7f6223166b63eb34180351cd2831c8fc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8122238858908259937
-    second: medium-ball-spawn-v1_0
+      213: 8138689629338545123
+    second: extra-small-ball-despawn-v1_0
   - first:
-      213: -2860943926441561579
-    second: medium-ball-spawn-v1_1
+      213: 1844751099869518194
+    second: extra-small-ball-despawn-v1_1
   - first:
-      213: -3908856470095794017
-    second: medium-ball-spawn-v1_2
+      213: 5613048026264960070
+    second: extra-small-ball-despawn-v1_2
   - first:
-      213: 5811676793613959198
-    second: medium-ball-spawn-v1_3
+      213: 8019130101498252636
+    second: extra-small-ball-despawn-v1_3
   - first:
-      213: 7833775862432360451
-    second: medium-ball-spawn-v1_4
+      213: -2267257311391559337
+    second: extra-small-ball-despawn-v1_4
   - first:
-      213: -1018183932511720606
-    second: medium-ball-spawn-v1_5
+      213: -3187671808974636712
+    second: extra-small-ball-despawn-v1_5
   - first:
-      213: 1627984825557128458
-    second: medium-ball-spawn-v1_6
+      213: -3873902408969851508
+    second: extra-small-ball-despawn-v1_6
   - first:
-      213: 3322797126782676707
-    second: medium-ball-spawn-v1_7
+      213: 2795847079455885745
+    second: extra-small-ball-despawn-v1_7
   - first:
-      213: 4491935456660757719
-    second: medium-ball-spawn-v1_8
+      213: -3091787916007970321
+    second: extra-small-ball-despawn-v1_8
   - first:
-      213: 8138784758406457590
-    second: medium-ball-spawn-v1_9
+      213: 58648781016167775
+    second: extra-small-ball-despawn-v1_9
+  - first:
+      213: -8293294645290868434
+    second: extra-small-ball-despawn-v1_10
+  - first:
+      213: -3458737286009196590
+    second: extra-small-ball-despawn-v1_11
+  - first:
+      213: 4154264871761219955
+    second: extra-small-ball-despawn-v1_12
+  - first:
+      213: -7295454299829203914
+    second: extra-small-ball-despawn-v1_13
+  - first:
+      213: 7221833616632740197
+    second: extra-small-ball-despawn-v1_14
+  - first:
+      213: 4860448219814546772
+    second: extra-small-ball-despawn-v1_15
+  - first:
+      213: 3837795768064269792
+    second: extra-small-ball-despawn-v1_16
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -127,7 +148,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_0
+      name: extra-small-ball-despawn-v1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -142,14 +163,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 166d91e653df7b070800000000000000
-      internalID: 8122238858908259937
+      spriteID: 3eb21e5e81f62f070800000000000000
+      internalID: 8138689629338545123
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_1
+      name: extra-small-ball-despawn-v1_1
       rect:
         serializedVersion: 2
         x: 48
@@ -164,14 +185,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 512b32628a2eb48d0800000000000000
-      internalID: -2860943926441561579
+      spriteID: 279dbb6f95fd99910800000000000000
+      internalID: 1844751099869518194
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_2
+      name: extra-small-ball-despawn-v1_2
       rect:
         serializedVersion: 2
         x: 96
@@ -186,14 +207,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f90f3fd10c3f0c9c0800000000000000
-      internalID: -3908856470095794017
+      spriteID: 64cfab0d07d85ed40800000000000000
+      internalID: 5613048026264960070
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_3
+      name: extra-small-ball-despawn-v1_3
       rect:
         serializedVersion: 2
         x: 144
@@ -208,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e10cdb0904937a050800000000000000
-      internalID: 5811676793613959198
+      spriteID: c5d0273175ca94f60800000000000000
+      internalID: 8019130101498252636
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_4
+      name: extra-small-ball-despawn-v1_4
       rect:
         serializedVersion: 2
         x: 192
@@ -230,14 +251,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3086f4a44a927bc60800000000000000
-      internalID: 7833775862432360451
+      spriteID: 751591cdc751980e0800000000000000
+      internalID: -2267257311391559337
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_5
+      name: extra-small-ball-despawn-v1_5
       rect:
         serializedVersion: 2
         x: 240
@@ -252,14 +273,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 26be0a2ab1faed1f0800000000000000
-      internalID: -1018183932511720606
+      spriteID: 8593a85f06d13c3d0800000000000000
+      internalID: -3187671808974636712
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_6
+      name: extra-small-ball-despawn-v1_6
       rect:
         serializedVersion: 2
         x: 288
@@ -274,14 +295,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a051f0bc293c79610800000000000000
-      internalID: 1627984825557128458
+      spriteID: c8d62daa8422d3ac0800000000000000
+      internalID: -3873902408969851508
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium-ball-spawn-v1_7
+      name: extra-small-ball-despawn-v1_7
       rect:
         serializedVersion: 2
         x: 336
@@ -296,30 +317,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3eee192c162fc1e20800000000000000
-      internalID: 3322797126782676707
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: medium-ball-spawn-v1_8
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7dc1f30af7f865e30800000000000000
-      internalID: 4491935456660757719
+      spriteID: 1b908411b18dcc620800000000000000
+      internalID: 2795847079455885745
       vertices: []
       indices: 
       edges: []
@@ -328,7 +327,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f4cc4b527138ca5408cc0b3827d6fbeb
+    spriteID: b00d06cdfde2eb046a9f1c11e9f3d21d
     internalID: 0
     vertices: []
     indices: 
@@ -338,15 +337,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      medium-ball-spawn-v1_0: 8122238858908259937
-      medium-ball-spawn-v1_1: -2860943926441561579
-      medium-ball-spawn-v1_2: -3908856470095794017
-      medium-ball-spawn-v1_3: 5811676793613959198
-      medium-ball-spawn-v1_4: 7833775862432360451
-      medium-ball-spawn-v1_5: -1018183932511720606
-      medium-ball-spawn-v1_6: 1627984825557128458
-      medium-ball-spawn-v1_7: 3322797126782676707
-      medium-ball-spawn-v1_8: 4491935456660757719
+      extra-small-ball-despawn-v1_0: 8138689629338545123
+      extra-small-ball-despawn-v1_1: 1844751099869518194
+      extra-small-ball-despawn-v1_2: 5613048026264960070
+      extra-small-ball-despawn-v1_3: 8019130101498252636
+      extra-small-ball-despawn-v1_4: -2267257311391559337
+      extra-small-ball-despawn-v1_5: -3187671808974636712
+      extra-small-ball-despawn-v1_6: -3873902408969851508
+      extra-small-ball-despawn-v1_7: 2795847079455885745
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
