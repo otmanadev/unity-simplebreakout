@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: Dead Area Animated Tile 5_2 v1
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: 8578341482023450192, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -4435963830909578663, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -3021859704604871558, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: 7292098820894006281, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -5721059110576394050, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -5119975425032340117, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: 425864357144568211, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -7822434337760035584, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -8703456852260412028, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -100497526611273048, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -2678700845456665100, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: 944522064492781454, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -7380318086157376042, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: 7235940443190081146, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: 7705083348101820744, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -875013036840727506, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: 2129462499538546689, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -4353704327719714284, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: 5209470737015885271, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: 7947109453390400288, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -51297265743148611, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -3125998658814224161, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -3512148385725890704, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: 4719043739233251436, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: 2634640193607879556, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: 1626795306588296167, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: 1454398108110430184, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -5235644536196663158, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -449856943381989194, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -867318491162598590, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: -3705630535699405574, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  - {fileID: 4383402169000496728, guid: 18b8d42e5e1f806478d034d2c659baef, type: 3}
+  m_MinSpeed: 24
+  m_MaxSpeed: 24
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
+  m_TileAnimationFlags: 0

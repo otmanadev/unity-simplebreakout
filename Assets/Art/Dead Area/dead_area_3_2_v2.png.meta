@@ -1,0 +1,1054 @@
+fileFormatVersion: 2
+guid: 456b1c268a1348a4fb3cdcfc2de47293
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3542788199315922984
+    second: dead_area_3_2_v2_0
+  - first:
+      213: -6756158193681064617
+    second: dead_area_3_2_v2_1
+  - first:
+      213: -5410656236254643266
+    second: dead_area_3_2_v2_2
+  - first:
+      213: -4595191046030682767
+    second: dead_area_3_2_v2_3
+  - first:
+      213: -6046341023775822941
+    second: dead_area_3_2_v2_4
+  - first:
+      213: 2977013340987215392
+    second: dead_area_3_2_v2_5
+  - first:
+      213: 8838350856666666526
+    second: dead_area_3_2_v2_6
+  - first:
+      213: -5132840276144327347
+    second: dead_area_3_2_v2_7
+  - first:
+      213: -2571633741434530904
+    second: dead_area_3_2_v2_8
+  - first:
+      213: -2413176978846780681
+    second: dead_area_3_2_v2_9
+  - first:
+      213: -3618236482412952748
+    second: dead_area_3_2_v2_10
+  - first:
+      213: 459284731402889512
+    second: dead_area_3_2_v2_11
+  - first:
+      213: -2353164299840926762
+    second: dead_area_3_2_v2_12
+  - first:
+      213: -1421422254439643199
+    second: dead_area_3_2_v2_13
+  - first:
+      213: -5679498053175835613
+    second: dead_area_3_2_v2_14
+  - first:
+      213: 7182674743347812276
+    second: dead_area_3_2_v2_15
+  - first:
+      213: -787710726672776297
+    second: dead_area_3_2_v2_16
+  - first:
+      213: 1602348094004482201
+    second: dead_area_3_2_v2_17
+  - first:
+      213: -3860930227437879246
+    second: dead_area_3_2_v2_18
+  - first:
+      213: -9049339296655955337
+    second: dead_area_3_2_v2_19
+  - first:
+      213: 3761504517979036425
+    second: dead_area_3_2_v2_20
+  - first:
+      213: 4228727397663456769
+    second: dead_area_3_2_v2_21
+  - first:
+      213: 186075784263863586
+    second: dead_area_3_2_v2_22
+  - first:
+      213: -5830414039968497874
+    second: dead_area_3_2_v2_23
+  - first:
+      213: -5028969746327959385
+    second: dead_area_3_2_v2_24
+  - first:
+      213: 4274575721701144933
+    second: dead_area_3_2_v2_25
+  - first:
+      213: 2910547883750539910
+    second: dead_area_3_2_v2_26
+  - first:
+      213: 296692370351178296
+    second: dead_area_3_2_v2_27
+  - first:
+      213: 8139862661479227495
+    second: dead_area_3_2_v2_28
+  - first:
+      213: -3858252904525161346
+    second: dead_area_3_2_v2_29
+  - first:
+      213: 5055683643906958876
+    second: dead_area_3_2_v2_30
+  - first:
+      213: -7097319458888641512
+    second: dead_area_3_2_v2_31
+  - first:
+      213: 2749356516252261349
+    second: dead_area_3_2_v2_32
+  - first:
+      213: -5252618548901084751
+    second: dead_area_3_2_v2_33
+  - first:
+      213: 5529822120826460432
+    second: dead_area_3_2_v2_34
+  - first:
+      213: 1635689346295898151
+    second: dead_area_3_2_v2_35
+  - first:
+      213: 7737458486802481674
+    second: dead_area_3_2_v2_36
+  - first:
+      213: -3269226665591828606
+    second: dead_area_3_2_v2_37
+  - first:
+      213: 9211179336222155015
+    second: dead_area_3_2_v2_38
+  - first:
+      213: -411459287692536782
+    second: dead_area_3_2_v2_39
+  - first:
+      213: -7466222221186340515
+    second: dead_area_3_2_v2_40
+  - first:
+      213: -5157282969691592431
+    second: dead_area_3_2_v2_41
+  - first:
+      213: -5892285842372165475
+    second: dead_area_3_2_v2_42
+  - first:
+      213: -8483599460572151995
+    second: dead_area_3_2_v2_43
+  - first:
+      213: 4200504746718462082
+    second: dead_area_3_2_v2_44
+  - first:
+      213: 6149827240432270344
+    second: dead_area_3_2_v2_45
+  - first:
+      213: 1160287433709871812
+    second: dead_area_3_2_v2_46
+  - first:
+      213: 6984644899138186063
+    second: dead_area_3_2_v2_47
+  - first:
+      213: -1689851364622443206
+    second: dead_area_3_2_v2_48
+  - first:
+      213: -4963827046630373690
+    second: dead_area_3_2_v2_49
+  - first:
+      213: 195811924932233214
+    second: dead_area_3_2_v2_50
+  - first:
+      213: -1533931514901663857
+    second: dead_area_3_2_v2_51
+  - first:
+      213: -5113369314443867116
+    second: dead_area_3_2_v2_52
+  - first:
+      213: -325747797864217945
+    second: dead_area_3_2_v2_53
+  - first:
+      213: 5431209413267969725
+    second: dead_area_3_2_v2_54
+  - first:
+      213: 8458724915539212236
+    second: dead_area_3_2_v2_55
+  - first:
+      213: 122961738976918931
+    second: dead_area_3_2_v2_56
+  - first:
+      213: 991069310527598808
+    second: dead_area_3_2_v2_57
+  - first:
+      213: -6582027093004911548
+    second: dead_area_3_2_v2_58
+  - first:
+      213: -1747184906140743870
+    second: dead_area_3_2_v2_59
+  - first:
+      213: -5194114665048805962
+    second: dead_area_3_2_v2_60
+  - first:
+      213: -99424354273686389
+    second: dead_area_3_2_v2_61
+  - first:
+      213: 8106967587355208065
+    second: dead_area_3_2_v2_62
+  - first:
+      213: 2526168258857536094
+    second: dead_area_3_2_v2_63
+  - first:
+      213: -40622390529506265
+    second: dead_area_3_2_v2_64
+  - first:
+      213: -7762067947934530967
+    second: dead_area_3_2_v2_65
+  - first:
+      213: -929826914921647086
+    second: dead_area_3_2_v2_66
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 992
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 820eba6c8138a2130800000000000000
+      internalID: 3542788199315922984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 960
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75d9b432bed4d32a0800000000000000
+      internalID: -6756158193681064617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 928
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebb3a4ce1dc79e4b0800000000000000
+      internalID: -5410656236254643266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 896
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 175194a071a9a30c0800000000000000
+      internalID: -4595191046030682767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 864
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ab68feafd4171ca0800000000000000
+      internalID: -6046341023775822941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 832
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02e44295cd9705920800000000000000
+      internalID: 2977013340987215392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 800
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e16d2ebc64128aa70800000000000000
+      internalID: 8838350856666666526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d45799bb6fc74c8b0800000000000000
+      internalID: -5132840276144327347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 736
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a3d26dbcb8bf4cd0800000000000000
+      internalID: -2571633741434530904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 704
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f2ffa3c25ca28ed0800000000000000
+      internalID: -2413176978846780681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 672
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 453ca68e61179cdc0800000000000000
+      internalID: -3618236482412952748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 640
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 829a702a705bf5600800000000000000
+      internalID: 459284731402889512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 608
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dbc9d17981e75fd0800000000000000
+      internalID: -2353164299840926762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 576
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c74a489df7164ce0800000000000000
+      internalID: -1421422254439643199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 544
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3248ee5ac9e5e21b0800000000000000
+      internalID: -5679498053175835613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b79a66af9cfda360800000000000000
+      internalID: 7182674743347812276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 480
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79387ee744d7115f0800000000000000
+      internalID: -787710726672776297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 448
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99059a51a1fac3610800000000000000
+      internalID: 1602348094004482201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 416
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2304ffa0a683b6ac0800000000000000
+      internalID: -3860930227437879246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77aa6daead94a6280800000000000000
+      internalID: -9049339296655955337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 352
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90bda270e6c833430800000000000000
+      internalID: 3761504517979036425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10e31b5d9257faa30800000000000000
+      internalID: 4228727397663456769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22d895e90f2159200800000000000000
+      internalID: 186075784263863586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2f3a3e4255361fa0800000000000000
+      internalID: -5830414039968497874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a88feb09a2853ab0800000000000000
+      internalID: -5028969746327959385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5697181a8f7525b30800000000000000
+      internalID: 4274575721701144933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68247b821e7546820800000000000000
+      internalID: 2910547883750539910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 832c95e83201e1400800000000000000
+      internalID: 296692370351178296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7606fe9b6f996f070800000000000000
+      internalID: 8139862661479227495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_29
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7c982cdc6bb47ac0800000000000000
+      internalID: -3858252904525161346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c16a3dbec75692640800000000000000
+      internalID: 5055683643906958876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dead_area_3_2_v2_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 814997b2e81418d90800000000000000
+      internalID: -7097319458888641512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 1057d555a9e43534d901bba31b38864c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      dead_area_3_2_v2_0: 3542788199315922984
+      dead_area_3_2_v2_1: -6756158193681064617
+      dead_area_3_2_v2_10: -3618236482412952748
+      dead_area_3_2_v2_11: 459284731402889512
+      dead_area_3_2_v2_12: -2353164299840926762
+      dead_area_3_2_v2_13: -1421422254439643199
+      dead_area_3_2_v2_14: -5679498053175835613
+      dead_area_3_2_v2_15: 7182674743347812276
+      dead_area_3_2_v2_16: -787710726672776297
+      dead_area_3_2_v2_17: 1602348094004482201
+      dead_area_3_2_v2_18: -3860930227437879246
+      dead_area_3_2_v2_19: -9049339296655955337
+      dead_area_3_2_v2_2: -5410656236254643266
+      dead_area_3_2_v2_20: 3761504517979036425
+      dead_area_3_2_v2_21: 4228727397663456769
+      dead_area_3_2_v2_22: 186075784263863586
+      dead_area_3_2_v2_23: -5830414039968497874
+      dead_area_3_2_v2_24: -5028969746327959385
+      dead_area_3_2_v2_25: 4274575721701144933
+      dead_area_3_2_v2_26: 2910547883750539910
+      dead_area_3_2_v2_27: 296692370351178296
+      dead_area_3_2_v2_28: 8139862661479227495
+      dead_area_3_2_v2_29: -3858252904525161346
+      dead_area_3_2_v2_3: -4595191046030682767
+      dead_area_3_2_v2_30: 5055683643906958876
+      dead_area_3_2_v2_31: -7097319458888641512
+      dead_area_3_2_v2_4: -6046341023775822941
+      dead_area_3_2_v2_5: 2977013340987215392
+      dead_area_3_2_v2_6: 8838350856666666526
+      dead_area_3_2_v2_7: -5132840276144327347
+      dead_area_3_2_v2_8: -2571633741434530904
+      dead_area_3_2_v2_9: -2413176978846780681
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
