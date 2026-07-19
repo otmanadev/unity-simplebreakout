@@ -72,17 +72,6 @@ public class Ball : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        GameObject collidedObject = other.gameObject;
-
-        if (collidedObject.TryGetComponent(out DeadZoneTrigger _))
-        {
-            Debug.Log($"[Ball / {name}] Send notification from {BallsManager.Instance.name} : Ball reached dead zone.");
-            BallsManager.Instance.OnBallReachDeadZoneNotification(this);
-        }
-    }
-
     /// <summary>
     /// Start move ball.
     /// </summary>

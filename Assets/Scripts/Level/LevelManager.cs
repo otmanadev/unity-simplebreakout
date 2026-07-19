@@ -47,8 +47,6 @@ public class LevelManager : MonoBehaviour
             case ELevelState.LoadingObjects:
                 break;
             case ELevelState.StartSequences:
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
                 PowerUpsManager.Instance.LinkPowerUpsToBricks();
                 startLevelSequence.StartSequence();
                 break;

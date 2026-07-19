@@ -97,11 +97,6 @@ public class BallsManager : Manager
     /// <param name="ball"></param>
     public void OnBallReachDeadZoneNotification(Ball ball)
     {
-        if (!AllBalls.Contains(ball))
-        {
-            return;
-        }
-        
         Debug.Log($"[<color=orange>BallsManager / {name}</color>] Received notification from {ball.name} : Ball reached dead zone.");
         Debug.Log($"[<color=orange>BallsManager / {name}</color>] Send notification from {LevelManager.Instance.name} : Ball reached dead zone.");
         LevelManager.Instance.OnBallReachedDeadZoneNotification();
