@@ -14,7 +14,7 @@ public class PauseManager : MonoBehaviour
     private readonly string VOLUME_TEXT_DISPLAY = "|";
     
     [Header("References")]
-    [SerializeField] private Canvas mainCanvas;
+    [SerializeField] private CanvasRenderer mainCanvas;
     [SerializeField] private CanvasRenderer pauseCanvasRenderer;
     [SerializeField] private CanvasRenderer optionsCanvasRenderer;
     [SerializeField] private CanvasRenderer mainMenuCanvasRenderer;
