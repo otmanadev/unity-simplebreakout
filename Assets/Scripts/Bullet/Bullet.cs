@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     
     [Min(.0f)] public float speed;
     [Min(0)] public int damage;
+    public float movementSpeedPercentage = 1.0f;
     
     private bool _hasReflection = false;
     private Collider2D _collidedGameObject = null;
@@ -43,7 +44,7 @@ public class Bullet : MonoBehaviour
     private void MoveBullet()
     {
         Vector2 currentVelocity = _rigidBody.linearVelocity;
-        Vector2 targetVelocity = Vector2.up * speed;
+        Vector2 targetVelocity = movementSpeedPercentage * speed * Vector2.up;
         _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, .0f);
     }
 

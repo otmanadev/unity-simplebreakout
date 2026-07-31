@@ -30,10 +30,6 @@ public abstract class Area : MonoBehaviour
         UpdateAreaColor(color);
     }
 
-    private void Start()
-    {
-    }
-
     private void UpdateAreaColor(Color newColor)
     {
         color = newColor;

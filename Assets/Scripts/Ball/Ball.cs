@@ -30,6 +30,7 @@ public class Ball : MonoBehaviour
     
     [Header("Movement")]
     [SerializeField] private float speed = 1.0f;
+    public float movementSpeedPercentage = 1.0f;
     
     private Vector2 _direction;
     public Vector2 Direction => _direction;
@@ -149,7 +150,7 @@ public class Ball : MonoBehaviour
     private void MoveBall()
     {
         Vector2 currentVelocity = _rigidBody.linearVelocity;
-        float currentSpeed = BallsManager.Instance.MovementMultiplier * speed;
+        float currentSpeed = BallsManager.Instance.MovementMultiplier * speed * movementSpeedPercentage;
         Vector2 targetVelocity = _direction * currentSpeed;
         _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, .0f);
     }
