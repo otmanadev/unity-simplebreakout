@@ -17,7 +17,7 @@ public abstract class Area : MonoBehaviour
 
     [Header("Properties")] 
     [SerializeField] protected bool isActive;
-    [SerializeField] private Color color;
+    public Color color;
 
     private void Awake()
     {
@@ -45,7 +45,7 @@ public abstract class Area : MonoBehaviour
         }
     }
 
-    private void EnableArea()
+    public void EnableArea()
     {
         isActive = true;
         _compositeCollider2D.enabled = true;
@@ -53,7 +53,7 @@ public abstract class Area : MonoBehaviour
         areaUI.SetActive(true);
     }
 
-    private void DisableArea()
+    public void DisableArea()
     {
         isActive = false;
         _compositeCollider2D.enabled = false;
