@@ -19372,7 +19372,8 @@ MonoBehaviour:
   areaUI: {fileID: 201798842}
   isActive: 1
   color: {r: 0, g: 0.114018075, b: 0.4245283, a: 1}
-  slowPercentage: 75
+  movementBonus:
+    movementSpeedPercentage: -30
 --- !u!1 &960329295
 GameObject:
   m_ObjectHideFlags: 0
@@ -24086,6 +24087,10 @@ PrefabInstance:
       propertyPath: soBallSize
       value: 
       objectReference: {fileID: 11400000, guid: f21a4edc2bc8ea341acad86dc3ecb1d4, type: 2}
+    - target: {fileID: 4252231004838117511, guid: 43ff0b9227b400741833733214c2d180, type: 3}
+      propertyPath: movement.movementSpeed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5044536792486844678, guid: 43ff0b9227b400741833733214c2d180, type: 3}
       propertyPath: m_Name
       value: Ball - MEDIUM

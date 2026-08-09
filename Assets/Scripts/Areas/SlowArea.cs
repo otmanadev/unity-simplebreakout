@@ -4,14 +4,20 @@ public class SlowArea : Area
 {
     
     [Header("Slow Area Properties")]
-    [SerializeField, Range(0.0f, 100.0f)] private float slowPercentage = 75f;
+    [SerializeField] private MovementBonus movementBonus;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        movementBonus.InitializeInstanceId(GetInstanceID());
+    }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
         GameObject collidedObject = other.gameObject;
 
         if (IsTriggeredWithBallOrBullet(collidedObject))
-            TryUpdateMovementSpeedPercentageOfGameObject(collidedObject, slowPercentage);
+            AddMovementBonusOnCollidedObject(collidedObject);
     }
     
     private void OnTriggerExit2D(Collider2D other)
@@ -19,7 +25,7 @@ public class SlowArea : Area
         GameObject collidedObject = other.gameObject;
 
         if (IsTriggeredWithBallOrBullet(collidedObject))
-            TryUpdateMovementSpeedPercentageOfGameObject(collidedObject, .0f);
+            RemoveMovementBonusOnCollidedObject(collidedObject);
     }
 
     private bool IsTriggeredWithBallOrBullet(GameObject collidedObject)
@@ -28,23 +34,32 @@ public class SlowArea : Area
                || collidedObject.TryGetComponent(out Bullet _);
     }
 
-    private void TryUpdateMovementSpeedPercentageOfGameObject(GameObject collidedObject, float movementSpeedPercentage)
+    private void AddMovementBonusOnCollidedObject(GameObject collidedObject)
     {
         if (collidedObject.TryGetComponent(out Ball ball))
         {
-            ball.movementSpeedPercentage = GetMovementSpeedPercentage(movementSpeedPercentage);
+            ball.Movement.AddMovementBonus(movementBonus);
             return;
         }
         
         if (collidedObject.TryGetComponent(out Bullet bullet))
         {
-            bullet.movementSpeedPercentage = GetMovementSpeedPercentage(movementSpeedPercentage);
+            bullet.Movement.AddMovementBonus(movementBonus);
         }
     }
-
-    private float GetMovementSpeedPercentage(float movementSpeedPercentage)
+    
+    private void RemoveMovementBonusOnCollidedObject(GameObject collidedObject)
     {
-        return (100.0f - movementSpeedPercentage) / 100.0f;
+        if (collidedObject.TryGetComponent(out Ball ball))
+        {
+            ball.Movement.RemoveMovementBonus(movementBonus);
+            return;
+        }
+        
+        if (collidedObject.TryGetComponent(out Bullet bullet))
+        {
+            bullet.Movement.RemoveMovementBonus(movementBonus);
+        }
     }
     
 }

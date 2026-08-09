@@ -19,7 +19,7 @@ public abstract class Area : MonoBehaviour
     [SerializeField] protected bool isActive;
     public Color color;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _compositeCollider2D = GetComponent<CompositeCollider2D>();
         _tilemapCollider2D = GetComponent<TilemapCollider2D>();

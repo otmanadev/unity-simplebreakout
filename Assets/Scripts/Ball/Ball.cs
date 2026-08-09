@@ -29,8 +29,8 @@ public class Ball : MonoBehaviour
     private Collision2D _collidedGameObject;
     
     [Header("Movement")]
-    [SerializeField] private float speed = 1.0f;
-    public float movementSpeedPercentage = 1.0f;
+    [SerializeField] private Movement movement;
+    public Movement Movement => movement;
     
     private Vector2 _direction;
     public Vector2 Direction => _direction;
@@ -73,13 +73,13 @@ public class Ball : MonoBehaviour
         }
     }
 
-    /// <summary>
+    /// <summary>c
     /// Start move ball.
     /// </summary>
     public void StartMoveBall()
     {
         _circleCollider.enabled = true;
-        _direction = Vector2.down;
+        movement.UpdateDirectionNormalized(Vector2.down);
     }
     
     // ///////////////////////////////////////////////////////////////
@@ -114,7 +114,7 @@ public class Ball : MonoBehaviour
     public void DespawnBall()
     {
         _circleCollider.enabled = false;
-        _direction = Vector2.zero;
+        movement.UpdateDirectionNormalized(Vector2.zero);
         _animator.SetTrigger(AnimationTriggerDespawn);
     }
     
@@ -140,7 +140,6 @@ public class Ball : MonoBehaviour
         
         _animator.SetInteger(AnimationIntegerBallSizeLevel, ballSizeProperties.SizeLevel);
         _circleCollider.radius = ballSizeProperties.ColliderRadius;
-        speed = ballSizeProperties.Speed;
         damage = ballSizeProperties.Damage;
     }
  
@@ -150,8 +149,7 @@ public class Ball : MonoBehaviour
     private void MoveBall()
     {
         Vector2 currentVelocity = _rigidBody.linearVelocity;
-        float currentSpeed = BallsManager.Instance.MovementMultiplier * speed * movementSpeedPercentage;
-        Vector2 targetVelocity = _direction * currentSpeed;
+        Vector2 targetVelocity = BallsManager.Instance.MovementMultiplier * movement.GetMovementDirection;
         _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, .0f);
     }
 
@@ -168,19 +166,19 @@ public class Ball : MonoBehaviour
         
         if (collidedObject.TryGetComponent(out Brick brick))
         {
-            _direction = Vector2.Reflect(_direction, normal).normalized;
+            movement.UpdateDirectionNormalized(Vector2.Reflect(movement.Direction, normal));
             brick.TryHitBrick(damage);
         }
         
         if (collidedObject.TryGetComponent(out Platform platform))
         {
-            _direction = platform.GetBallNormalizedDirectionFromGivenPosition(transform.position.x);
+            movement.UpdateDirectionNormalized(platform.GetBallNormalizedDirectionFromGivenPosition(transform.position.x));
             Instantiate(hitPlatformAudioPrefab, transform.position, Quaternion.identity);
         }
 
         if (collidedObject.TryGetComponent(out StaticCollider _))
         {
-            _direction = Vector2.Reflect(_direction, normal).normalized;
+            movement.UpdateDirectionNormalized(Vector2.Reflect(movement.Direction, normal));
             Instantiate(hitStaticColliderAudioPrefab, transform.position, Quaternion.identity);
         }
 

@@ -9,10 +9,12 @@ public class Bullet : MonoBehaviour
 {
 
     private Rigidbody2D _rigidBody;
+
+    [Header("Movement")] 
+    [SerializeField] private Movement movement;
+    public Movement Movement => movement;
     
-    [Min(.0f)] public float speed;
     [Min(0)] public int damage;
-    public float movementSpeedPercentage = 1.0f;
     
     private bool _hasReflection = false;
     private Collider2D _collidedGameObject = null;
@@ -21,6 +23,7 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+        movement.UpdateDirectionNormalized(Vector2.up);
     }
 
     private void FixedUpdate()
@@ -44,7 +47,7 @@ public class Bullet : MonoBehaviour
     private void MoveBullet()
     {
         Vector2 currentVelocity = _rigidBody.linearVelocity;
-        Vector2 targetVelocity = movementSpeedPercentage * speed * Vector2.up;
+        Vector2 targetVelocity = movement.GetMovementDirection;
         _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, .0f);
     }
 
