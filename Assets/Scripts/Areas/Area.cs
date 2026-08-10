@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
@@ -60,5 +61,12 @@ public abstract class Area : MonoBehaviour
         _tilemapCollider2D.enabled = false;
         areaUI.SetActive(false);
     }
-    
+
+    private void OnValidate()
+    {
+        _compositeCollider2D = GetComponent<CompositeCollider2D>();
+        _tilemapCollider2D = GetComponent<TilemapCollider2D>();
+        if (areaUI != null)
+            UpdateAreaColor(color);
+    }
 }

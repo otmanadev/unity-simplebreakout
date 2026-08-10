@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -13,12 +14,12 @@ public class Bullet : MonoBehaviour
     [Header("Movement")] 
     [SerializeField] private Movement movement;
     public Movement Movement => movement;
-    
-    [Min(0)] public int damage;
-    
-    private bool _hasReflection = false;
-    private Collider2D _collidedGameObject = null;
     private Vector2 _refZeroVelocity;
+    
+    [Header("Damage")]
+    [Min(0)] public int damage;
+
+    private readonly HashSet<Collider2D> _pendingCollisions = new();
 
     private void Awake()
     {
@@ -28,8 +29,8 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HandleDetection();
         MoveBullet();
+        HandleCollisions();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -39,8 +40,7 @@ public class Bullet : MonoBehaviour
         if (collidedObject.TryGetComponent(out Brick _)
             || collidedObject.TryGetComponent(out StaticCollider _))
         {
-            _hasReflection = true;
-            _collidedGameObject = other;
+            _pendingCollisions.Add(other);
         }
     }
 
@@ -51,12 +51,29 @@ public class Bullet : MonoBehaviour
         _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, .0f);
     }
 
-    private void HandleDetection()
+    /// <summary>
+    /// Gère et traite l'ensemble des collisions rencontrées.
+    /// </summary>
+    private void HandleCollisions()
     {
-        if (!_hasReflection)
+        if (_pendingCollisions.Count == 0)
             return;
+
+        foreach (Collider2D pendingCollision in _pendingCollisions)
+        {
+            HandleCollisions(pendingCollision);
+        }
         
-        GameObject collidedObject = _collidedGameObject.gameObject;
+        _pendingCollisions.Clear();
+    }
+
+    /// <summary>
+    /// Gère et traite une collision rencontrée.
+    /// </summary>
+    /// <param name="collision"></param>
+    private void HandleCollisions(Collider2D collision)
+    {
+        GameObject collidedObject = collision.gameObject;
         
         Debug.Log($"{name} collided with {collidedObject.name} on position {transform.position}");
         
@@ -64,9 +81,7 @@ public class Bullet : MonoBehaviour
         {
             brick.TryHitBrick(damage);
         }
-
-        _hasReflection = false;
-        _collidedGameObject = null;
+        
         Destroy(gameObject);
     }
     

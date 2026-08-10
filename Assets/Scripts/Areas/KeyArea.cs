@@ -82,5 +82,13 @@ public class KeyArea : MonoBehaviour
         _animator.SetTrigger(AnimationTriggerInactive);
         affectedArea.DisableArea();
     }
-    
+
+    private void OnValidate()
+    {
+        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        
+        if (affectedArea != null)
+            _spriteRenderer.color = affectedArea.color;
+    }
 }
