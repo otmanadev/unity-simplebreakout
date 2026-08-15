@@ -9,9 +9,8 @@ using UnityEngine.Tilemaps;
 public abstract class Area : MonoBehaviour
 {
     
-    private CompositeCollider2D _compositeCollider2D;
-    private TilemapCollider2D _tilemapCollider2D;
-    protected List<Ball> _triggeredBalls;
+    protected CompositeCollider2D _compositeCollider2D;
+    protected TilemapCollider2D _tilemapCollider2D;
     
     [Header("References")]
     [SerializeField] protected GameObject areaUI;
@@ -24,7 +23,6 @@ public abstract class Area : MonoBehaviour
     {
         _compositeCollider2D = GetComponent<CompositeCollider2D>();
         _tilemapCollider2D = GetComponent<TilemapCollider2D>();
-        _triggeredBalls = new List<Ball>();
         
         Assert.IsNotNull(areaUI);
         
@@ -46,7 +44,7 @@ public abstract class Area : MonoBehaviour
         }
     }
 
-    public void EnableArea()
+    public virtual void EnableArea()
     {
         isActive = true;
         _compositeCollider2D.enabled = true;
@@ -54,7 +52,7 @@ public abstract class Area : MonoBehaviour
         areaUI.SetActive(true);
     }
 
-    public void DisableArea()
+    public virtual void DisableArea()
     {
         isActive = false;
         _compositeCollider2D.enabled = false;

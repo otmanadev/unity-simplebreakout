@@ -66,7 +66,8 @@ public class Ball : MonoBehaviour
 
         if (collidedObject.TryGetComponent(out Brick _)
             || collidedObject.TryGetComponent(out StaticCollider _)
-            || collidedObject.TryGetComponent(out Platform _))
+            || collidedObject.TryGetComponent(out Platform _)
+            || collidedObject.TryGetComponent(out BlockingArea _))
         {
             _hasReflection = true;
             _collidedGameObject = other;
@@ -176,7 +177,7 @@ public class Ball : MonoBehaviour
             Instantiate(hitPlatformAudioPrefab, transform.position, Quaternion.identity);
         }
 
-        if (collidedObject.TryGetComponent(out StaticCollider _))
+        if (collidedObject.TryGetComponent(out StaticCollider _) || collidedObject.TryGetComponent(out BlockingArea _))
         {
             movement.UpdateDirectionNormalized(Vector2.Reflect(movement.Direction, normal));
             Instantiate(hitStaticColliderAudioPrefab, transform.position, Quaternion.identity);
