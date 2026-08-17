@@ -13,7 +13,7 @@ public class Movement
     [SerializeField] private Vector2 direction;
     public Vector2 Direction => direction;
     
-    [SerializeField] private List<MovementBonus> movementBonuses = new List<MovementBonus>();
+    [SerializeField] private List<MovementBonus> movementBonuses = new();
     
     public Vector2 GetMovementDirection => MovementSpeed * Direction * GetMovementBonusPercentage();
 

@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
-public class Platform : MonoBehaviour
+public class Platform : MonoBehaviour, IBallCollisionHandler
 {
     
     private static readonly String AnimationTriggerSpawn = "SpawnTrigger";
@@ -29,11 +29,10 @@ public class Platform : MonoBehaviour
     
     private float _refZeroVelocity = .0f;
     private float _yPosition;
-
-    [Header("Ball Direction Properties")] 
+    
+    [Header("Ball Properties")]
+    [SerializeField] private GameObject ballCollisionAudioPrefab;
     [SerializeField, Min(.0f)] private float maxAngleOnCorners;
-
-    [Header("Ball direction preview properties")]
     [SerializeField] private GameObject ballPreviewPrefab;
     [SerializeField, Min(.0f)] private float ballDistanceToShowPreviewBalls;
     [SerializeField, Min(0L)] private int numberOfBallPreviews;
@@ -56,6 +55,9 @@ public class Platform : MonoBehaviour
         
         _yPosition = transform.position.y;
         Assert.IsNotNull(ballPreviewPrefab);
+        
+        Assert.IsNotNull(ballCollisionAudioPrefab);
+        Assert.IsTrue(ballCollisionAudioPrefab.GetComponent<Audio>());
         
         Assert.IsNotNull(bulletPrefab);
         Assert.IsTrue(bulletPrefab.GetComponent<Bullet>());
@@ -269,6 +271,24 @@ public class Platform : MonoBehaviour
             previewBallInstance.transform.position = ballPreviewCoordinates; 
             previewBallInstance.SetActive(visible);
         }
+    }
+    
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        GameObject collidedObject = other.gameObject;
+
+        if (!collidedObject.TryGetComponent(out Ball ball))
+            return;
+        
+        ball.RegisterCollision(this, other);
+    }
+
+    public CollisionResponse HandleBallCollision(Collision2D collision, Vector2 _)
+    {
+        Instantiate(ballCollisionAudioPrefab, collision.transform.position, Quaternion.identity);
+        float ballPosition = collision.gameObject.transform.position.x;
+        Vector2 reflectionDirection = GetBallNormalizedDirectionFromGivenPosition(ballPosition);
+        return new CollisionResponse(reflectionDirection);
     }
     
 }

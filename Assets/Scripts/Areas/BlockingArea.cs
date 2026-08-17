@@ -2,27 +2,35 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions;
 
-public class BlockingArea : Area
+public class BlockingArea : Area, IBallCollisionHandler
 {
     
-    protected List<int> _triggeredBalls = new List<int>();
+    private readonly List<int> _triggeredBalls = new();
+    
+    [Header("Ball Properties")]
+    [SerializeField] private GameObject ballCollisionAudioPrefab;
 
     protected override void Awake()
     {
         base.Awake();
-        _compositeCollider2D.enabled = true;
-        _tilemapCollider2D.enabled = true;
+        
+        Assert.IsNotNull(ballCollisionAudioPrefab);
+        Assert.IsTrue(ballCollisionAudioPrefab.GetComponent<Audio>());
+        
+        CompositeCollider2D.enabled = true;
+        TilemapCollider2D.enabled = true;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         GameObject collidedObject = other.gameObject;
 
-        if (collidedObject.TryGetComponent(out Ball ball))
-        {
-            
-        }
+        if (!collidedObject.TryGetComponent(out Ball ball))
+            return;
+        
+        ball.RegisterCollision(this, other);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -55,8 +63,9 @@ public class BlockingArea : Area
     public override void DisableArea()
     {
         isActive = false;
-        _compositeCollider2D.isTrigger = true;
+        CompositeCollider2D.isTrigger = true;
         areaUI.SetActive(false);
+        UpdateAreaColor();
     }
 
     /// <summary>
@@ -72,8 +81,16 @@ public class BlockingArea : Area
         if (_triggeredBalls.Count > 0)
             return;
         
-        _compositeCollider2D.isTrigger = false;
+        CompositeCollider2D.isTrigger = false;
         areaUI.SetActive(true);
+        UpdateAreaColor();
     }
-    
+
+    public CollisionResponse HandleBallCollision(Collision2D collision, Vector2 ballDirection)
+    {
+        Instantiate(ballCollisionAudioPrefab, collision.transform.position, Quaternion.identity);
+        Vector2 normal = collision.GetContact(0).normal;
+        Vector2 reflectedDirection = Vector2.Reflect(ballDirection, normal);
+        return new CollisionResponse(reflectedDirection);
+    }
 }

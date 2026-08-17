@@ -152,6 +152,7 @@ MonoBehaviour:
   health: 4
   brickHitAudioPrefab: {fileID: 5779626372241303908, guid: 341d1ef939e8ab845b8e65dab767b928, type: 3}
   brickDestroyedAudioPrefab: {fileID: 5779626372241303908, guid: c1744df08edf6f1489d128a98b0ac03d, type: 3}
+  ballCollisionAudioPrefab: {fileID: 5779626372241303908, guid: 341d1ef939e8ab845b8e65dab767b928, type: 3}
 --- !u!95 &47328168472077599
 Animator:
   serializedVersion: 7

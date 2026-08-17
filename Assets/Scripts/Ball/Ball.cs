@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -36,8 +38,10 @@ public class Ball : MonoBehaviour
     public Vector2 Direction => _direction;
     private Vector2 _refZeroVelocity = Vector2.zero;
     
+    [Header("Collisions")]
+    private readonly List<BallCollision> _pendingCollisions = new();
+    
     [Header("Hit properties")]
-    [SerializeField] private GameObject hitStaticColliderAudioPrefab;
     [SerializeField] private GameObject hitPlatformAudioPrefab;
 
     private void Awake()
@@ -46,8 +50,6 @@ public class Ball : MonoBehaviour
         _circleCollider = GetComponent<CircleCollider2D>();
         _animator = GetComponent<Animator>();
         
-        Assert.IsNotNull(hitStaticColliderAudioPrefab);
-        Assert.IsTrue(hitStaticColliderAudioPrefab.GetComponent<Audio>());
         Assert.IsNotNull(hitPlatformAudioPrefab);
         Assert.IsTrue(hitPlatformAudioPrefab.GetComponent<Audio>());
         
@@ -56,33 +58,66 @@ public class Ball : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HandleReflection();
-        MoveBall();
-    }
-    
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        GameObject collidedObject = other.gameObject;
-
-        if (collidedObject.TryGetComponent(out Brick _)
-            || collidedObject.TryGetComponent(out StaticCollider _)
-            || collidedObject.TryGetComponent(out Platform _)
-            || collidedObject.TryGetComponent(out BlockingArea _))
-        {
-            _hasReflection = true;
-            _collidedGameObject = other;
-        }
+        HandleCollisions();
+        UpdateBallVelocity();
     }
 
-    /// <summary>c
+    /// <summary>
     /// Start move ball.
     /// </summary>
     public void StartMoveBall()
     {
         _circleCollider.enabled = true;
-        movement.UpdateDirectionNormalized(Vector2.down);
+        movement.UpdateDirectionNormalized(Vector2.up);
     }
     
+    /// <summary>
+    /// Met à jour la vélocité de la balle en fonction de sa direction et des vitesses appliquées à la balle.
+    /// </summary>
+    private void UpdateBallVelocity()
+    {
+        Vector2 currentVelocity = _rigidBody.linearVelocity;
+        Vector2 targetVelocity = BallsManager.Instance.MovementMultiplier * movement.GetMovementDirection;
+        _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, .0f);
+    }
+
+    /// <summary>
+    /// Reçoit une notification d'une nouvelle collision à traiter.
+    /// </summary>
+    /// <param name="handler"></param>
+    /// <param name="collision"></param>
+    public void RegisterCollision(IBallCollisionHandler handler, Collision2D collision)
+    {
+        // Un GameObject ne peut entrer en collision qu'une seule fois avec l'objet.
+        // Ce code évite le traitement multiple des collisions pour un seul et même GameObject.
+        if (_pendingCollisions.Exists(ballCollision => ballCollision.Handler.Equals(handler)))
+            return;
+        
+        _pendingCollisions.Add(
+            new BallCollision(handler, collision));
+    }
+
+    /// <summary>
+    /// Traite chacune des collisions enregistrées entre 2 frames.
+    /// </summary>
+    private void HandleCollisions()
+    {
+        if (_pendingCollisions.Count == 0)
+             return;
+
+        Vector2 ballDirection = Vector2.zero;
+        foreach (BallCollision collision in _pendingCollisions)
+        {
+            CollisionResponse response = collision.Handler.HandleBallCollision(
+                collision.Collision, Movement.Direction);
+
+            ballDirection += response.Direction;
+        }
+        Movement.UpdateDirectionNormalized(ballDirection);
+        
+        _pendingCollisions.Clear();
+    }
+
     // ///////////////////////////////////////////////////////////////
     // SPAWN
     // ///////////////////////////////////////////////////////////////
@@ -128,65 +163,10 @@ public class Ball : MonoBehaviour
         Destroy(gameObject);
     }
     
+    // ///////////////////////////////////////////////////////////////
+    // BALL SIZE
+    // ///////////////////////////////////////////////////////////////
     
-
-    /// <summary>
-    /// Update ball size.
-    /// </summary>
-    /// <param name="newBallSizeType"></param>
-    private void UpdateBallSize(EBallSize newBallSizeType)
-    {
-        ballSize = newBallSizeType;
-        SOBallSize ballSizeProperties = BallsManager.Instance.GetBallSizeByItsType(BallSize);
-        
-        _animator.SetInteger(AnimationIntegerBallSizeLevel, ballSizeProperties.SizeLevel);
-        _circleCollider.radius = ballSizeProperties.ColliderRadius;
-        damage = ballSizeProperties.Damage;
-    }
- 
-    /// <summary>
-    /// Update ball's velocity, based on its direction.
-    /// </summary>
-    private void MoveBall()
-    {
-        Vector2 currentVelocity = _rigidBody.linearVelocity;
-        Vector2 targetVelocity = BallsManager.Instance.MovementMultiplier * movement.GetMovementDirection;
-        _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, .0f);
-    }
-
-    private void HandleReflection()
-    {
-        if (!_hasReflection)
-            return;
-        
-        GameObject collidedObject = _collidedGameObject.gameObject;
-        ContactPoint2D contact = _collidedGameObject.GetContact(0);
-        Vector2 normal = contact.normal;
-        
-        Debug.Log($"{name} collided with {collidedObject.name} on position {normal}");
-        
-        if (collidedObject.TryGetComponent(out Brick brick))
-        {
-            movement.UpdateDirectionNormalized(Vector2.Reflect(movement.Direction, normal));
-            brick.TryHitBrick(damage);
-        }
-        
-        if (collidedObject.TryGetComponent(out Platform platform))
-        {
-            movement.UpdateDirectionNormalized(platform.GetBallNormalizedDirectionFromGivenPosition(transform.position.x));
-            Instantiate(hitPlatformAudioPrefab, transform.position, Quaternion.identity);
-        }
-
-        if (collidedObject.TryGetComponent(out StaticCollider _) || collidedObject.TryGetComponent(out BlockingArea _))
-        {
-            movement.UpdateDirectionNormalized(Vector2.Reflect(movement.Direction, normal));
-            Instantiate(hitStaticColliderAudioPrefab, transform.position, Quaternion.identity);
-        }
-
-        _hasReflection = false;
-        _collidedGameObject = null;
-    }
-
     /// <summary>
     /// Update new ball size.
     /// </summary>
@@ -208,6 +188,20 @@ public class Ball : MonoBehaviour
         }
         
         UpdateBallSize(newBallSizeType);
+    }
+
+    /// <summary>
+    /// Update ball size.
+    /// </summary>
+    /// <param name="newBallSizeType"></param>
+    private void UpdateBallSize(EBallSize newBallSizeType)
+    {
+        ballSize = newBallSizeType;
+        SOBallSize ballSizeProperties = BallsManager.Instance.GetBallSizeByItsType(BallSize);
+        
+        _animator.SetInteger(AnimationIntegerBallSizeLevel, ballSizeProperties.SizeLevel);
+        _circleCollider.radius = ballSizeProperties.ColliderRadius;
+        damage = ballSizeProperties.Damage;
     }
     
 }

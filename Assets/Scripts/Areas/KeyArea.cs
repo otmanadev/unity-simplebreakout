@@ -2,6 +2,7 @@ using System;
 using NUnit.Framework;
 using UnityEngine;
 
+[ExecuteAlways]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(CompositeCollider2D))]
 [RequireComponent(typeof(Animator))]
@@ -35,7 +36,7 @@ public class KeyArea : MonoBehaviour
         if (!isActive)
             SetAreaInactive();
         
-        _spriteRenderer.color = affectedArea.color;
+        _spriteRenderer.color = affectedArea.AreaColor;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -63,8 +64,15 @@ public class KeyArea : MonoBehaviour
         if (!isActive)
         {
             SetAreaActive();
-            return;
         }
+    }
+
+    /// <summary>
+    /// Récupère la couleur de l'Area en fonction de son activité.
+    /// </summary>
+    private void UpdateColor()
+    {
+        _spriteRenderer.color = affectedArea.AreaColor;
     }
 
     private void SetAreaActive()
@@ -73,6 +81,7 @@ public class KeyArea : MonoBehaviour
             isActive = true;
         _animator.SetTrigger(AnimationTriggerActive);
         affectedArea.EnableArea();
+        UpdateColor();
     }
 
     private void SetAreaInactive()
@@ -81,6 +90,7 @@ public class KeyArea : MonoBehaviour
             isActive = false;
         _animator.SetTrigger(AnimationTriggerInactive);
         affectedArea.DisableArea();
+        UpdateColor();
     }
 
     private void OnValidate()
@@ -89,6 +99,6 @@ public class KeyArea : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         
         if (affectedArea != null)
-            _spriteRenderer.color = affectedArea.color;
+            UpdateColor();
     }
 }

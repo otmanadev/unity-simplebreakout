@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
-public class Brick : MonoBehaviour
+public class Brick : MonoBehaviour, IBallCollisionHandler
 {
 
     private static readonly String AnimationTriggerSpawn = "SpawnTrigger";
@@ -26,6 +26,9 @@ public class Brick : MonoBehaviour
     [SerializeField] private GameObject brickHitAudioPrefab;
     [SerializeField] private GameObject brickDestroyedAudioPrefab;
     
+    [Header("Ball Properties")]
+    [SerializeField] private GameObject ballCollisionAudioPrefab;
+    
     protected virtual void Awake()
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
@@ -37,6 +40,9 @@ public class Brick : MonoBehaviour
         
         Assert.IsNotNull(brickDestroyedAudioPrefab);
         Assert.IsTrue(brickDestroyedAudioPrefab.GetComponent<Audio>());
+        
+        Assert.IsNotNull(ballCollisionAudioPrefab);
+        Assert.IsTrue(ballCollisionAudioPrefab.GetComponent<Audio>());
 
         CheckHasAttachedPowerUp();
     }
@@ -130,6 +136,27 @@ public class Brick : MonoBehaviour
         {
             brickPassive.OnBrickActivated();
         }
+    }
+    
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        GameObject collidedObject = other.gameObject;
+
+        if (!collidedObject.TryGetComponent(out Ball ball))
+            return;
+        
+        Debug.Log($"[BRICK - {name}] Collision avec la balle aux coordonnées : " + collidedObject.transform.position);
+        ball.RegisterCollision(this, other);
+    }
+
+    public CollisionResponse HandleBallCollision(Collision2D collision, Vector2 ballDirection)
+    {
+        Instantiate(ballCollisionAudioPrefab, collision.transform.position, Quaternion.identity);
+        Vector2 normal = collision.GetContact(0).normal;
+        Vector2 reflectedDirection = Vector2.Reflect(ballDirection, normal);
+        
+        TryHitBrick(100);
+        return new CollisionResponse(reflectedDirection);
     }
     
 }

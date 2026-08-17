@@ -4,67 +4,70 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+[ExecuteAlways]
 [RequireComponent(typeof(CompositeCollider2D))]
 [RequireComponent(typeof(TilemapCollider2D))]
 public abstract class Area : MonoBehaviour
 {
     
-    protected CompositeCollider2D _compositeCollider2D;
-    protected TilemapCollider2D _tilemapCollider2D;
+    protected CompositeCollider2D CompositeCollider2D;
+    protected TilemapCollider2D TilemapCollider2D;
     
     [Header("References")]
     [SerializeField] protected GameObject areaUI;
 
-    [Header("Properties")] 
+    [Header("Area Properties")] 
     [SerializeField] protected bool isActive;
-    public Color color;
+    [SerializeField] private Color colorWhenActive;
+    [SerializeField] private Color colorWhenInactive;
+    public Color AreaColor => isActive ? colorWhenActive : colorWhenInactive;
 
     protected virtual void Awake()
     {
-        _compositeCollider2D = GetComponent<CompositeCollider2D>();
-        _tilemapCollider2D = GetComponent<TilemapCollider2D>();
+        CompositeCollider2D = GetComponent<CompositeCollider2D>();
+        TilemapCollider2D = GetComponent<TilemapCollider2D>();
         
         Assert.IsNotNull(areaUI);
         
-        UpdateAreaColor(color);
+        UpdateAreaColor();
     }
 
-    private void UpdateAreaColor(Color newColor)
+    protected void UpdateAreaColor()
     {
-        color = newColor;
-
-        if (_compositeCollider2D.gameObject.TryGetComponent(out Tilemap tilemapComposite))
+        if (CompositeCollider2D.gameObject.TryGetComponent(out Tilemap tilemapComposite))
         {
-            tilemapComposite.color = newColor;
+            tilemapComposite.color = AreaColor;
         }
         
         if (areaUI.TryGetComponent(out Tilemap tilemapUI))
         {
-            tilemapUI.color = newColor;
+            tilemapUI.color = AreaColor;
         }
     }
 
     public virtual void EnableArea()
     {
         isActive = true;
-        _compositeCollider2D.enabled = true;
-        _tilemapCollider2D.enabled = true;
+        CompositeCollider2D.enabled = true;
+        TilemapCollider2D.enabled = true;
         areaUI.SetActive(true);
+        UpdateAreaColor();
     }
 
     public virtual void DisableArea()
     {
         isActive = false;
-        _compositeCollider2D.enabled = false;
-        _tilemapCollider2D.enabled = false;
+        CompositeCollider2D.enabled = false;
+        TilemapCollider2D.enabled = false;
         areaUI.SetActive(false);
+        UpdateAreaColor();
     }
 
     private void OnValidate()
     {
-        _compositeCollider2D = GetComponent<CompositeCollider2D>();
-        _tilemapCollider2D = GetComponent<TilemapCollider2D>();
+        CompositeCollider2D = GetComponent<CompositeCollider2D>();
+        TilemapCollider2D = GetComponent<TilemapCollider2D>();
         if (areaUI != null)
-            UpdateAreaColor(color);
+            UpdateAreaColor();
     }
 }

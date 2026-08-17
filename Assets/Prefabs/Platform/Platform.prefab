@@ -179,6 +179,7 @@ MonoBehaviour:
   platformSize: 2
   speed: 6.5
   smoothTimeSpeed: 0.05
+  ballCollisionAudioPrefab: {fileID: 5779626372241303908, guid: 968c2a05e94c6984eba7b3b91f63d46e, type: 3}
   maxAngleOnCorners: 30
   ballPreviewPrefab: {fileID: 7392780525699250837, guid: 7691a7afc96e53d479805f44438df77c, type: 3}
   ballDistanceToShowPreviewBalls: 7.5
