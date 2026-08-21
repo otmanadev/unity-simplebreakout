@@ -68,7 +68,6 @@ public class Ball : MonoBehaviour
     public void StartMoveBall()
     {
         _circleCollider.enabled = true;
-        movement.UpdateDirectionNormalized(Vector2.up);
     }
     
     /// <summary>
