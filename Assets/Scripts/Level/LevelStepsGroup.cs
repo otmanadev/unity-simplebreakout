@@ -19,7 +19,6 @@ public class LevelStepsGroup
     {
         if (steps == null || steps.Count == 0)
         {
-            Debug.LogError($"[LevelStepsGroup] No Steps were defined");
             return;
         }
         _stepsFinished = 0;

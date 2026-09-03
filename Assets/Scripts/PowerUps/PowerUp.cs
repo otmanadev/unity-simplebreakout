@@ -33,12 +33,10 @@ public class PowerUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        var collidedObject = other.gameObject;
+        GameObject collidedObject = other.gameObject;
 
-        if (collidedObject.GetComponent<Platform>() == null)
-        {
+        if (!collidedObject.TryGetComponent(out Platform _))
             return;
-        }
         
         Debug.Log($"[PowerUp / {name}] Send notification to {PowerUpsManager.Instance.name} : Activate power up {Type}.");
         Instantiate(pickupAudioPrefab, transform.position, Quaternion.identity);

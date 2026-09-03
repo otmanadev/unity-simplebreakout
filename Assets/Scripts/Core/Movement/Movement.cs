@@ -30,10 +30,7 @@ public class Movement
     public void AddMovementBonus(MovementBonus bonus)
     {
         if (movementBonuses.Contains(bonus))
-        {
-            Debug.LogWarning($"{nameof(MovementBonus)} already exists!");
             return;
-        }
         
         movementBonuses.Add(bonus);
     }

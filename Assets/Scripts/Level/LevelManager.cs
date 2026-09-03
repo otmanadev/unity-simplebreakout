@@ -39,7 +39,6 @@ public class LevelManager : MonoBehaviour
     private void UpdateLevelState(ELevelState newLevelState)
     {
         
-        Debug.Log($"[<color=orange>LevelManager / {name}</color>] Level State changed from <color=red>{_levelState}</color> to <color=green>{newLevelState}</color>");
         _levelState = newLevelState;
 
         switch (newLevelState)
@@ -83,7 +82,6 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void OnNoMoreBricksNotification()
     {
-        Debug.Log($"[<color=orange>LevelManager / {name}</color>] Receive notification from {BricksManager.Instance.name} : No more bricks to destroy.");
         UpdateLevelState(ELevelState.EndSequences);
     }
 

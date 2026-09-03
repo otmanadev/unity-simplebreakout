@@ -37,12 +37,10 @@ public class PowerUpsManager : MonoBehaviour
         {
             if (bricksWithNoAttachedPowerUp.Count == 0)
             {
-                Debug.LogWarning($"[PowerUpsManager / {name}] Cannot attach more power ups because there is no bricks with no power up attached.");
                 break;
             }
             Brick randomBrick = bricksWithNoAttachedPowerUp[Random.Range(0, bricksWithNoAttachedPowerUp.Count)];
             
-            Debug.Log($"[<color=orange>PowerUpsManager / {name}</color>] Put power up {powerUp.Type} to brick {randomBrick.name}.");
             randomBrick.SetUpPowerUp(powerUp);
             
             bricksWithNoAttachedPowerUp.Remove(randomBrick);

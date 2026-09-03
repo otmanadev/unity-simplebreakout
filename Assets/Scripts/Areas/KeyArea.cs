@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(CompositeCollider2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
-public class KeyArea : MonoBehaviour
+public class KeyArea : MonoBehaviour, IBallTriggerHandler, IBulletTriggerHandler
 {
     
     private static readonly String AnimationTriggerActive = "ActiveTrigger";
@@ -42,15 +42,12 @@ public class KeyArea : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         GameObject collidedObject = other.gameObject;
-
-        if (IsTriggeredWithBallOrBullet(collidedObject))
-            SwitchAreaActiveProperties();
-    }
-    
-    private bool IsTriggeredWithBallOrBullet(GameObject collidedObject)
-    {
-        return collidedObject.TryGetComponent(out Ball _)
-               || collidedObject.TryGetComponent(out Bullet _);
+        
+        if (collidedObject.TryGetComponent(out Ball ball))
+            ball.RegisterTriggerEnter(this, other);
+        
+        if (collidedObject.TryGetComponent(out Bullet bullet))
+            bullet.RegisterTriggerEnter(this, other);
     }
 
     private void SwitchAreaActiveProperties()
@@ -101,4 +98,39 @@ public class KeyArea : MonoBehaviour
         if (affectedArea != null)
             UpdateColor();
     }
+
+    public TriggerResponse HandleBallTriggerEnter(Collider2D _, Ball __)
+    {
+        SwitchAreaActiveProperties();
+        return new TriggerResponse();
+    }
+
+    /// <summary>
+    /// Aucune implémentation prévue à cet effet.
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="__"></param>
+    /// <returns></returns>
+    public TriggerResponse HandleBallTriggerExit(Collider2D _, Ball __)
+    {
+        return new TriggerResponse();
+    }
+
+    public TriggerResponse HandleBulletTriggerEnter(Collider2D _, Bullet __)
+    {
+        SwitchAreaActiveProperties();
+        return new TriggerResponse();
+    }
+
+    /// <summary>
+    /// Aucune implémentation prévue à cet effet.
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="__"></param>
+    /// <returns></returns>
+    public TriggerResponse HandleBulletTriggerExit(Collider2D _, Bullet __)
+    {
+        return new TriggerResponse();
+    }
+    
 }

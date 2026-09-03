@@ -283,7 +283,7 @@ public class Platform : MonoBehaviour, IBallCollisionHandler
         ball.RegisterCollision(this, other);
     }
 
-    public CollisionResponse HandleBallCollision(Collision2D collision, Vector2 _)
+    public CollisionResponse HandleBallCollision(Collision2D collision, Ball _)
     {
         Instantiate(ballCollisionAudioPrefab, collision.transform.position, Quaternion.identity);
         float ballPosition = collision.gameObject.transform.position.x;

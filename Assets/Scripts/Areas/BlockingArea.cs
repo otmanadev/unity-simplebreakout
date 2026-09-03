@@ -1,20 +1,23 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class BlockingArea : Area, IBallCollisionHandler
+public class BlockingArea : Area, IBallCollisionHandler, IBulletCollisionHandler, IBallTriggerHandler, IBulletTriggerHandler
 {
     
     private readonly List<int> _triggeredBalls = new();
+    private readonly List<Bullet> _triggeredBullets = new();
     
-    [Header("Ball Properties")]
+    [Header("Collision Properties")]
     [SerializeField] private GameObject ballCollisionAudioPrefab;
+    [SerializeField] private GameObject bulletCollisionAudioPrefab;
 
     protected override void Awake()
     {
         base.Awake();
+        
+        Assert.IsNotNull(ballCollisionAudioPrefab);
+        Assert.IsTrue(ballCollisionAudioPrefab.GetComponent<Audio>());
         
         Assert.IsNotNull(ballCollisionAudioPrefab);
         Assert.IsTrue(ballCollisionAudioPrefab.GetComponent<Audio>());
@@ -27,31 +30,33 @@ public class BlockingArea : Area, IBallCollisionHandler
     {
         GameObject collidedObject = other.gameObject;
 
-        if (!collidedObject.TryGetComponent(out Ball ball))
-            return;
-        
-        ball.RegisterCollision(this, other);
+        if (collidedObject.TryGetComponent(out Ball ball))
+            ball.RegisterCollision(this, other);
+
+        if (collidedObject.TryGetComponent(out Bullet bullet))
+            bullet.RegisterCollision(this, other);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         GameObject collidedObject = other.gameObject;
-
-        if (collidedObject.TryGetComponent(out Ball ball) && !_triggeredBalls.Contains(ball.GetInstanceID()))
-        {
-            _triggeredBalls.Add(ball.GetInstanceID());
-        }
+ 
+        if (collidedObject.TryGetComponent(out Ball ball))
+            ball.RegisterTriggerEnter(this, other);
+ 
+        if (collidedObject.TryGetComponent(out Bullet bullet))
+            bullet.RegisterTriggerEnter(this, other);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         GameObject collidedObject = other.gameObject;
         
-        if (collidedObject.TryGetComponent(out Ball ball) && _triggeredBalls.Contains(ball.GetInstanceID()))
-        {
-            _triggeredBalls.Remove(ball.GetInstanceID());
-            CheckIfAreaCanBeEnabled();
-        }
+        if (collidedObject.TryGetComponent(out Ball ball))
+            ball.RegisterTriggerExit(this, other);
+ 
+        if (collidedObject.TryGetComponent(out Bullet bullet))
+            bullet.RegisterTriggerExit(this, other);
     }
 
     public override void EnableArea()
@@ -81,16 +86,60 @@ public class BlockingArea : Area, IBallCollisionHandler
         if (_triggeredBalls.Count > 0)
             return;
         
+        foreach (Bullet bullet in _triggeredBullets)
+            Destroy(bullet.gameObject);
+        _triggeredBullets.Clear();
+        
         CompositeCollider2D.isTrigger = false;
         areaUI.SetActive(true);
         UpdateAreaColor();
     }
 
-    public CollisionResponse HandleBallCollision(Collision2D collision, Vector2 ballDirection)
+    public CollisionResponse HandleBallCollision(Collision2D collision, Ball ball)
     {
         Instantiate(ballCollisionAudioPrefab, collision.transform.position, Quaternion.identity);
         Vector2 normal = collision.GetContact(0).normal;
-        Vector2 reflectedDirection = Vector2.Reflect(ballDirection, normal);
+        Vector2 reflectedDirection = Vector2.Reflect(ball.Movement.Direction, normal);
         return new CollisionResponse(reflectedDirection);
     }
+
+    public CollisionResponse HandleBulletCollision(Collision2D collision, Bullet _)
+    {
+        Instantiate(ballCollisionAudioPrefab, collision.transform.position, Quaternion.identity);
+        return new CollisionResponse();
+    }
+
+    public TriggerResponse HandleBallTriggerEnter(Collider2D _, Ball ball)
+    {
+        int ballInstance = ball.GetInstanceID();
+        if (!_triggeredBalls.Contains(ballInstance))
+            _triggeredBalls.Add(ballInstance);
+        return new TriggerResponse();
+    }
+
+    public TriggerResponse HandleBallTriggerExit(Collider2D _, Ball ball)
+    {
+        int ballInstance = ball.GetInstanceID();
+        if (_triggeredBalls.Contains(ballInstance))
+        {
+            _triggeredBalls.Remove(ballInstance);
+            CheckIfAreaCanBeEnabled();
+        }
+        return new TriggerResponse();
+    }
+
+    public TriggerResponse HandleBulletTriggerEnter(Collider2D _, Bullet bullet)
+    {
+        if (!_triggeredBullets.Contains(bullet))
+            _triggeredBullets.Add(bullet);
+        return new TriggerResponse();
+    }
+
+    public TriggerResponse HandleBulletTriggerExit(Collider2D _, Bullet bullet)
+    {
+        if (_triggeredBullets.Contains(bullet))
+            _triggeredBullets.Remove(bullet);
+        return new TriggerResponse();
+    }
+    
 }

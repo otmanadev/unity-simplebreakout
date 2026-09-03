@@ -17,9 +17,13 @@ public class Bullet : MonoBehaviour
     private Vector2 _refZeroVelocity;
     
     [Header("Damage")]
-    [Min(0)] public int damage;
+    [SerializeField, Min(1)] private int damage;
+    public int Damage => damage;
 
-    private readonly HashSet<Collider2D> _pendingCollisions = new();
+    [Header("Collisions")]
+    private readonly List<BulletCollision> _pendingCollisions = new();
+    private readonly List<BulletTrigger> _pendingTriggersEnter = new();
+    private readonly List<BulletTrigger> _pendingTriggersExit = new();
 
     private void Awake()
     {
@@ -31,58 +35,126 @@ public class Bullet : MonoBehaviour
     {
         MoveBullet();
         HandleCollisions();
+        HandleTriggers();
     }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        GameObject collidedObject = other.gameObject;
-
-        if (collidedObject.TryGetComponent(out Brick _)
-            || collidedObject.TryGetComponent(out StaticCollider _))
-        {
-            _pendingCollisions.Add(other);
-        }
-    }
-
+    
     private void MoveBullet()
     {
         Vector2 currentVelocity = _rigidBody.linearVelocity;
         Vector2 targetVelocity = movement.GetMovementDirection;
         _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, .0f);
     }
+    
+    // ///////////////////////////////////////////////////////////////
+    // COLLISIONS & TRIGGERS
+    // ///////////////////////////////////////////////////////////////
+    
+    /// <summary>
+    /// Reçoit une notification d'une nouvelle collision à traiter.
+    /// </summary>
+    /// <param name="handler"></param>
+    /// <param name="collision"></param>
+    public void RegisterCollision(IBulletCollisionHandler handler, Collision2D collision)
+    {
+        // Un GameObject ne peut entrer en collision qu'une seule fois avec l'objet.
+        // Ce code évite le traitement multiple des collisions pour un seul et même GameObject.
+        if (_pendingCollisions.Exists(ballCollision => ballCollision.Handler.Equals(handler)))
+            return;
+        
+        _pendingCollisions.Add(
+            new BulletCollision(handler, collision));
+    }
 
     /// <summary>
-    /// Gère et traite l'ensemble des collisions rencontrées.
+    /// Traite chacune des collisions enregistrées entre 2 frames.
     /// </summary>
     private void HandleCollisions()
     {
         if (_pendingCollisions.Count == 0)
             return;
 
-        foreach (Collider2D pendingCollision in _pendingCollisions)
+        foreach (BulletCollision collision in _pendingCollisions)
         {
-            HandleCollisions(pendingCollision);
+            collision.Handler.HandleBulletCollision(collision.Collision, this);
         }
         
         _pendingCollisions.Clear();
+        Destroy(gameObject);
     }
 
     /// <summary>
-    /// Gère et traite une collision rencontrée.
+    /// Reçoit une notification d'une nouvelle entrée de trigger à traiter.
     /// </summary>
-    /// <param name="collision"></param>
-    private void HandleCollisions(Collider2D collision)
+    /// <param name="handler"></param>
+    /// <param name="collider2d"></param>
+    public void RegisterTriggerEnter(IBulletTriggerHandler handler, Collider2D collider2d)
     {
-        GameObject collidedObject = collision.gameObject;
+        // Un GameObject ne peut entrer en collision qu'une seule fois avec l'objet.
+        // Ce code évite le traitement multiple des collisions pour un seul et même GameObject.
+        if (_pendingTriggersEnter.Exists(ballTrigger => ballTrigger.Handler.Equals(handler)))
+            return;
         
-        Debug.Log($"{name} collided with {collidedObject.name} on position {transform.position}");
+        _pendingTriggersEnter.Add(
+            new BulletTrigger(handler, collider2d));
+    }
+    
+    /// <summary>
+    /// Reçoit une notification d'une nouvelle sortie de trigger à traiter.
+    /// </summary>
+    /// <param name="handler"></param>
+    /// <param name="collider2d"></param>
+    public void RegisterTriggerExit(IBulletTriggerHandler handler, Collider2D collider2d)
+    {
+        // Un GameObject ne peut entrer en collision qu'une seule fois avec l'objet.
+        // Ce code évite le traitement multiple des collisions pour un seul et même GameObject.
+        if (_pendingTriggersExit.Exists(ballTrigger => ballTrigger.Handler.Equals(handler)))
+            return;
         
-        if (collidedObject.TryGetComponent(out Brick brick))
+        _pendingTriggersExit.Add(
+            new BulletTrigger(handler, collider2d));
+    }
+
+    /// <summary>
+    /// Traite les entrées et sorties de trigger entre 2 frames.
+    /// </summary>
+    private void HandleTriggers()
+    {
+        HandleTriggersEnter();
+        HandleTriggersExit();
+    }
+
+    /// <summary>
+    /// Traite chacune des entrées de trigger entre 2 frames.
+    /// </summary>
+    private void HandleTriggersEnter()
+    {
+        if (_pendingTriggersEnter.Count == 0)
+            return;
+
+        foreach (BulletTrigger trigger in _pendingTriggersEnter)
         {
-            brick.TryHitBrick(damage);
+            TriggerResponse _ = trigger.Handler.HandleBulletTriggerEnter(
+                trigger.Collider, this);
         }
         
-        Destroy(gameObject);
+        _pendingTriggersEnter.Clear();
+    }
+    
+    /// <summary>
+    /// Traite chacune des sorties de trigger entre 2 frames.
+    /// </summary>
+    private void HandleTriggersExit()
+    {
+        if (_pendingTriggersExit.Count == 0)
+            return;
+
+        foreach (BulletTrigger trigger in _pendingTriggersExit)
+        {
+            TriggerResponse _ = trigger.Handler.HandleBulletTriggerExit(
+                trigger.Collider, this);
+        }
+        
+        _pendingTriggersExit.Clear();
     }
     
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -26,6 +25,7 @@ public class Ball : MonoBehaviour
 
     [Header("Damage")] 
     [SerializeField, Min(1)] private int damage;
+    public int Damage => damage;
 
     private bool _hasReflection;
     private Collision2D _collidedGameObject;
@@ -38,8 +38,10 @@ public class Ball : MonoBehaviour
     public Vector2 Direction => _direction;
     private Vector2 _refZeroVelocity = Vector2.zero;
     
-    [Header("Collisions")]
+    [Header("Collisions & Triggers")]
     private readonly List<BallCollision> _pendingCollisions = new();
+    private readonly List<BallTrigger> _pendingTriggersEnter = new();
+    private readonly List<BallTrigger> _pendingTriggersExit = new();
     
     [Header("Hit properties")]
     [SerializeField] private GameObject hitPlatformAudioPrefab;
@@ -59,6 +61,7 @@ public class Ball : MonoBehaviour
     private void FixedUpdate()
     {
         HandleCollisions();
+        HandleTriggers();
         UpdateBallVelocity();
     }
 
@@ -80,6 +83,10 @@ public class Ball : MonoBehaviour
         _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, .0f);
     }
 
+    // ///////////////////////////////////////////////////////////////
+    // COLLISIONS & TRIGGERS
+    // ///////////////////////////////////////////////////////////////
+    
     /// <summary>
     /// Reçoit une notification d'une nouvelle collision à traiter.
     /// </summary>
@@ -108,13 +115,88 @@ public class Ball : MonoBehaviour
         foreach (BallCollision collision in _pendingCollisions)
         {
             CollisionResponse response = collision.Handler.HandleBallCollision(
-                collision.Collision, Movement.Direction);
+                collision.Collision, this);
 
-            ballDirection += response.Direction;
+            ballDirection += response.ReflectedDirection;
         }
         Movement.UpdateDirectionNormalized(ballDirection);
         
         _pendingCollisions.Clear();
+    }
+    
+    /// <summary>
+    /// Reçoit une notification d'une nouvelle entrée de trigger à traiter.
+    /// </summary>
+    /// <param name="handler"></param>
+    /// <param name="collider2d"></param>
+    public void RegisterTriggerEnter(IBallTriggerHandler handler, Collider2D collider2d)
+    {
+        // Un GameObject ne peut entrer en collision qu'une seule fois avec l'objet.
+        // Ce code évite le traitement multiple des collisions pour un seul et même GameObject.
+        if (_pendingTriggersEnter.Exists(ballTrigger => ballTrigger.Handler.Equals(handler)))
+            return;
+        
+        _pendingTriggersEnter.Add(
+            new BallTrigger(handler, collider2d));
+    }
+    
+    /// <summary>
+    /// Reçoit une notification d'une nouvelle sortie de trigger à traiter.
+    /// </summary>
+    /// <param name="handler"></param>
+    /// <param name="collider2d"></param>
+    public void RegisterTriggerExit(IBallTriggerHandler handler, Collider2D collider2d)
+    {
+        // Un GameObject ne peut entrer en collision qu'une seule fois avec l'objet.
+        // Ce code évite le traitement multiple des collisions pour un seul et même GameObject.
+        if (_pendingTriggersExit.Exists(ballTrigger => ballTrigger.Handler.Equals(handler)))
+            return;
+        
+        _pendingTriggersExit.Add(
+            new BallTrigger(handler, collider2d));
+    }
+
+    /// <summary>
+    /// Traite les entrées et sorties de trigger entre 2 frames.
+    /// </summary>
+    private void HandleTriggers()
+    {
+        HandleTriggersEnter();
+        HandleTriggersExit();
+    }
+
+    /// <summary>
+    /// Traite chacune des entrées de trigger entre 2 frames.
+    /// </summary>
+    private void HandleTriggersEnter()
+    {
+        if (_pendingTriggersEnter.Count == 0)
+            return;
+
+        foreach (BallTrigger trigger in _pendingTriggersEnter)
+        {
+            TriggerResponse _ = trigger.Handler.HandleBallTriggerEnter(
+                trigger.Collider, this);
+        }
+        
+        _pendingTriggersEnter.Clear();
+    }
+    
+    /// <summary>
+    /// Traite chacune des sorties de trigger entre 2 frames.
+    /// </summary>
+    private void HandleTriggersExit()
+    {
+        if (_pendingTriggersExit.Count == 0)
+            return;
+
+        foreach (BallTrigger trigger in _pendingTriggersExit)
+        {
+            TriggerResponse _ = trigger.Handler.HandleBallTriggerExit(
+                trigger.Collider, this);
+        }
+        
+        _pendingTriggersExit.Clear();
     }
 
     // ///////////////////////////////////////////////////////////////

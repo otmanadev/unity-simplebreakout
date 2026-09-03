@@ -17,7 +17,6 @@ public class LevelSequence
     {
         if (stepsGroups == null || stepsGroups.Count == 0)
         {
-            Debug.LogError($"[LevelSequence] No Steps Groups were defined");
             return;
         }
         LaunchStepsGroup();

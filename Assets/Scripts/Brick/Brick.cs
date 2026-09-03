@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
-public class Brick : MonoBehaviour, IBallCollisionHandler
+public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandler
 {
 
     private static readonly String AnimationTriggerSpawn = "SpawnTrigger";
@@ -23,11 +23,10 @@ public class Brick : MonoBehaviour, IBallCollisionHandler
 
     [Header("Health")]
     [SerializeField, Min(0)] private int health;
+    
+    [Header("Collision Properties")]
     [SerializeField] private GameObject brickHitAudioPrefab;
     [SerializeField] private GameObject brickDestroyedAudioPrefab;
-    
-    [Header("Ball Properties")]
-    [SerializeField] private GameObject ballCollisionAudioPrefab;
     
     protected virtual void Awake()
     {
@@ -40,9 +39,6 @@ public class Brick : MonoBehaviour, IBallCollisionHandler
         
         Assert.IsNotNull(brickDestroyedAudioPrefab);
         Assert.IsTrue(brickDestroyedAudioPrefab.GetComponent<Audio>());
-        
-        Assert.IsNotNull(ballCollisionAudioPrefab);
-        Assert.IsTrue(ballCollisionAudioPrefab.GetComponent<Audio>());
 
         CheckHasAttachedPowerUp();
     }
@@ -95,7 +91,6 @@ public class Brick : MonoBehaviour, IBallCollisionHandler
     public void TryHitBrick(int givenDamage)
     {
         health -= givenDamage;
-        Debug.Log($"[Brick / {name}] Received {givenDamage} damage. Now has {health} health point(s) left.");
 
         if (health > 0)
         {
@@ -107,7 +102,6 @@ public class Brick : MonoBehaviour, IBallCollisionHandler
             return;
         }
         
-        Debug.Log($"[Brick / {name}] Send notification to {BricksManager.Instance.name} : Brick destroyed.");
         Instantiate(brickDestroyedAudioPrefab, transform.position, Quaternion.identity);
         BricksManager.Instance.OnBrickDestroyedNotification(this);
         foreach (IBrickPassive brickPassive in _brickPassives)
@@ -141,22 +135,26 @@ public class Brick : MonoBehaviour, IBallCollisionHandler
     private void OnCollisionEnter2D(Collision2D other)
     {
         GameObject collidedObject = other.gameObject;
-
-        if (!collidedObject.TryGetComponent(out Ball ball))
-            return;
         
-        Debug.Log($"[BRICK - {name}] Collision avec la balle aux coordonnées : " + collidedObject.transform.position);
-        ball.RegisterCollision(this, other);
+        if (collidedObject.TryGetComponent(out Ball ball))
+            ball.RegisterCollision(this, other);
+        
+        if (collidedObject.TryGetComponent(out Bullet bullet))
+            bullet.RegisterCollision(this, other);
     }
 
-    public CollisionResponse HandleBallCollision(Collision2D collision, Vector2 ballDirection)
+    public CollisionResponse HandleBallCollision(Collision2D collision, Ball ball)
     {
-        Instantiate(ballCollisionAudioPrefab, collision.transform.position, Quaternion.identity);
         Vector2 normal = collision.GetContact(0).normal;
-        Vector2 reflectedDirection = Vector2.Reflect(ballDirection, normal);
+        Vector2 reflectedDirection = Vector2.Reflect(ball.Movement.Direction, normal);
         
-        TryHitBrick(100);
+        TryHitBrick(ball.Damage);
         return new CollisionResponse(reflectedDirection);
     }
-    
+
+    public CollisionResponse HandleBulletCollision(Collision2D collision, Bullet bullet)
+    {
+        TryHitBrick(bullet.Damage);
+        return new CollisionResponse();
+    }
 }

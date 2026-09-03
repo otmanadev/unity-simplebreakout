@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SlowArea : Area
+public class SlowArea : Area, IBallTriggerHandler, IBulletTriggerHandler
 {
     
     [Header("Slow Area Properties")]
@@ -15,51 +15,47 @@ public class SlowArea : Area
     private void OnTriggerEnter2D(Collider2D other)
     {
         GameObject collidedObject = other.gameObject;
-
-        if (IsTriggeredWithBallOrBullet(collidedObject))
-            AddMovementBonusOnCollidedObject(collidedObject);
+        
+        if (collidedObject.TryGetComponent(out Ball ball))
+            ball.RegisterTriggerEnter(this, other);
+        
+        if (collidedObject.TryGetComponent(out Bullet bullet))
+            bullet.RegisterTriggerEnter(this, other);
     }
     
     private void OnTriggerExit2D(Collider2D other)
     {
         GameObject collidedObject = other.gameObject;
-
-        if (IsTriggeredWithBallOrBullet(collidedObject))
-            RemoveMovementBonusOnCollidedObject(collidedObject);
-    }
-
-    private bool IsTriggeredWithBallOrBullet(GameObject collidedObject)
-    {
-        return collidedObject.TryGetComponent(out Ball _)
-               || collidedObject.TryGetComponent(out Bullet _);
-    }
-
-    private void AddMovementBonusOnCollidedObject(GameObject collidedObject)
-    {
+        
         if (collidedObject.TryGetComponent(out Ball ball))
-        {
-            ball.Movement.AddMovementBonus(movementBonus);
-            return;
-        }
+            ball.RegisterTriggerExit(this, other);
         
         if (collidedObject.TryGetComponent(out Bullet bullet))
-        {
-            bullet.Movement.AddMovementBonus(movementBonus);
-        }
+            bullet.RegisterTriggerExit(this, other);
     }
-    
-    private void RemoveMovementBonusOnCollidedObject(GameObject collidedObject)
+
+    public TriggerResponse HandleBallTriggerEnter(Collider2D _, Ball ball)
     {
-        if (collidedObject.TryGetComponent(out Ball ball))
-        {
-            ball.Movement.RemoveMovementBonus(movementBonus);
-            return;
-        }
-        
-        if (collidedObject.TryGetComponent(out Bullet bullet))
-        {
-            bullet.Movement.RemoveMovementBonus(movementBonus);
-        }
+        ball.Movement.AddMovementBonus(movementBonus);
+        return new TriggerResponse();
+    }
+
+    public TriggerResponse HandleBallTriggerExit(Collider2D _, Ball ball)
+    {
+        ball.Movement.RemoveMovementBonus(movementBonus);
+        return new TriggerResponse();
+    }
+
+    public TriggerResponse HandleBulletTriggerEnter(Collider2D _, Bullet bullet)
+    {
+        bullet.Movement.AddMovementBonus(movementBonus);
+        return new TriggerResponse();
+    }
+
+    public TriggerResponse HandleBulletTriggerExit(Collider2D _, Bullet bullet)
+    {
+        bullet.Movement.RemoveMovementBonus(movementBonus);
+        return new TriggerResponse();
     }
     
 }

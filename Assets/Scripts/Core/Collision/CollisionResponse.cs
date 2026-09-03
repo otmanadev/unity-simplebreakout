@@ -3,11 +3,11 @@
 public struct CollisionResponse
 {
     
-    public Vector2 Direction;
+    public Vector2 ReflectedDirection;
     
-    public CollisionResponse(Vector2 direction)
+    public CollisionResponse(Vector2 reflectedDirection)
     {
-        Direction = direction;
+        ReflectedDirection = reflectedDirection;
     }
     
 }
