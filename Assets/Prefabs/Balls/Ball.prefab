@@ -107,7 +107,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 131072
+    m_Bits: 393216
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -168,8 +168,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballSize: 2
   damage: 0
-  speed: 6
-  hitStaticColliderAudioPrefab: {fileID: 5779626372241303908, guid: 2255cfe32503c4b478924b8f41e500aa, type: 3}
+  movement:
+    movementSpeed: 0
+    direction: {x: 0, y: 0}
+    movementBonuses: []
   hitPlatformAudioPrefab: {fileID: 5779626372241303908, guid: 968c2a05e94c6984eba7b3b91f63d46e, type: 3}
 --- !u!95 &4665327464070248783
 Animator:
