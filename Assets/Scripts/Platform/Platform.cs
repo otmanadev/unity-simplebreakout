@@ -30,15 +30,12 @@ public class Platform : MonoBehaviour, IBallCollisionHandler
     private float _refZeroVelocity = .0f;
     private float _yPosition;
     
+    [Header("Collisions & Triggers")]
+    private readonly List<PlatformTrigger> _pendingTriggersEnter = new();
+    
     [Header("Ball Properties")]
     [SerializeField] private GameObject ballCollisionAudioPrefab;
     [SerializeField, Min(.0f)] private float maxAngleOnCorners;
-    [SerializeField] private GameObject ballPreviewPrefab;
-    [SerializeField, Min(.0f)] private float ballDistanceToShowPreviewBalls;
-    [SerializeField, Min(0L)] private int numberOfBallPreviews;
-    [SerializeField, Min(.0f)] private float minDistanceForBallDirectionPreview;
-    [SerializeField, Min(.0f)] private float ballPreviewDistance;
-    private Dictionary<int, List<GameObject>> _ballPreviewsInstances;
 
     [Header("Shoot Properties")]
     [SerializeField] private GameObject bulletPrefab; // TODO modifier cette partie
@@ -54,7 +51,6 @@ public class Platform : MonoBehaviour, IBallCollisionHandler
         _animator = GetComponent<Animator>();
         
         _yPosition = transform.position.y;
-        Assert.IsNotNull(ballPreviewPrefab);
         
         Assert.IsNotNull(ballCollisionAudioPrefab);
         Assert.IsTrue(ballCollisionAudioPrefab.GetComponent<Audio>());
@@ -63,43 +59,14 @@ public class Platform : MonoBehaviour, IBallCollisionHandler
         Assert.IsTrue(bulletPrefab.GetComponent<Bullet>());
         Assert.IsNotNull(bulletAudioPrefab);
         Assert.IsTrue(bulletAudioPrefab.GetComponent<Audio>());
-
-        _ballPreviewsInstances = new Dictionary<int, List<GameObject>>();
     }
 
     private void FixedUpdate()
     {
         MovePlatform();
+        HandleTriggers();
         FixVerticalVelocity();
-        UpdatePreviewBalls();
         UpdateFire();
-    }
-
-    private void InitializeBallPreviewInstancesForEachBall()
-    {
-        foreach (Ball ball in BallsManager.Instance.AllBalls)
-        {
-            int ballId = ball.GetInstanceID();
-            _ballPreviewsInstances.Add(ballId, new List<GameObject>());
-            
-            for (int i = 0; i < numberOfBallPreviews; i++)
-            {
-                Vector2 ballPreviewCoordinates = new Vector2(ball.transform.position.x,
-                    transform.position.y + minDistanceForBallDirectionPreview + i * ballPreviewDistance);
-                
-                GameObject ballPreviewInstance = ballPreviewPrefab;
-                ballPreviewInstance.SetActive(false);
-                
-                Color ballPreviewColor = ballPreviewInstance.GetComponent<SpriteRenderer>().color;
-                ballPreviewColor.a = (numberOfBallPreviews + 1f - (i + 1f)) / numberOfBallPreviews;
-                ballPreviewInstance.GetComponent<SpriteRenderer>().color = ballPreviewColor;
-                
-                GameObject ballPreviewCreatedInstance = Instantiate(ballPreviewInstance, ballPreviewCoordinates, Quaternion.identity);
-                _ballPreviewsInstances[ballId].Add(ballPreviewCreatedInstance);
-            }
-            
-            Debug.Log($"<color=red>Added ball {ballId} with {_ballPreviewsInstances[ballId].Count} preview balls</color>");
-        }
     }
     
     /// <summary>
@@ -109,7 +76,6 @@ public class Platform : MonoBehaviour, IBallCollisionHandler
     {
         UpdatePlatformSize(PlatformSize);
         Debug.Log($"[Platform / {name}] Start animation");
-        InitializeBallPreviewInstancesForEachBall();
         _animator.SetTrigger(AnimationTriggerSpawn);
     }
 
@@ -204,28 +170,6 @@ public class Platform : MonoBehaviour, IBallCollisionHandler
 
         UpdatePlatformSize(newPlatformSizeType);
     }
-    
-    private void UpdatePreviewBalls()
-    {
-        float minX = transform.position.x - _boxCollider.size.x / 2;
-        float maxX = transform.position.x + _boxCollider.size.x / 2;
-
-        foreach (Ball ball in BallsManager.Instance.AllBalls)
-        {
-            float distance = Vector2.Distance(Vector2.up * ball.transform.position.y, Vector2.up * transform.position.y);
-            if (!LevelManager.Instance.LevelState.Equals(ELevelState.GameStarted)
-                || ball.transform.position.x < minX 
-                || ball.transform.position.x > maxX 
-                || distance > ballDistanceToShowPreviewBalls 
-                || ball.Direction.y >= .0f)
-            {
-                UpdatePreviewBallsWithVisibility(ball, false);
-                continue;
-            }
-
-            UpdatePreviewBallsWithVisibility(ball, true);
-        }
-    }
 
     private void UpdateFire()
     {
@@ -252,25 +196,61 @@ public class Platform : MonoBehaviour, IBallCollisionHandler
         }
     }
 
-    private void UpdatePreviewBallsWithVisibility(Ball ball, bool visible)
+    /// <summary>
+    /// Renvoie la coordonnée du Collider le plus haut pour la ball preview.
+    /// </summary>
+    /// <param name="collisionPoint"></param>
+    /// <returns></returns>
+    public Vector2 GetStartPointForBallPreview(Vector2 collisionPoint)
     {
-        int ballId = ball.GetInstanceID();
-        if (!_ballPreviewsInstances.TryGetValue(ballId, out List<GameObject> ballPreviews))
+        Bounds bounds = _boxCollider.bounds;
+
+        return new Vector2(
+            collisionPoint.x,
+            bounds.max.y
+        );
+    }
+    
+    /// <summary>
+    /// Reçoit une notification d'une nouvelle entrée de trigger à traiter.
+    /// </summary>
+    /// <param name="handler"></param>
+    /// <param name="collider2d"></param>
+    public void RegisterTriggerEnter(IPlatformTriggerHandler handler, Collider2D collider2d)
+    {
+        // Un GameObject ne peut entrer en collision qu'une seule fois avec l'objet.
+        // Ce code évite le traitement multiple des collisions pour un seul et même GameObject.
+        if (_pendingTriggersEnter.Exists(platformTrigger => platformTrigger.Handler.Equals(handler)))
+            return;
+        
+        _pendingTriggersEnter.Add(
+            new PlatformTrigger(handler, collider2d));
+    }
+    
+    /// <summary>
+    /// Traite les entrées et sorties de trigger entre 2 frames.
+    /// Uniquement le trigger d'entrée, rien à faire pour le trigger de sortie.
+    /// </summary>
+    private void HandleTriggers()
+    {
+        HandleTriggersEnter();
+    }
+
+    /// <summary>
+    /// Traite chacune des entrées de trigger entre 2 frames.
+    /// </summary>
+    private void HandleTriggersEnter()
+    {
+        if (_pendingTriggersEnter.Count == 0)
             return;
 
-        Vector2 origin = ball.transform.position;
-        Vector2 direction = GetBallNormalizedDirectionFromGivenPosition(origin.x);
-        foreach (GameObject previewBallInstance in ballPreviews)
+        foreach (PlatformTrigger trigger in _pendingTriggersEnter)
         {
-            // Calcul de la coordonnée X en fonction du point d'origine, la direction et la coordonnée Y connue.
-            float targetY = previewBallInstance.transform.position.y;
-            float t = (targetY - origin.y) / direction.y;
-            float targetX = origin.x + t * direction.x;
-            Vector2 ballPreviewCoordinates = new Vector2(targetX, targetY);
-            
-            previewBallInstance.transform.position = ballPreviewCoordinates; 
-            previewBallInstance.SetActive(visible);
+            TriggerResponse _ = trigger.Handler.HandlePlatformTriggerEnter(
+                trigger.Collider, this);
         }
+        
+        _pendingTriggersEnter.Clear();
     }
     
     private void OnCollisionEnter2D(Collision2D other)

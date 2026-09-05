@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PowerUp : MonoBehaviour
+public class PowerUp : MonoBehaviour, IPlatformTriggerHandler
 {
 
     private Rigidbody2D _rigidBody;
@@ -35,13 +35,8 @@ public class PowerUp : MonoBehaviour
     {
         GameObject collidedObject = other.gameObject;
 
-        if (!collidedObject.TryGetComponent(out Platform _))
-            return;
-        
-        Debug.Log($"[PowerUp / {name}] Send notification to {PowerUpsManager.Instance.name} : Activate power up {Type}.");
-        Instantiate(pickupAudioPrefab, transform.position, Quaternion.identity);
-        PowerUpsManager.Instance.ActivatePowerUp(Type);
-        Destroy(gameObject);
+        if (collidedObject.TryGetComponent(out Platform platform))
+            platform.RegisterTriggerEnter(this, other);
     }
 
     private void ThrowPowerUp()
@@ -50,5 +45,24 @@ public class PowerUp : MonoBehaviour
         var targetVelocityY = -speed;
         _rigidBody.linearVelocityY = Mathf.SmoothDamp(currentVelocityY, targetVelocityY, ref _refZeroVelocity, .0f);
     }
-    
+
+    public TriggerResponse HandlePlatformTriggerEnter(Collider2D _, Platform platform)
+    {
+        Instantiate(pickupAudioPrefab, transform.position, Quaternion.identity);
+        PowerUpsManager.Instance.ActivatePowerUp(Type);
+        Destroy(gameObject);
+        
+        return new TriggerResponse();
+    }
+
+    /// <summary>
+    /// Aucune implémentation prévue à cet effet.
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="__"></param>
+    /// <returns></returns>
+    public TriggerResponse HandlePlatformTriggerExit(Collider2D _, Platform __)
+    {
+        return new TriggerResponse();
+    }
 }

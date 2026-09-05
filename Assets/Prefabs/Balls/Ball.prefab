@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2870857734954478953}
   - component: {fileID: 4252231004838117511}
   - component: {fileID: 4665327464070248783}
+  - component: {fileID: 1916504635464750040}
   m_Layer: 17
   m_Name: Ball
   m_TagString: Ball
@@ -195,3 +196,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1916504635464750040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5044536792486844678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58d6f2a946a4e75a1693c3076fa8088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballReflectionPreviewPrefab: {fileID: 7392780525699250837, guid: 7691a7afc96e53d479805f44438df77c, type: 3}
+  numberOfBallPreviews: 5
+  ballDistanceToShowPreviewBalls: 7.5
+  distanceBetweenPlatformAndFirstBallPreviewInstance: 0.5
+  distanceBetweenTwoBallPreviewInstances: 0.75
+  alphaMin: 1
+  alphaMax: 0.25

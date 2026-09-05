@@ -66,8 +66,6 @@ public class PowerUpsManager : MonoBehaviour
     /// <param name="powerUpType"></param>
     public void ActivatePowerUp(EPowerUp powerUpType)
     {
-        Debug.Log($"[<color=orange>PowerUpsManager / {name}</color>] Received notification : Activate power up {powerUpType}.");
-
         switch (powerUpType)
         {
             case EPowerUp.BallBigger:

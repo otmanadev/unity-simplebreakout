@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a777de5877b864842b65e7700867df89, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1cf8a0009d2f08741999e9963bc8d94b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 935c588ecc9dda547b5d012249d5f1be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 3
   speed: 3.5
   pickupAudioPrefab: {fileID: 5779626372241303908, guid: 8e5556db86e6c7e4eb97f207e6fdcb25, type: 3}
 --- !u!50 &2500923717011504340
