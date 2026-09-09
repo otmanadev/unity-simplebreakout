@@ -1,19 +1,21 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(SpriteRenderer))]
 public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandler
 {
 
     private static readonly String AnimationTriggerSpawn = "SpawnTrigger";
     
+    [Header("References")]
     private BoxCollider2D _boxCollider2D;
     private Animator _animator;
-    private SpriteRenderer _spriteRenderer;
+    [SerializeField] private SpriteRenderer outlineSpriteRenderer;
+    [SerializeField] private SpriteRenderer backgroundSpriteRenderer;
     
     private List<IBrickPassive> _brickPassives = new List<IBrickPassive>();
     public List<IBrickPassive> BrickPassives => _brickPassives;
@@ -23,6 +25,10 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
 
     [Header("Health")]
     [SerializeField, Min(0)] private int health;
+    [SerializeField, Min(.0f)] private float hitDuration;
+    [SerializeField] private Color backgroundColorWhenHit;
+    [SerializeField] private Color defaultBackgroundColor;
+    private Coroutine _coroutineDamageColor = null;
     
     [Header("Collision Properties")]
     [SerializeField] private GameObject brickHitAudioPrefab;
@@ -32,7 +38,9 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        
+        Assert.IsNotNull(outlineSpriteRenderer);
+        Assert.IsNotNull(backgroundSpriteRenderer);
         
         Assert.IsNotNull(brickHitAudioPrefab);
         Assert.IsTrue(brickHitAudioPrefab.GetComponent<Audio>());
@@ -79,7 +87,7 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
         if (powerUp.BrickMaterial != null)
         {
             Material material = new Material(powerUp.BrickMaterial);
-            _spriteRenderer.material = material;
+            outlineSpriteRenderer.material = material;
         }
     }
 
@@ -95,6 +103,9 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
         if (health > 0)
         {
             Instantiate(brickHitAudioPrefab, transform.position, Quaternion.identity);
+            if (_coroutineDamageColor != null)
+                StopCoroutine(_coroutineDamageColor);
+            _coroutineDamageColor = StartCoroutine(DamageColor());
             foreach (IBrickPassive brickPassive in _brickPassives)
             {
                 brickPassive.OnBrickHurt();
@@ -110,6 +121,27 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
         }
         SpawnAttachedPowerUp();
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Modifie la couleur de la brique de fond lorsqu'il subit des dommages.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator DamageColor()
+    {
+        float elapsedTime = .0f;
+
+        while (elapsedTime < hitDuration)
+        {
+            float t = elapsedTime / hitDuration;
+            
+            backgroundSpriteRenderer.color = Color.Lerp(backgroundColorWhenHit, defaultBackgroundColor, t);
+            
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        
+        backgroundSpriteRenderer.color = defaultBackgroundColor;
     }
 
     /// <summary>
