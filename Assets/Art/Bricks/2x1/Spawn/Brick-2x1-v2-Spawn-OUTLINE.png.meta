@@ -1,43 +1,34 @@
 fileFormatVersion: 2
-guid: 96097e1fc4000a4428d05795c8eb64b9
+guid: 4bc0d1376269d1c4ea6e9a45623d1cb9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3972824572216059100
-    second: Brick-1x1-v2-Spawn-OUTLINE_0
+      213: -4451973786899339302
+    second: Brick-2x1-v2-Spawn-OUTLINE_0
   - first:
-      213: -3702044331126578636
-    second: Brick-1x1-v2-Spawn-OUTLINE_1
+      213: 6689849750842931494
+    second: Brick-2x1-v2-Spawn-OUTLINE_1
   - first:
-      213: -3883390775859651302
-    second: Brick-1x1-v2-Spawn-OUTLINE_2
+      213: -74369253710664786
+    second: Brick-2x1-v2-Spawn-OUTLINE_2
   - first:
-      213: 6071161994734955412
-    second: Brick-1x1-v2-Spawn-OUTLINE_3
+      213: -7344952963898064888
+    second: Brick-2x1-v2-Spawn-OUTLINE_3
   - first:
-      213: -4963948583906908902
-    second: Brick-1x1-v2-Spawn-OUTLINE_4
+      213: -4608249785076370129
+    second: Brick-2x1-v2-Spawn-OUTLINE_4
   - first:
-      213: 1399577140676002128
-    second: Brick-1x1-v2-Spawn-OUTLINE_5
+      213: -3982451782742039297
+    second: Brick-2x1-v2-Spawn-OUTLINE_5
   - first:
-      213: 8775745880721341290
-    second: Brick-1x1-v2-Spawn-OUTLINE_6
+      213: -6033959571197718229
+    second: Brick-2x1-v2-Spawn-OUTLINE_6
   - first:
-      213: 6233788035780112413
-    second: Brick-1x1-v2-Spawn-OUTLINE_7
+      213: -494996014474141386
+    second: Brick-2x1-v2-Spawn-OUTLINE_7
   - first:
-      213: 8959818599737833925
-    second: Brick-1x1-v2-Spawn-OUTLINE_8
-  - first:
-      213: 3258663234576374100
-    second: Brick-1x1-v2-Spawn-OUTLINE_9
-  - first:
-      213: 8360317066443784538
-    second: Brick-1x1-v2-Spawn-OUTLINE_10
-  - first:
-      213: -5598010509843427069
-    second: Brick-1x1-v2-Spawn-OUTLINE_11
+      213: 5005164665528580383
+    second: Brick-2x1-v2-Spawn-OUTLINE_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -133,12 +124,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-OUTLINE_0
+      name: Brick-2x1-v2-Spawn-OUTLINE_0
       rect:
         serializedVersion: 2
-        x: 160
+        x: 640
         y: 0
-        width: 32
+        width: 64
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -148,19 +139,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 42b5e1ab911bdd8c0800000000000000
-      internalID: -3972824572216059100
+      spriteID: ad7a38aad696732c0800000000000000
+      internalID: -4451973786899339302
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-OUTLINE_1
+      name: Brick-2x1-v2-Spawn-OUTLINE_1
       rect:
         serializedVersion: 2
-        x: 192
+        x: 704
         y: 0
-        width: 32
+        width: 64
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -170,19 +161,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 432a37c8b42bf9cc0800000000000000
-      internalID: -3702044331126578636
+      spriteID: 6297abf67ee17dc50800000000000000
+      internalID: 6689849750842931494
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-OUTLINE_2
+      name: Brick-2x1-v2-Spawn-OUTLINE_2
       rect:
         serializedVersion: 2
-        x: 224
+        x: 768
         y: 0
-        width: 32
+        width: 64
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -192,19 +183,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a1d5bd81aac6b1ac0800000000000000
-      internalID: -3883390775859651302
+      spriteID: eab6d5ace89c7fef0800000000000000
+      internalID: -74369253710664786
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-OUTLINE_3
+      name: Brick-2x1-v2-Spawn-OUTLINE_3
       rect:
         serializedVersion: 2
-        x: 256
+        x: 832
         y: 0
-        width: 32
+        width: 64
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -214,19 +205,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 49b6706faa9114450800000000000000
-      internalID: 6071161994734955412
+      spriteID: 80047eec13c711a90800000000000000
+      internalID: -7344952963898064888
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-OUTLINE_4
+      name: Brick-2x1-v2-Spawn-OUTLINE_4
       rect:
         serializedVersion: 2
-        x: 288
+        x: 896
         y: 0
-        width: 32
+        width: 64
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -236,19 +227,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a15ece420138c1bb0800000000000000
-      internalID: -4963948583906908902
+      spriteID: f25b04c6c353c00c0800000000000000
+      internalID: -4608249785076370129
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-OUTLINE_5
+      name: Brick-2x1-v2-Spawn-OUTLINE_5
       rect:
         serializedVersion: 2
-        x: 320
+        x: 960
         y: 0
-        width: 32
+        width: 64
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -258,30 +249,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 05100c18efb4c6310800000000000000
-      internalID: 1399577140676002128
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-OUTLINE_6
-      rect:
-        serializedVersion: 2
-        x: 352
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a6b3e73f166b9c970800000000000000
-      internalID: 8775745880721341290
+      spriteID: ff42a8a143d7bb8c0800000000000000
+      internalID: -3982451782742039297
       vertices: []
       indices: 
       edges: []
@@ -290,7 +259,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: c25443093bf64a04aa2421c5a9f0b46d
+    spriteID: fc956c30b1ad8f34bb52cd696e35de67
     internalID: 0
     vertices: []
     indices: 
@@ -300,13 +269,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Brick-1x1-v2-Spawn-OUTLINE_0: -3972824572216059100
-      Brick-1x1-v2-Spawn-OUTLINE_1: -3702044331126578636
-      Brick-1x1-v2-Spawn-OUTLINE_2: -3883390775859651302
-      Brick-1x1-v2-Spawn-OUTLINE_3: 6071161994734955412
-      Brick-1x1-v2-Spawn-OUTLINE_4: -4963948583906908902
-      Brick-1x1-v2-Spawn-OUTLINE_5: 1399577140676002128
-      Brick-1x1-v2-Spawn-OUTLINE_6: 8775745880721341290
+      Brick-2x1-v2-Spawn-OUTLINE_0: -4451973786899339302
+      Brick-2x1-v2-Spawn-OUTLINE_1: 6689849750842931494
+      Brick-2x1-v2-Spawn-OUTLINE_2: -74369253710664786
+      Brick-2x1-v2-Spawn-OUTLINE_3: -7344952963898064888
+      Brick-2x1-v2-Spawn-OUTLINE_4: -4608249785076370129
+      Brick-2x1-v2-Spawn-OUTLINE_5: -3982451782742039297
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

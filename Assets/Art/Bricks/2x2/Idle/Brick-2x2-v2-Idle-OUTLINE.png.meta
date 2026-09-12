@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4afd8cc40020ae84a90b50f1ddecb250
+guid: d43391cad2ff7f8429f944dabf5de00b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -168846193197275796
-    second: Brick-1x1-v2-Idle-OUTLINE_0
+      213: -6338198245210361606
+    second: Brick-2x2-v2-Idle-OUTLINE_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_0
+      name: Brick-2x2-v2-Idle-OUTLINE_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,42 +115,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c65acc8284328adf0800000000000000
-      internalID: -168846193197275796
+      spriteID: af07b36f6423a08a0800000000000000
+      internalID: -6338198245210361606
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 51ff9c74383b69049ab83ba8d4afb2aa
-      internalID: -1610797654
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_2
+      name: Brick-2x2-v2-Idle-OUTLINE_1
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,42 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9caaaebdd6803f74b9e189590cdf3837
-      internalID: 1688467271
+      spriteID: df44b26132d2bb14b9dca1ac37ae9019
+      internalID: 1748065126
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7adf365d94d8c8445af555a51778282d
-      internalID: 93642514
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_4
+      name: Brick-2x2-v2-Idle-OUTLINE_2
       rect:
         serializedVersion: 2
         x: 128
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,42 +159,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c46561f4122b0941bc1dcba6f041029
-      internalID: 1461706454
+      spriteID: 442213c150c8d8d448899acb8e1da709
+      internalID: 1237577997
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 89b490cfd6b53bb449d95fa216a3dc90
-      internalID: -1806013984
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_6
+      name: Brick-2x2-v2-Idle-OUTLINE_3
       rect:
         serializedVersion: 2
         x: 192
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,42 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 264fb08699bf24c4aad1aa0bbe3b387b
-      internalID: -756135390
+      spriteID: b1d291c011a42c144a9ff8c2d4a257d5
+      internalID: -870977049
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_7
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 41d22e126ba15594f9546d21999f27c8
-      internalID: -1858846840
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_8
+      name: Brick-2x2-v2-Idle-OUTLINE_4
       rect:
         serializedVersion: 2
         x: 256
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -291,42 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d180acb9e360d2041b379bd848d300ad
-      internalID: -2119764058
+      spriteID: 3965ad36266ace5428d1a4ac5483c75d
+      internalID: 630435506
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_9
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78e92731f2f4d8342a02c92025ec8bff
-      internalID: -504465956
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_10
+      name: Brick-2x2-v2-Idle-OUTLINE_5
       rect:
         serializedVersion: 2
         x: 320
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -335,42 +225,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e83023232aff1b345ac6d8905d1c1d8a
-      internalID: -2061259272
+      spriteID: 030070a6d998cde4abca416c8a069cf0
+      internalID: 545972671
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_11
-      rect:
-        serializedVersion: 2
-        x: 352
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3d263b82b87fcc64aaf9e9ccddf8bf87
-      internalID: -1395347661
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_12
+      name: Brick-2x2-v2-Idle-OUTLINE_6
       rect:
         serializedVersion: 2
         x: 384
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -379,42 +247,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22ac62e07822a3c4aae9519b8b6c67cc
-      internalID: -1064985169
+      spriteID: f77c0e2e6635de24aaa2abc1a713b0e1
+      internalID: -2047932539
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_13
-      rect:
-        serializedVersion: 2
-        x: 416
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9fe8fba1443ab641bfd6f83127c426b
-      internalID: 418185726
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_14
+      name: Brick-2x2-v2-Idle-OUTLINE_7
       rect:
         serializedVersion: 2
         x: 448
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -423,42 +269,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52784ba91c75e4445bb4ecd949f3b95e
-      internalID: -35335035
+      spriteID: 54380aff3d20a0548b56a8fdf97f8733
+      internalID: -654853003
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_15
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 536c7d142b99d34468f1c681a6645312
-      internalID: 1323424455
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_16
+      name: Brick-2x2-v2-Idle-OUTLINE_8
       rect:
         serializedVersion: 2
         x: 512
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -467,42 +291,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c02ef280dde4fe4e82886f311c2482a
-      internalID: 1300889702
+      spriteID: c7466ad69d62c1d4cacc9f99c6486450
+      internalID: 268434037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_17
-      rect:
-        serializedVersion: 2
-        x: 544
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c29b202f880163448b9e12bd7833a655
-      internalID: -714395285
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_18
+      name: Brick-2x2-v2-Idle-OUTLINE_9
       rect:
         serializedVersion: 2
         x: 576
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -511,42 +313,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f7579c195048f245b181f273318e119
-      internalID: -1942000874
+      spriteID: 448d5c8fa82623943a351ef47f04b962
+      internalID: -6442250
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_19
-      rect:
-        serializedVersion: 2
-        x: 608
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 605a40cdc21b2b44f82e2167e2ec6a7a
-      internalID: -1815333025
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_20
+      name: Brick-2x2-v2-Idle-OUTLINE_10
       rect:
         serializedVersion: 2
         x: 640
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -555,42 +335,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d386e2ba56092234b8604cf1485916d3
-      internalID: -1862181473
+      spriteID: 24214f529af4a0644ac3236038fac844
+      internalID: 1931858644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_21
-      rect:
-        serializedVersion: 2
-        x: 672
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0deed05d1b6201948ba079589f4776d4
-      internalID: 352496360
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_22
+      name: Brick-2x2-v2-Idle-OUTLINE_11
       rect:
         serializedVersion: 2
         x: 704
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -599,42 +357,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53e5814b53b73004d9371026c364e5de
-      internalID: 307472937
+      spriteID: 343a8792e225dfa429b467765941dc99
+      internalID: -597397266
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_23
-      rect:
-        serializedVersion: 2
-        x: 736
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1873d428aeb6362438908c857ae87efc
-      internalID: 1115367167
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Idle-OUTLINE_24
+      name: Brick-2x2-v2-Idle-OUTLINE_12
       rect:
         serializedVersion: 2
         x: 768
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -643,8 +379,272 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49fee0a92024bb944b5cf958b8c496c7
-      internalID: 1453444537
+      spriteID: 8270ad4a86b3994468a2f1539b2c5ae5
+      internalID: -1950584681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-2x2-v2-Idle-OUTLINE_13
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f62b5c02a394154eb00ec1387fd744d
+      internalID: -1341848388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-2x2-v2-Idle-OUTLINE_14
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 350b4e6b53328f54f960187279a682e2
+      internalID: -731463850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-2x2-v2-Idle-OUTLINE_15
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 010e2ac8ad181f144b034a4291be51f4
+      internalID: -1048220505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-2x2-v2-Idle-OUTLINE_16
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c445157ee66647488acef1fc30785dc
+      internalID: 1259291770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-2x2-v2-Idle-OUTLINE_17
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1da117665b239c449a939ecce7ce8473
+      internalID: 711806035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-2x2-v2-Idle-OUTLINE_18
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ced92ad361ff9764c9b9e28e3be107be
+      internalID: 1455487445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-2x2-v2-Idle-OUTLINE_19
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d2ab8bc7961e0b4da4b35de1847bf0e
+      internalID: 1661825434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-2x2-v2-Idle-OUTLINE_20
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bf942b18afcac040a69fe0a3b27ef52
+      internalID: -1151849966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-2x2-v2-Idle-OUTLINE_21
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80321d6b673ea8947bb48be6b101de76
+      internalID: 1513557222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-2x2-v2-Idle-OUTLINE_22
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a632962cbd5b53459c6d1f5a15cf989
+      internalID: 1405105062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-2x2-v2-Idle-OUTLINE_23
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8256b1f6b606234eab9bb64587aff19
+      internalID: -977244647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-2x2-v2-Idle-OUTLINE_24
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c195a043a2a34e449a3b12371877dfc7
+      internalID: 1861419770
       vertices: []
       indices: 
       edges: []
@@ -653,7 +653,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 74fd613c7add4214fa79485e928e4f3f
+    spriteID: 07b1798eff46781459d4723474ac5d98
     internalID: 0
     vertices: []
     indices: 
@@ -663,31 +663,31 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Brick-1x1-v2-Idle-OUTLINE_0: -168846193197275796
-      Brick-1x1-v2-Idle-OUTLINE_1: -1610797654
-      Brick-1x1-v2-Idle-OUTLINE_10: -2061259272
-      Brick-1x1-v2-Idle-OUTLINE_11: -1395347661
-      Brick-1x1-v2-Idle-OUTLINE_12: -1064985169
-      Brick-1x1-v2-Idle-OUTLINE_13: 418185726
-      Brick-1x1-v2-Idle-OUTLINE_14: -35335035
-      Brick-1x1-v2-Idle-OUTLINE_15: 1323424455
-      Brick-1x1-v2-Idle-OUTLINE_16: 1300889702
-      Brick-1x1-v2-Idle-OUTLINE_17: -714395285
-      Brick-1x1-v2-Idle-OUTLINE_18: -1942000874
-      Brick-1x1-v2-Idle-OUTLINE_19: -1815333025
-      Brick-1x1-v2-Idle-OUTLINE_2: 1688467271
-      Brick-1x1-v2-Idle-OUTLINE_20: -1862181473
-      Brick-1x1-v2-Idle-OUTLINE_21: 352496360
-      Brick-1x1-v2-Idle-OUTLINE_22: 307472937
-      Brick-1x1-v2-Idle-OUTLINE_23: 1115367167
-      Brick-1x1-v2-Idle-OUTLINE_24: 1453444537
-      Brick-1x1-v2-Idle-OUTLINE_3: 93642514
-      Brick-1x1-v2-Idle-OUTLINE_4: 1461706454
-      Brick-1x1-v2-Idle-OUTLINE_5: -1806013984
-      Brick-1x1-v2-Idle-OUTLINE_6: -756135390
-      Brick-1x1-v2-Idle-OUTLINE_7: -1858846840
-      Brick-1x1-v2-Idle-OUTLINE_8: -2119764058
-      Brick-1x1-v2-Idle-OUTLINE_9: -504465956
+      Brick-2x2-v2-Idle-OUTLINE_0: -6338198245210361606
+      Brick-2x2-v2-Idle-OUTLINE_1: 1748065126
+      Brick-2x2-v2-Idle-OUTLINE_10: 1931858644
+      Brick-2x2-v2-Idle-OUTLINE_11: -597397266
+      Brick-2x2-v2-Idle-OUTLINE_12: -1950584681
+      Brick-2x2-v2-Idle-OUTLINE_13: -1341848388
+      Brick-2x2-v2-Idle-OUTLINE_14: -731463850
+      Brick-2x2-v2-Idle-OUTLINE_15: -1048220505
+      Brick-2x2-v2-Idle-OUTLINE_16: 1259291770
+      Brick-2x2-v2-Idle-OUTLINE_17: 711806035
+      Brick-2x2-v2-Idle-OUTLINE_18: 1455487445
+      Brick-2x2-v2-Idle-OUTLINE_19: 1661825434
+      Brick-2x2-v2-Idle-OUTLINE_2: 1237577997
+      Brick-2x2-v2-Idle-OUTLINE_20: -1151849966
+      Brick-2x2-v2-Idle-OUTLINE_21: 1513557222
+      Brick-2x2-v2-Idle-OUTLINE_22: 1405105062
+      Brick-2x2-v2-Idle-OUTLINE_23: -977244647
+      Brick-2x2-v2-Idle-OUTLINE_24: 1861419770
+      Brick-2x2-v2-Idle-OUTLINE_3: -870977049
+      Brick-2x2-v2-Idle-OUTLINE_4: 630435506
+      Brick-2x2-v2-Idle-OUTLINE_5: 545972671
+      Brick-2x2-v2-Idle-OUTLINE_6: -2047932539
+      Brick-2x2-v2-Idle-OUTLINE_7: -654853003
+      Brick-2x2-v2-Idle-OUTLINE_8: 268434037
+      Brick-2x2-v2-Idle-OUTLINE_9: -6442250
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

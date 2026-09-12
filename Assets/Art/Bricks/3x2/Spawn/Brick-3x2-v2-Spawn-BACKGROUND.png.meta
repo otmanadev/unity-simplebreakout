@@ -1,34 +1,31 @@
 fileFormatVersion: 2
-guid: 8950a8c92e315dc48ad97c78fce1b0b6
+guid: 02487e977650d404bb3217388401b87b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -698268727056317839
-    second: Brick-1x1-v2-Spawn-BACKGROUND_0
+      213: 6278249329500082297
+    second: Brick-3x2-v2-Spawn-BACKGROUND_0
   - first:
-      213: 8448576469662352095
-    second: Brick-1x1-v2-Spawn-BACKGROUND_1
+      213: 2207622935084769318
+    second: Brick-3x2-v2-Spawn-BACKGROUND_1
   - first:
-      213: -8726273421223738234
-    second: Brick-1x1-v2-Spawn-BACKGROUND_2
+      213: 4203625766763526388
+    second: Brick-3x2-v2-Spawn-BACKGROUND_2
   - first:
-      213: -2175351334099820324
-    second: Brick-1x1-v2-Spawn-BACKGROUND_3
+      213: -1518832283425046035
+    second: Brick-3x2-v2-Spawn-BACKGROUND_3
   - first:
-      213: -3447074501819071667
-    second: Brick-1x1-v2-Spawn-BACKGROUND_4
+      213: 3009376629527610656
+    second: Brick-3x2-v2-Spawn-BACKGROUND_4
   - first:
-      213: 8428806595738306192
-    second: Brick-1x1-v2-Spawn-BACKGROUND_5
+      213: 6245083016328409046
+    second: Brick-3x2-v2-Spawn-BACKGROUND_5
   - first:
-      213: 1312078740479240063
-    second: Brick-1x1-v2-Spawn-BACKGROUND_6
+      213: -5727647201653183943
+    second: Brick-3x2-v2-Spawn-BACKGROUND_6
   - first:
-      213: 6647320550642929296
-    second: Brick-1x1-v2-Spawn-BACKGROUND_7
-  - first:
-      213: 3730274048236663074
-    second: Brick-1x1-v2-Spawn-BACKGROUND_8
+      213: -3595458935569180925
+    second: Brick-3x2-v2-Spawn-BACKGROUND_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -124,13 +121,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-BACKGROUND_0
+      name: Brick-3x2-v2-Spawn-BACKGROUND_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 96
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,64 +136,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1724b06da404f46f0800000000000000
-      internalID: -698268727056317839
+      spriteID: 970df286082d02750800000000000000
+      internalID: 6278249329500082297
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-BACKGROUND_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fd2c2f3698f5f3570800000000000000
-      internalID: 8448576469662352095
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-BACKGROUND_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 684c603ae8c06e680800000000000000
-      internalID: -8726273421223738234
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-BACKGROUND_3
+      name: Brick-3x2-v2-Spawn-BACKGROUND_1
       rect:
         serializedVersion: 2
         x: 96
         y: 0
-        width: 32
-        height: 32
+        width: 96
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,64 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cd0ee45bc799fc1e0800000000000000
-      internalID: -2175351334099820324
+      spriteID: 620abbbec5d03ae10800000000000000
+      internalID: 2207622935084769318
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-BACKGROUND_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d4384c401088920d0800000000000000
-      internalID: -3447074501819071667
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-BACKGROUND_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 096837be0f229f470800000000000000
-      internalID: 8428806595738306192
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-BACKGROUND_6
+      name: Brick-3x2-v2-Spawn-BACKGROUND_2
       rect:
         serializedVersion: 2
         x: 192
         y: 0
-        width: 32
-        height: 32
+        width: 96
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,108 +180,130 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f776b9ba9a0753210800000000000000
-      internalID: 1312078740479240063
+      spriteID: 4f87e94fc57465a30800000000000000
+      internalID: 4203625766763526388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-BACKGROUND_7
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 09ec93162d6004c50800000000000000
-      internalID: 6647320550642929296
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-BACKGROUND_8
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2213108ab7894c330800000000000000
-      internalID: 3730274048236663074
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-BACKGROUND_9
+      name: Brick-3x2-v2-Spawn-BACKGROUND_3
       rect:
         serializedVersion: 2
         x: 288
         y: 0
-        width: 32
-        height: 32
+        width: 96
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f97a565284d2b02419552b540e7f58be
-      internalID: 2111160406
+      spriteID: de10e09d5160ceae0800000000000000
+      internalID: -1518832283425046035
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-BACKGROUND_10
+      name: Brick-3x2-v2-Spawn-BACKGROUND_4
       rect:
         serializedVersion: 2
-        x: 320
+        x: 384
         y: 0
-        width: 32
-        height: 32
+        width: 96
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 9a94684cbed2eaf4c9e153f80c39d87e
-      internalID: 825635314
+      spriteID: 0250b56a91473c920800000000000000
+      internalID: 3009376629527610656
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick-1x1-v2-Spawn-BACKGROUND_11
+      name: Brick-3x2-v2-Spawn-BACKGROUND_5
       rect:
         serializedVersion: 2
-        x: 352
+        x: 480
         y: 0
-        width: 32
-        height: 32
+        width: 96
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6df641d5aedfaa650800000000000000
+      internalID: 6245083016328409046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-3x2-v2-Spawn-BACKGROUND_6
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 96
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93aa3ba673f4380b0800000000000000
+      internalID: -5727647201653183943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-3x2-v2-Spawn-BACKGROUND_7
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 0
+        width: 96
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30715ecc52d5a1ec0800000000000000
+      internalID: -3595458935569180925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-3x2-v2-Spawn-BACKGROUND_8
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 96
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -381,8 +312,118 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2863d690d5b44a240a991caf972b1a60
-      internalID: -881532410
+      spriteID: 3e82fce3010c53e48b0a25dd32e409b5
+      internalID: 375022164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-3x2-v2-Spawn-BACKGROUND_9
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 0
+        width: 96
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d788e1a0617820a47bf4c5faac0627d3
+      internalID: -558010386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-3x2-v2-Spawn-BACKGROUND_10
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 96
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b371048f08ad3db4eb6429dffe16c68b
+      internalID: -10380538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-3x2-v2-Spawn-BACKGROUND_11
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 0
+        width: 96
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf096b77d01335648b9c5a238e3a689f
+      internalID: 2011690594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-3x2-v2-Spawn-BACKGROUND_12
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 96
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e22eb259d8fa4c4c9de8192b52abf59
+      internalID: 610848938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brick-3x2-v2-Spawn-BACKGROUND_13
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 0
+        width: 96
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c54238a1700c3f2408904303af42f73b
+      internalID: -588188263
       vertices: []
       indices: 
       edges: []
@@ -391,7 +432,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b535c97d2e66a834a9aed32ff65a7d41
+    spriteID: 7810ab3b0d90de64a9157b8b0ed2ca55
     internalID: 0
     vertices: []
     indices: 
@@ -401,18 +442,20 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Brick-1x1-v2-Spawn-BACKGROUND_0: -698268727056317839
-      Brick-1x1-v2-Spawn-BACKGROUND_1: 8448576469662352095
-      Brick-1x1-v2-Spawn-BACKGROUND_10: 825635314
-      Brick-1x1-v2-Spawn-BACKGROUND_11: -881532410
-      Brick-1x1-v2-Spawn-BACKGROUND_2: -8726273421223738234
-      Brick-1x1-v2-Spawn-BACKGROUND_3: -2175351334099820324
-      Brick-1x1-v2-Spawn-BACKGROUND_4: -3447074501819071667
-      Brick-1x1-v2-Spawn-BACKGROUND_5: 8428806595738306192
-      Brick-1x1-v2-Spawn-BACKGROUND_6: 1312078740479240063
-      Brick-1x1-v2-Spawn-BACKGROUND_7: 6647320550642929296
-      Brick-1x1-v2-Spawn-BACKGROUND_8: 3730274048236663074
-      Brick-1x1-v2-Spawn-BACKGROUND_9: 2111160406
+      Brick-3x2-v2-Spawn-BACKGROUND_0: 6278249329500082297
+      Brick-3x2-v2-Spawn-BACKGROUND_1: 2207622935084769318
+      Brick-3x2-v2-Spawn-BACKGROUND_10: -10380538
+      Brick-3x2-v2-Spawn-BACKGROUND_11: 2011690594
+      Brick-3x2-v2-Spawn-BACKGROUND_12: 610848938
+      Brick-3x2-v2-Spawn-BACKGROUND_13: -588188263
+      Brick-3x2-v2-Spawn-BACKGROUND_2: 4203625766763526388
+      Brick-3x2-v2-Spawn-BACKGROUND_3: -1518832283425046035
+      Brick-3x2-v2-Spawn-BACKGROUND_4: 3009376629527610656
+      Brick-3x2-v2-Spawn-BACKGROUND_5: 6245083016328409046
+      Brick-3x2-v2-Spawn-BACKGROUND_6: -5727647201653183943
+      Brick-3x2-v2-Spawn-BACKGROUND_7: -3595458935569180925
+      Brick-3x2-v2-Spawn-BACKGROUND_8: 375022164
+      Brick-3x2-v2-Spawn-BACKGROUND_9: -558010386
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
