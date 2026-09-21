@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: background-tiles-v1_1
+  m_Name: background-tiles-v2_18
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 892434962, guid: 217ac1c9401973640908c8f47459d902, type: 3}
+  m_Sprite: {fileID: -1906810862, guid: 563ea03c3159248488fe7df4bff6341a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

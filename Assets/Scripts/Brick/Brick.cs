@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Animator))]
@@ -19,6 +20,9 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
     
     private List<IBrickPassive> _brickPassives = new List<IBrickPassive>();
     public List<IBrickPassive> BrickPassives => _brickPassives;
+
+    [Header("Spawn Properties")] 
+    [SerializeField, Min(0f)] private float maxRandomTimeSpawn = .35f;
     
     [Header("Attached Power Up")]
     [SerializeField] private SOPowerUp powerUp;
@@ -27,7 +31,7 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
     [SerializeField, Min(0)] private int health;
     [SerializeField, Min(.0f)] private float hitDuration;
     [SerializeField] private Color backgroundColorWhenHit;
-    [SerializeField] private Color defaultBackgroundColor;
+    private Color _defaultBackgroundColor;
     private Coroutine _coroutineDamageColor = null;
     
     [Header("Collision Properties")]
@@ -48,6 +52,8 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
         Assert.IsNotNull(brickDestroyedAudioPrefab);
         Assert.IsTrue(brickDestroyedAudioPrefab.GetComponent<Audio>());
 
+        _defaultBackgroundColor = backgroundSpriteRenderer.color;
+
         CheckHasAttachedPowerUp();
     }
 
@@ -65,7 +71,14 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
     /// </summary>
     public void StartBrickSpawn()
     {
-        Debug.Log($"[Brick / {name}] Start animation");
+        float waitTime = Random.Range(.0f, maxRandomTimeSpawn);
+        Debug.Log($"[Brick / {name}] Start animation {waitTime} in seconds");
+        StartCoroutine(BrickSpawnCoroutine(waitTime));
+    }
+
+    private IEnumerator BrickSpawnCoroutine(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
         _animator.SetTrigger(AnimationTriggerSpawn);
     }
 
@@ -135,13 +148,13 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
         {
             float t = elapsedTime / hitDuration;
             
-            backgroundSpriteRenderer.color = Color.Lerp(backgroundColorWhenHit, defaultBackgroundColor, t);
+            backgroundSpriteRenderer.color = Color.Lerp(backgroundColorWhenHit, _defaultBackgroundColor, t);
             
             elapsedTime += Time.deltaTime;
             yield return null;
         }
         
-        backgroundSpriteRenderer.color = defaultBackgroundColor;
+        backgroundSpriteRenderer.color = _defaultBackgroundColor;
     }
 
     /// <summary>

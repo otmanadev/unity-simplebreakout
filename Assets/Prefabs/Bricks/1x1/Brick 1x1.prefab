@@ -205,6 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineSpriteRenderer: {fileID: 2561714519620585432}
   backgroundSpriteRenderer: {fileID: 6731199821522777554}
+  maxRandomTimeSpawn: 0.35
   powerUp: {fileID: 0}
   health: 2
   hitDuration: 0.35
@@ -289,7 +290,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 2967591154912318497, guid: 8048e1bfe2e5fdc4ba880457c2df27cc, type: 3}
-  m_Color: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
+  m_Color: {r: 0.09803922, g: 0.09803922, b: 0.09803922, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

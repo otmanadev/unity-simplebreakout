@@ -183,11 +183,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineSpriteRenderer: {fileID: 5775195969557941723}
   backgroundSpriteRenderer: {fileID: 333841389153928058}
+  maxRandomTimeSpawn: 0.35
   powerUp: {fileID: 0}
   health: 10
   hitDuration: 0.5
   backgroundColorWhenHit: {r: 0.3019608, g: 0.0627451, b: 0.0627451, a: 1}
-  defaultBackgroundColor: {r: 0.16078432, g: 0.16078432, b: 0.16078432, a: 1}
   brickHitAudioPrefab: {fileID: 5779626372241303908, guid: 2c0eb478adec5d74fab5a0c31d74ceda, type: 3}
   brickDestroyedAudioPrefab: {fileID: 5779626372241303908, guid: 6cd42501346a2bb40a016546cd270aaa, type: 3}
 --- !u!95 &7185196002364772294
@@ -289,7 +289,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 4793665352425002412, guid: 2ce99be8295aa004690ccecf596139f9, type: 3}
-  m_Color: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
+  m_Color: {r: 0.09803922, g: 0.09803922, b: 0.09803922, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
