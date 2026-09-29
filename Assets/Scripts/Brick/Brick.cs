@@ -30,8 +30,10 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
     [Header("Health")]
     [SerializeField, Min(0)] private int health;
     [SerializeField, Min(.0f)] private float hitDuration;
+    [SerializeField] private Color outlineColorWhenHit;
     [SerializeField] private Color backgroundColorWhenHit;
     private Color _defaultBackgroundColor;
+    private Color _defaultOutlineColor;
     private Coroutine _coroutineDamageColor = null;
     
     [Header("Collision Properties")]
@@ -53,6 +55,7 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
         Assert.IsTrue(brickDestroyedAudioPrefab.GetComponent<Audio>());
 
         _defaultBackgroundColor = backgroundSpriteRenderer.color;
+        _defaultOutlineColor = outlineSpriteRenderer.color;
 
         CheckHasAttachedPowerUp();
     }
@@ -147,13 +150,15 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
         while (elapsedTime < hitDuration)
         {
             float t = elapsedTime / hitDuration;
-            
+
+            outlineSpriteRenderer.color = Color.Lerp(outlineColorWhenHit, _defaultOutlineColor, t);
             backgroundSpriteRenderer.color = Color.Lerp(backgroundColorWhenHit, _defaultBackgroundColor, t);
-            
+
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
+
+        outlineSpriteRenderer.color = _defaultOutlineColor;
         backgroundSpriteRenderer.color = _defaultBackgroundColor;
     }
 
