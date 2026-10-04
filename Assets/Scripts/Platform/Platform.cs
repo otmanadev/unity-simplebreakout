@@ -19,6 +19,7 @@ public class Platform : MonoBehaviour, IBallCollisionHandler
     private Rigidbody2D _rigidBody;
     private BoxCollider2D _boxCollider;
     private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
     
     [SerializeField] private EPlatformSize platformSize;
     public EPlatformSize PlatformSize => platformSize;
@@ -49,6 +50,7 @@ public class Platform : MonoBehaviour, IBallCollisionHandler
         _rigidBody = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         
         _yPosition = transform.position.y;
         
@@ -59,6 +61,8 @@ public class Platform : MonoBehaviour, IBallCollisionHandler
         Assert.IsTrue(bulletPrefab.GetComponent<Bullet>());
         Assert.IsNotNull(bulletAudioPrefab);
         Assert.IsTrue(bulletAudioPrefab.GetComponent<Audio>());
+        
+        _spriteRenderer.enabled = false;
     }
 
     private void FixedUpdate()
@@ -74,6 +78,7 @@ public class Platform : MonoBehaviour, IBallCollisionHandler
     /// </summary>
     public void SpawnPlatform()
     {
+        _spriteRenderer.enabled = true;
         UpdatePlatformSize(PlatformSize);
         Debug.Log($"[Platform / {name}] Start animation");
         _animator.SetTrigger(AnimationTriggerSpawn);

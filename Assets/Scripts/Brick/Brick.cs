@@ -57,6 +57,9 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
         _defaultBackgroundColor = backgroundSpriteRenderer.color;
         _defaultOutlineColor = outlineSpriteRenderer.color;
 
+        backgroundSpriteRenderer.enabled = false;
+        outlineSpriteRenderer.enabled = false;
+
         CheckHasAttachedPowerUp();
     }
 
@@ -74,6 +77,8 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
     /// </summary>
     public void StartBrickSpawn()
     {
+        backgroundSpriteRenderer.enabled = true;
+        outlineSpriteRenderer.enabled = true;
         float waitTime = Random.Range(.0f, maxRandomTimeSpawn);
         Debug.Log($"[Brick / {name}] Start animation {waitTime} in seconds");
         StartCoroutine(BrickSpawnCoroutine(waitTime));

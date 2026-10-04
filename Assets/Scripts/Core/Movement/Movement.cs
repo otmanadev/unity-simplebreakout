@@ -8,7 +8,7 @@ public class Movement
 {
 
     [SerializeField, Min(0f)] private float movementSpeed;
-    public float MovementSpeed => movementSpeed;
+    public float MovementSpeed { get { return movementSpeed; } set { movementSpeed = value; } }
     
     [SerializeField] private Vector2 direction;
     public Vector2 Direction => direction;

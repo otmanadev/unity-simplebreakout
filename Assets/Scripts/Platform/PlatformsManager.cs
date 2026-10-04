@@ -14,6 +14,7 @@ public class PlatformsManager : Manager
 
     [Header("Inputs")] 
     public float inputHorizontalDirection = .0f;
+    public bool canFire = true;
     public bool inputFirePressed = false;
 
     [Header("Controls")] 
@@ -73,7 +74,7 @@ public class PlatformsManager : Manager
     /// <param name="callbackContext"></param>
     public void CallbackFireAction(InputAction.CallbackContext callbackContext)
     {
-        if (callbackContext.performed) return;
+        if (callbackContext.performed || !canFire) return;
         
         if (callbackContext.started) inputFirePressed = true;
         

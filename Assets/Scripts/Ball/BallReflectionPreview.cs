@@ -78,7 +78,7 @@ public class BallReflectionPreview : MonoBehaviour
     /// <summary>
     /// Détruit les BallPreview existants s'il y en a de référencé.
     /// </summary>
-    private void ClearCurrentBallPreviews()
+    public void ClearCurrentBallPreviews()
     {
         if (_ballReflectionPreviewInstances.Count == 0)
             return;

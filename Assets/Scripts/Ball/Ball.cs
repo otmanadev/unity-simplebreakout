@@ -7,6 +7,7 @@ using UnityEngine.Assertions;
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(BallReflectionPreview))]
 public class Ball : MonoBehaviour
 {
     
@@ -19,6 +20,8 @@ public class Ball : MonoBehaviour
     private Rigidbody2D _rigidBody;
     private CircleCollider2D _circleCollider;
     private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
+    private BallReflectionPreview _ballReflectionPreview;
 
     [SerializeField] private EBallSize ballSize;
     public EBallSize BallSize => ballSize;
@@ -33,9 +36,6 @@ public class Ball : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private Movement movement;
     public Movement Movement => movement;
-    
-    private Vector2 _direction;
-    public Vector2 Direction => _direction;
     private Vector2 _refZeroVelocity = Vector2.zero;
     
     [Header("Collisions & Triggers")]
@@ -51,11 +51,15 @@ public class Ball : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _circleCollider = GetComponent<CircleCollider2D>();
         _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _ballReflectionPreview = GetComponent<BallReflectionPreview>();
         
         Assert.IsNotNull(hitPlatformAudioPrefab);
         Assert.IsTrue(hitPlatformAudioPrefab.GetComponent<Audio>());
         
         _circleCollider.enabled = false;
+        _spriteRenderer.enabled = false;
+        DisableBallPreview();
     }
 
     private void FixedUpdate()
@@ -70,6 +74,7 @@ public class Ball : MonoBehaviour
     /// </summary>
     public void StartMoveBall()
     {
+        EnableBallPreview();
         _circleCollider.enabled = true;
     }
     
@@ -81,6 +86,17 @@ public class Ball : MonoBehaviour
         Vector2 currentVelocity = _rigidBody.linearVelocity;
         Vector2 targetVelocity = BallsManager.Instance.MovementMultiplier * movement.GetMovementDirection;
         _rigidBody.linearVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref _refZeroVelocity, .0f);
+    }
+
+    private void EnableBallPreview()
+    {
+        _ballReflectionPreview.enabled = true;
+    }
+
+    private void DisableBallPreview()
+    {
+        _ballReflectionPreview.ClearCurrentBallPreviews();
+        _ballReflectionPreview.enabled = false;
     }
 
     // ///////////////////////////////////////////////////////////////
@@ -208,6 +224,7 @@ public class Ball : MonoBehaviour
     /// </summary>
     public void SpawnBall()
     {
+        _spriteRenderer.enabled = true;
         UpdateBallSize(BallSize);
         Debug.Log($"[Ball / {name}] Start animation");
         _animator.SetTrigger(AnimationTriggerSpawn);
@@ -230,8 +247,10 @@ public class Ball : MonoBehaviour
     /// </summary>
     public void DespawnBall()
     {
+        DisableBallPreview();
         _circleCollider.enabled = false;
         movement.UpdateDirectionNormalized(Vector2.zero);
+        _rigidBody.linearVelocity = Vector2.zero;
         _animator.SetTrigger(AnimationTriggerDespawn);
     }
     
@@ -283,6 +302,7 @@ public class Ball : MonoBehaviour
         _animator.SetInteger(AnimationIntegerBallSizeLevel, ballSizeProperties.SizeLevel);
         _circleCollider.radius = ballSizeProperties.ColliderRadius;
         damage = ballSizeProperties.Damage;
+        Movement.MovementSpeed = ballSizeProperties.Speed;
     }
     
 }
