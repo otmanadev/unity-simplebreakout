@@ -173,6 +173,9 @@ MonoBehaviour:
     movementSpeed: 0
     direction: {x: 0, y: -1}
     movementBonuses: []
+  platformLayerToAvoidWhenGoingUp:
+    serializedVersion: 2
+    m_Bits: 65536
   hitPlatformAudioPrefab: {fileID: 5779626372241303908, guid: 968c2a05e94c6984eba7b3b91f63d46e, type: 3}
 --- !u!95 &4665327464070248783
 Animator:

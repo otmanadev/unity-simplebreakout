@@ -37,12 +37,13 @@ public class Ball : MonoBehaviour
     [SerializeField] private Movement movement;
     public Movement Movement => movement;
     private Vector2 _refZeroVelocity = Vector2.zero;
-    
+
     [Header("Collisions & Triggers")]
+    [SerializeField] private LayerMask platformLayerToAvoidWhenGoingUp;
     private readonly List<BallCollision> _pendingCollisions = new();
     private readonly List<BallTrigger> _pendingTriggersEnter = new();
     private readonly List<BallTrigger> _pendingTriggersExit = new();
-    
+
     [Header("Hit properties")]
     [SerializeField] private GameObject hitPlatformAudioPrefab;
 
@@ -67,6 +68,7 @@ public class Ball : MonoBehaviour
         HandleCollisions();
         HandleTriggers();
         UpdateBallVelocity();
+        UpdateCollisions();
     }
 
     /// <summary>
@@ -213,6 +215,20 @@ public class Ball : MonoBehaviour
         }
         
         _pendingTriggersExit.Clear();
+    }
+    
+    
+    /// <summary>
+    /// Met à jour les collisions de la balle.
+    /// </summary>
+    private void UpdateCollisions()
+    {
+        if (_rigidBody.linearVelocityY >= .0f)
+        {
+            LayerUtils.AddExcludeLayerToCollider(_circleCollider, platformLayerToAvoidWhenGoingUp);
+            return;
+        }
+        LayerUtils.RemoveExcludeLayerToCollider(_circleCollider, platformLayerToAvoidWhenGoingUp);
     }
 
     // ///////////////////////////////////////////////////////////////

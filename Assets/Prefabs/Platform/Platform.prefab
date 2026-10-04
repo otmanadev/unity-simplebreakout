@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8982948839642095279}
   - component: {fileID: 7717173952702929010}
   - component: {fileID: 5750553333060297510}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -181,11 +181,6 @@ MonoBehaviour:
   smoothTimeSpeed: 0.05
   ballCollisionAudioPrefab: {fileID: 5779626372241303908, guid: 968c2a05e94c6984eba7b3b91f63d46e, type: 3}
   maxAngleOnCorners: 30
-  ballPreviewPrefab: {fileID: 7392780525699250837, guid: 7691a7afc96e53d479805f44438df77c, type: 3}
-  ballDistanceToShowPreviewBalls: 7.5
-  numberOfBallPreviews: 5
-  minDistanceForBallDirectionPreview: 1
-  ballPreviewDistance: 0.75
   bulletPrefab: {fileID: 6558989489541313429, guid: 3e44b96fbcd27624b990dc760f260f7e, type: 3}
   bulletAudioPrefab: {fileID: 5779626372241303908, guid: 8cb9af289c2fc224cadc531111ca6b83, type: 3}
   fireRate: 0.5
