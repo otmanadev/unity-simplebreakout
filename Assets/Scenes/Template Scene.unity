@@ -649,6 +649,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 498536436}
     - target: {fileID: 2955455904966476324, guid: 893afe87e0fcf494195d733aef4b32c9, type: 3}
+      propertyPath: gameUICanvasRenderer
+      value: 
+      objectReference: {fileID: 3315698769327319016}
+    - target: {fileID: 2955455904966476324, guid: 893afe87e0fcf494195d733aef4b32c9, type: 3}
       propertyPath: 'endLevelSequence.stepsGroups.Array.data[0].steps.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
@@ -1401,6 +1405,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1992033966083655920, guid: 8ab06c635f79da04e9998c890349520c, type: 3}
+      propertyPath: gameUICanvasRenderer
+      value: 
+      objectReference: {fileID: 3315698769327319016}
     - target: {fileID: 6652667727446222225, guid: 8ab06c635f79da04e9998c890349520c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.4697533
@@ -1445,6 +1453,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level Sequence
       objectReference: {fileID: 0}
+    - target: {fileID: 8031194263749675189, guid: 8ab06c635f79da04e9998c890349520c, type: 3}
+      propertyPath: gameUICanvasRenderer
+      value: 
+      objectReference: {fileID: 3315698769327319016}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1879,6 +1891,11 @@ PrefabInstance:
 --- !u!222 &3315698769327319015 stripped
 CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 6857459763706714118, guid: 9c84a457b4e3baa448d4563d71f33abc, type: 3}
+  m_PrefabInstance: {fileID: 3315698769327319014}
+  m_PrefabAsset: {fileID: 0}
+--- !u!222 &3315698769327319016 stripped
+CanvasRenderer:
+  m_CorrespondingSourceObject: {fileID: 1565221137918090936, guid: 9c84a457b4e3baa448d4563d71f33abc, type: 3}
   m_PrefabInstance: {fileID: 3315698769327319014}
   m_PrefabAsset: {fileID: 0}
 --- !u!1839735485 &3420659635418650598

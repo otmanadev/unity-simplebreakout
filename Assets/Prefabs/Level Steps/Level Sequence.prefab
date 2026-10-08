@@ -32,6 +32,7 @@ Transform:
   - {fileID: 506236581894286109}
   - {fileID: 5110103038601000288}
   - {fileID: 1806766442074854710}
+  - {fileID: 1953308355844987173}
   m_Father: {fileID: 6652667727446222225}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1651644611226135260
@@ -166,6 +167,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5f887df3eb76147a85138869427011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3657864310156919967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9206244840196898194}
+  - component: {fileID: 1992033966083655920}
+  m_Layer: 0
+  m_Name: Level Step - Game UI Step Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9206244840196898194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3657864310156919967}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9031004311160438532}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1992033966083655920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3657864310156919967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0631f173c4f47b09ccad72cd99608c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameUICanvasRenderer: {fileID: 0}
+  hasToBeTransparent: 1
+  durationTime: 2.5
 --- !u!1 &3701671796429607709
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,6 +290,7 @@ Transform:
   - {fileID: 2025356904529509081}
   - {fileID: 444773765749355788}
   - {fileID: 645802530839340353}
+  - {fileID: 9206244840196898194}
   m_Father: {fileID: 6652667727446222225}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6429317030816934343
@@ -288,6 +337,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4882e5de3ae84cb5b9d357f0188a834a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7153495529306238708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1953308355844987173}
+  - component: {fileID: 8031194263749675189}
+  m_Layer: 0
+  m_Name: Level Step - Game UI Step Despawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1953308355844987173
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153495529306238708}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8482280903991646503}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8031194263749675189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153495529306238708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0631f173c4f47b09ccad72cd99608c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameUICanvasRenderer: {fileID: 0}
+  hasToBeTransparent: 0
+  durationTime: 2.5
 --- !u!1 &7641264972407109406
 GameObject:
   m_ObjectHideFlags: 0

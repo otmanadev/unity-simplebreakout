@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     private ELevelState _levelState;
     public ELevelState LevelState => _levelState;
 
+    [SerializeField] private CanvasRenderer gameUICanvasRenderer;
     [SerializeField] private LevelSequence startLevelSequence;
     [SerializeField] private LevelSequence endLevelSequence;
 
@@ -22,7 +23,8 @@ public class LevelManager : MonoBehaviour
             return;
         }
         Instance = this;
-        
+
+        Assert.IsNotNull(gameUICanvasRenderer);
         Assert.IsNotNull(startLevelSequence);
         Assert.IsNotNull(endLevelSequence);
     }
@@ -46,6 +48,7 @@ public class LevelManager : MonoBehaviour
             case ELevelState.LoadingObjects:
                 break;
             case ELevelState.StartSequences:
+                gameUICanvasRenderer.gameObject.SetActive(true);
                 PowerUpsManager.Instance.LinkPowerUpsToBricks();
                 startLevelSequence.StartSequence();
                 break;
