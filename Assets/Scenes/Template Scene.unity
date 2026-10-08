@@ -676,6 +676,14 @@ PrefabInstance:
       propertyPath: 'startLevelSequence.stepsGroups.Array.data[2].steps.Array.data[1]'
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5592490038686989581, guid: 893afe87e0fcf494195d733aef4b32c9, type: 3}
+      propertyPath: textMeshPro
+      value: 
+      objectReference: {fileID: 1297056272}
+    - target: {fileID: 5592490038686989581, guid: 893afe87e0fcf494195d733aef4b32c9, type: 3}
+      propertyPath: dialogCanvasRenderer
+      value: 
+      objectReference: {fileID: 3315698769327319015}
     - target: {fileID: 5773442676479195465, guid: 893afe87e0fcf494195d733aef4b32c9, type: 3}
       propertyPath: m_Name
       value: Manager
@@ -1799,6 +1807,14 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 523999601}
+    - target: {fileID: 4319081941568383865, guid: 9c84a457b4e3baa448d4563d71f33abc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5369198029034258685, guid: 9c84a457b4e3baa448d4563d71f33abc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6150590423656315020, guid: 9c84a457b4e3baa448d4563d71f33abc, type: 3}
       propertyPath: audioSource
       value: 
@@ -1851,11 +1867,20 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 523999601}
+    - target: {fileID: 9016638312888609112, guid: 9c84a457b4e3baa448d4563d71f33abc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c84a457b4e3baa448d4563d71f33abc, type: 3}
+--- !u!222 &3315698769327319015 stripped
+CanvasRenderer:
+  m_CorrespondingSourceObject: {fileID: 6857459763706714118, guid: 9c84a457b4e3baa448d4563d71f33abc, type: 3}
+  m_PrefabInstance: {fileID: 3315698769327319014}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1839735485 &3420659635418650598
 Tilemap:
   m_ObjectHideFlags: 0
@@ -2512,11 +2537,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2955744868208918609, guid: ba0890f3a5da5964da32b2462fd93b86, type: 3}
       propertyPath: m_Name
-      value: Background
-      objectReference: {fileID: 0}
-    - target: {fileID: 2955744868208918609, guid: ba0890f3a5da5964da32b2462fd93b86, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: Space Background
       objectReference: {fileID: 0}
     - target: {fileID: 3481997068186484318, guid: ba0890f3a5da5964da32b2462fd93b86, type: 3}
       propertyPath: m_LocalPosition.x
