@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BricksManager : Manager
+public class BricksManager : MonoBehaviour
 {
     
     public static BricksManager Instance;

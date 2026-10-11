@@ -11,20 +11,9 @@ public class WaitStep : LevelStep
         StartCoroutine(CoroutineWait());
     }
 
-    public override void OnReceivedNotificationFromUnityObject(Object unityObject)
-    {
-        if (unityObject is not WaitStep)
-        {
-            Debug.LogError("[GameUIStep] Notification was received by an Unity object but not a GameUIStep.");
-            return;
-        }
-        
-        OnLevelStepFinishedNotification();
-    }
-
     private IEnumerator CoroutineWait()
     {
         yield return new WaitForSeconds(durationTime);
-        OnReceivedNotificationFromUnityObject(this);
+        OnLevelStepFinishedNotification();
     }
 }

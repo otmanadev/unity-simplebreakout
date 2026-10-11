@@ -77,10 +77,5 @@ public class CameraMovementStep : LevelStep
             enabled = false;
         }
     }
-
-    public override void OnReceivedNotificationFromUnityObject(Object unityObject)
-    {
-        throw new System.NotImplementedException();
-    }
     
 }

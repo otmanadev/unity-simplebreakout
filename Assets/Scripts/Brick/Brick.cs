@@ -12,6 +12,9 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
 
     private static readonly String AnimationTriggerSpawn = "SpawnTrigger";
     
+    public event Action<Brick> OnSpawnAnimationCompleted;
+    public event Action<Brick> OnDespawnAnimationCompleted;
+    
     [Header("References")]
     private BoxCollider2D _boxCollider2D;
     private Animator _animator;
@@ -91,11 +94,11 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
     }
 
     /// <summary>
-    /// Notifie Level Step que l'apparition de la brique s'est finalisée.
+    /// Envoie une notification pour indiquer que la brick a finit de spawn.
     /// </summary>
     public void OnReceiveNotificationFromAnimatorBrickSpawned()
     {
-        BricksManager.Instance.OnReceivedNotificationFromUnityObject(this);
+        OnSpawnAnimationCompleted?.Invoke(this);
     }
     
     /// <summary>

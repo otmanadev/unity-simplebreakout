@@ -17,12 +17,6 @@ public abstract class LevelStep : MonoBehaviour
 
     protected abstract void StartStep();
 
-    /// <summary>
-    /// Réception de la notification d'un objet Unity.
-    /// </summary>
-    /// <param name="unityObject"></param>
-    public abstract void OnReceivedNotificationFromUnityObject(Object unityObject);
-
     protected void OnLevelStepFinishedNotification()
     {
         _stepsGroup.OnLevelStepFinishedNotification();

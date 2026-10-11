@@ -22,6 +22,9 @@ public class Ball : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private BallReflectionPreview _ballReflectionPreview;
+    
+    public event Action<Ball> OnSpawnAnimationCompleted;
+    public event Action<Ball> OnDespawnAnimationCompleted;
 
     [SerializeField] private EBallSize ballSize;
     public EBallSize BallSize => ballSize;
@@ -247,11 +250,11 @@ public class Ball : MonoBehaviour
     }
     
     /// <summary>
-    /// Notifie Level Step que l'apparition de la balle s'est finalisée.
+    /// Envoie une notification pour indiquer que la balle a finit de spawn.
     /// </summary>
     public void OnReceiveNotificationFromAnimatorBallSpawned()
     {
-        BallsManager.Instance.OnReceivedNotificationFromUnityObject(this);
+        OnSpawnAnimationCompleted?.Invoke(this);
     }
     
     // ///////////////////////////////////////////////////////////////
@@ -271,11 +274,11 @@ public class Ball : MonoBehaviour
     }
     
     /// <summary>
-    /// Notify Balls Manager the ball finished his despawn animation.
+    /// Envoie une notification pour indiquer que la balle a finit de despawn, puis s'autodétruit.
     /// </summary>
     public void OnReceiveNotificationFromAnimatorBallDespawned()
     {
-        BallsManager.Instance.OnReceivedNotificationFromUnityObject(this);
+        OnDespawnAnimationCompleted?.Invoke(this);
         Destroy(gameObject);
     }
     

@@ -17,22 +17,11 @@ public class GameUIStep : LevelStep
         if (gameUICanvasRenderer == null)
         {
             Debug.LogError("[GameUIStep] Cannot launch GameUIStep cause it has no reference to Game UI Canvas. Skipping this Step...");
-            OnReceivedNotificationFromUnityObject(this);
+            OnLevelStepFinishedNotification();
             return;
         }
 
         StartCoroutine(CoroutineLerpGameUIAlphaColor());
-    }
-
-    public override void OnReceivedNotificationFromUnityObject(Object unityObject)
-    {
-        if (unityObject is not GameUIStep)
-        {
-            Debug.LogError("[GameUIStep] Notification was received by an Unity object but not a GameUIStep.");
-            return;
-        }
-        
-        OnLevelStepFinishedNotification();
     }
 
     private IEnumerator CoroutineLerpGameUIAlphaColor()
@@ -63,7 +52,7 @@ public class GameUIStep : LevelStep
             Debug.LogError("[GameUIStep] Cannot launch GameUIStep cause it has no reference to Image from Game UI Canvas. Skipping this Step...");
         }
         
-        OnReceivedNotificationFromUnityObject(this);
+        OnLevelStepFinishedNotification();
     }
     
 }

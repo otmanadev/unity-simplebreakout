@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Serialization;
 
-public class BallsManager : Manager
+public class BallsManager : MonoBehaviour
 {
 
     public static BallsManager Instance;

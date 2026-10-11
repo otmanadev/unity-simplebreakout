@@ -7,19 +7,18 @@ public class DialogStep : LevelStep
     
     protected override void StartStep()
     {
-        DialogManager.Instance.SetOrUpdateLevelStep(this);
-        dialog.StartDialog();
+        DialogManager.Instance.OnDialogFinished += OnDialogFinished;
+        DialogManager.Instance.PlayDialog(dialog);
     }
 
-    public override void OnReceivedNotificationFromUnityObject(Object unityObject)
+    public void OnDialogFinished(Dialog playedDialog)
     {
-        if (unityObject is not Dialog)
-        {
-            Debug.LogError("[DialogStep] Notification was received by an Unity object but not a Dialog.");
-            return;
-        }
+        DialogManager.Instance.OnDialogFinished -= OnDialogFinished;
         
-        DialogManager.Instance.ClearLevelStep();
+        if (dialog != playedDialog)
+            return;
+
         OnLevelStepFinishedNotification();
     }
+    
 }

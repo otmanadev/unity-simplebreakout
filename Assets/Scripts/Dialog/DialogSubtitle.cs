@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [Serializable]
-public struct DialogTextDuration
+public struct DialogSubtitle
 {
     
     [SerializeField] private string text;

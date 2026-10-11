@@ -21,6 +21,9 @@ public class Platform : MonoBehaviour, IBallCollisionHandler
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     
+    public event Action<Platform> OnSpawnAnimationCompleted;
+    public event Action<Platform> OnDespawnAnimationCompleted;
+    
     [SerializeField] private EPlatformSize platformSize;
     public EPlatformSize PlatformSize => platformSize;
 
@@ -85,11 +88,11 @@ public class Platform : MonoBehaviour, IBallCollisionHandler
     }
 
     /// <summary>
-    /// Notify Platforms Manager the platform finished his spawn animation.
+    /// Envoie une notification pour indiquer que la plateforme a finit de spawn.
     /// </summary>
     public void OnReceiveNotificationFromAnimatorPlatformSpawned()
     {
-        PlatformsManager.Instance.OnReceivedNotificationFromUnityObject(this);
+        OnSpawnAnimationCompleted?.Invoke(this);
     }
     
     /// <summary>

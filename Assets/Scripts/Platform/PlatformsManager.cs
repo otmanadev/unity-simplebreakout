@@ -4,7 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlatformsManager : Manager
+public class PlatformsManager : MonoBehaviour
 {
     
     public static PlatformsManager Instance;
