@@ -42,6 +42,7 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
     [Header("Collision Properties")]
     [SerializeField] private GameObject brickHitAudioPrefab;
     [SerializeField] private GameObject brickDestroyedAudioPrefab;
+    [SerializeField, UnityEngine.Range(0, 1)] private float ballShakeIntensity = .35f;
     
     protected virtual void Awake()
     {
@@ -60,9 +61,6 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
         _defaultBackgroundColor = backgroundSpriteRenderer.color;
         _defaultOutlineColor = outlineSpriteRenderer.color;
 
-        backgroundSpriteRenderer.enabled = false;
-        outlineSpriteRenderer.enabled = false;
-
         CheckHasAttachedPowerUp();
     }
 
@@ -80,8 +78,6 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
     /// </summary>
     public void StartBrickSpawn()
     {
-        backgroundSpriteRenderer.enabled = true;
-        outlineSpriteRenderer.enabled = true;
         float waitTime = Random.Range(.0f, maxRandomTimeSpawn);
         Debug.Log($"[Brick / {name}] Start animation {waitTime} in seconds");
         StartCoroutine(BrickSpawnCoroutine(waitTime));
@@ -206,7 +202,7 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
         Vector2 normal = collision.GetContact(0).normal;
         Vector2 reflectedDirection = Vector2.Reflect(ball.Movement.Direction, normal);
         
-        CameraManager.Instance.Shake(.35f, reflectedDirection);
+        CameraManager.Instance.Shake(ballShakeIntensity, reflectedDirection);
         
         TryHitBrick(ball.Damage);
         return new CollisionResponse(reflectedDirection);

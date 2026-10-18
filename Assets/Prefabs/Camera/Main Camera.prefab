@@ -175,3 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b96943b7c98af6a4eb00270060110c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _trauma: 0
+  _impactDirection: {x: 0, y: 0}
+  maxOffset: 0.25
+  traumaDecay: 4
+  traumaExponent: 0.5
+  randomInfluence: 0.25

@@ -5,8 +5,10 @@ using UnityEngine;
 public class StaticCollider : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandler
 {
     
-    [Header("Collision Properties")]
+    [Header("Ball Collision Properties")]
     [SerializeField] private GameObject ballCollisionAudioPrefab;
+    
+    [Header("Bullet Collision Properties")]
     [SerializeField] private GameObject bulletCollisionAudioPrefab;
     
     private void Awake()
@@ -35,6 +37,7 @@ public class StaticCollider : MonoBehaviour, IBallCollisionHandler, IBulletColli
     public CollisionResponse HandleBallCollision(Collision2D collision, Ball ball)
     {
         Instantiate(ballCollisionAudioPrefab, collision.transform.position, Quaternion.identity);
+        
         Vector2 normal = Vector2.zero;
 
         for (int i = 0; i < collision.contactCount; i++)

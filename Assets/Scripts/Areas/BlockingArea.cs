@@ -8,8 +8,10 @@ public class BlockingArea : Area, IBallCollisionHandler, IBulletCollisionHandler
     private readonly List<int> _triggeredBalls = new();
     private readonly List<Bullet> _triggeredBullets = new();
     
-    [Header("Collision Properties")]
+    [Header("Ball Collision Properties")]
     [SerializeField] private GameObject ballCollisionAudioPrefab;
+    
+    [Header("Bullet Collision Properties")]
     [SerializeField] private GameObject bulletCollisionAudioPrefab;
 
     protected override void Awake()
@@ -98,6 +100,7 @@ public class BlockingArea : Area, IBallCollisionHandler, IBulletCollisionHandler
     public CollisionResponse HandleBallCollision(Collision2D collision, Ball ball)
     {
         Instantiate(ballCollisionAudioPrefab, collision.transform.position, Quaternion.identity);
+        
         Vector2 normal = collision.GetContact(0).normal;
         Vector2 reflectedDirection = Vector2.Reflect(ball.Movement.Direction, normal);
         return new CollisionResponse(reflectedDirection);
