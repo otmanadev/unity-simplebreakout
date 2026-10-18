@@ -206,6 +206,8 @@ public class Brick : MonoBehaviour, IBallCollisionHandler, IBulletCollisionHandl
         Vector2 normal = collision.GetContact(0).normal;
         Vector2 reflectedDirection = Vector2.Reflect(ball.Movement.Direction, normal);
         
+        CameraManager.Instance.Shake(.35f, reflectedDirection);
+        
         TryHitBrick(ball.Damage);
         return new CollisionResponse(reflectedDirection);
     }

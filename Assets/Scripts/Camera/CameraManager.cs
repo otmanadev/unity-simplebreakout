@@ -12,10 +12,18 @@ public class CameraManager : MonoBehaviour
     
     private Camera _camera;
     private PixelPerfectCamera _pixelPerfectCamera;
+    
+    private Vector3 _cameraPosition;
 
-    [Header("Movement")] 
-    private bool _isMoving;
     public event Action OnCameraMovementCompleted;
+
+    [Header("Shake Properties")] 
+    [SerializeField] private float _trauma;
+    [SerializeField] private Vector2 _impactDirection;
+    [SerializeField] private float maxOffset = 0.15f;
+    [SerializeField] private float traumaDecay = 3;
+    [SerializeField] private float traumaExponent = 2;
+    [SerializeField] private float randomInfluence = 0.2f;
 
     private void Awake()
     {
@@ -28,6 +36,13 @@ public class CameraManager : MonoBehaviour
         
         _camera = GetComponent<Camera>();
         _pixelPerfectCamera = GetComponent<PixelPerfectCamera>();
+        
+        _cameraPosition = transform.position;
+    }
+
+    private void LateUpdate()
+    {
+        UpdateShakeCameraCoordinates();
     }
 
     /// <summary>
@@ -56,15 +71,16 @@ public class CameraManager : MonoBehaviour
     {
         float elapsedTime = 0.0f;
         float t = 0.0f;
-        Vector3 sourcePosition = _camera.transform.position;
+        Vector3 sourcePosition = _cameraPosition;
         int sourcePixelsPerUnit = _pixelPerfectCamera.assetsPPU;
 
         Debug.Log($"[CameraManager] Moving camera from {sourcePosition} (PPU {sourcePixelsPerUnit}) to {targetPosition} (PPU {targetPixelsPerUnit}) in {duration} seconds.]");
         while (elapsedTime < duration)
         {
-            _camera.transform.position = Vector3.Lerp(sourcePosition, 
+            _cameraPosition = Vector3.Lerp(sourcePosition, 
                 new Vector3(targetPosition.x, targetPosition.y, sourcePosition.z), 
                 t);
+            transform.position = _cameraPosition;
             
             _pixelPerfectCamera.assetsPPU = (int) Mathf.Lerp(sourcePixelsPerUnit, 
                 targetPixelsPerUnit, 
@@ -82,6 +98,43 @@ public class CameraManager : MonoBehaviour
     private void NotifyCameraMovementCompleted()
     {
         OnCameraMovementCompleted?.Invoke();
+    }
+
+    /// <summary>
+    /// Fait trembler la caméra avec une intensité et une direction.
+    /// </summary>
+    /// <param name="intensity"></param>
+    /// <param name="direction"></param>
+    public void Shake(float intensity, Vector2 direction)
+    {
+        _trauma = Mathf.Clamp01(_trauma + intensity);
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            _impactDirection = direction.normalized;
+        }
+    }
+
+    private void UpdateShakeCameraCoordinates()
+    {
+        _trauma = Mathf.Max(
+            0f,
+            _trauma - traumaDecay * Time.deltaTime
+        );
+
+        float amplitude = maxOffset
+                          * Mathf.Pow(_trauma, traumaExponent);
+
+        Vector2 randomOffset = UnityEngine.Random.insideUnitCircle;
+
+        Vector2 offsetDirection =
+            _impactDirection
+            + randomOffset * randomInfluence;
+
+        Vector2 offset = offsetDirection * amplitude;
+
+        transform.position = _cameraPosition
+                                  + new Vector3(offset.x, offset.y, 0f);
     }
     
 }
